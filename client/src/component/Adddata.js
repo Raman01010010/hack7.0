@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 const Adddata = () => {
   const [accidentDetails, setAccidentDetails] = useState({
@@ -15,7 +18,9 @@ const Adddata = () => {
     address: "",
     latitude: "",
     longitude: "",
-    description: ""
+    description: "",
+    date: null, // Store the selected date here
+
   });
   const [locationSuggestions, setLocationSuggestions] = useState([]);
 
@@ -55,11 +60,16 @@ const Adddata = () => {
       setLocationSuggestions([]);
     }
   };
-
+  const handleDateChange = (selectedDate) => {
+    setAccidentDetails((prevDetails) => ({
+      ...prevDetails,
+      date: selectedDate, // Update the date property in accidentDetails state
+    }));
+  };
   const handleLocationSelection = (suggestion) => {
     setAccidentDetails((prevDetails) => ({
       ...prevDetails,
-      address: suggestion.formatted,
+      startAddress: suggestion.formatted,
       latitude: "", // Reset latitude
       longitude: "" // Reset longitude
     }));
@@ -100,12 +110,13 @@ const Adddata = () => {
               onChange={handleChange}
             />
           </Grid>
+         
           <Grid item xs={12}>
             <TextField
               required
               id="address"
               name="address"
-              label="Address"
+              label="address Address"
               fullWidth
               value={accidentDetails.address}
               onChange={handleChange}
@@ -151,6 +162,14 @@ const Adddata = () => {
             />
           </Grid>
           <Grid item xs={12}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateCalendar
+                value={accidentDetails.date}
+                onChange={handleDateChange}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={12}>
             <TextField
               required
               id="description"
@@ -163,8 +182,9 @@ const Adddata = () => {
               onChange={handleChange}
             />
           </Grid>
+          
         </Grid>
-        <Link to="/showjob" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <Button variant="contained" fullWidth sx={{ mt: 3 }}>
             Return Back
           </Button>
