@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button, Box } from '@mui/material';
+import axios from '../api/axios';
 
 const Shortestpath = () => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
+  const [PathsReceived, setPathsReceived] = useState('');
 
   const handleSourceChange = (e) => {
     setOrigin(e.target.value);
@@ -13,10 +15,14 @@ const Shortestpath = () => {
     setDestination(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted: Source -', origin, ' Destination -', destination);
+    try {
+      const response = await axios.get("/get_paths_and_accidents?origin=${origin}&destination=${destination}");
+      setPathsReceived(response.data);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -72,6 +78,7 @@ const Shortestpath = () => {
           </Grid>
         </form>
       </Box>
+
     </Box>
   );
 };
