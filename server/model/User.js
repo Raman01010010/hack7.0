@@ -48,7 +48,7 @@ const userSchema = new Schema({
 
     what_your_status: {
         type: Number,
-        required: true
+        required: false
     }
 
 });

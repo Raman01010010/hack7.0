@@ -9,15 +9,7 @@ const ShowRoad = () => {
     
   return (
     <div>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
-       <h1>ram</h1>
+      
     </div>
   )
 }
