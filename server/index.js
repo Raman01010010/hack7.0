@@ -33,6 +33,7 @@ app.use('/refresh',require('./routes/refresh'))
 app.use(verifyJWT)
 app.use('/user1',require('./routes/userUpdate'))
 
+app.use('/data',require('./routes/manageData'));
 
 app.all('/*',(req,res)=>{
     res.status(404)
@@ -48,7 +49,6 @@ app.all('/*',(req,res)=>{
 })
 
 app.use(errorHandler)
-//Route Handlers
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -1,5 +1,3 @@
-
-
 const users=require('../model/User')
 const otp=require("../model/otpSchema")
 const handleNewUser=async(req,res)=>{
@@ -44,12 +42,6 @@ if(tm.length){
         console.log("otp accepted")
         
         await adduser.save();
-
-
-        
-
-
-
 
         res.status(200).send("Otp Accepted")
 
