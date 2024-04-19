@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button, Box } from '@mui/material';
 
 const Shortestpath = () => {
-  const [formData, setFormData] = useState({
-    source: '',
-    destination: '',
-  });
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+
+  const handleSourceChange = (e) => {
+    setOrigin(e.target.value);
   };
+
+  const handleDestinationChange = (e) => {
+    setDestination(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
+    console.log('Form submitted: Source -', origin, ' Destination -', destination);
   };
 
   return (
@@ -43,11 +46,11 @@ const Shortestpath = () => {
               <TextField
                 required
                 fullWidth
-                id="source"
-                name="source"
-                label="Source"
-                value={formData.source}
-                onChange={handleChange}
+                id="origin"
+                name="origin"
+                label="origin"
+                value={origin}
+                onChange={handleSourceChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -57,8 +60,8 @@ const Shortestpath = () => {
                 id="destination"
                 name="destination"
                 label="Destination"
-                value={formData.destination}
-                onChange={handleChange}
+                value={destination}
+                onChange={handleDestinationChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -72,4 +75,5 @@ const Shortestpath = () => {
     </Box>
   );
 };
+
 export default Shortestpath;
