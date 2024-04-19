@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Grid, Typography, TextField, Button, Box } from '@mui/material';
 import axios from '../api/axios';
+import PathMap from './PathMap';
 
 const Shortestpath = () => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [PathsReceived, setPathsReceived] = useState('');
+  const [pathsReceived, setPathsReceived] = useState([]);
 
   const handleSourceChange = (e) => {
     setOrigin(e.target.value);
@@ -24,6 +25,8 @@ const Shortestpath = () => {
       console.error('Error:', error);
     }
   };
+  
+  const sortedPaths = [...pathsReceived].sort((a, b) => a[1] - b[1] );
 
   return (
     <Box
@@ -78,7 +81,13 @@ const Shortestpath = () => {
           </Grid>
         </form>
       </Box>
-
+      {pathsReceived.length > 0 && pathsReceived[0][0]!="error" && 
+      sortedPaths.map((path, index) => (
+        <li key={index}>
+            <p><PathMap paths={path[0]}/></p>
+            <p>score : {path[1]}</p>
+        </li>
+    ))}
     </Box>
   );
 };

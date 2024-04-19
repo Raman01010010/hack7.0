@@ -7,7 +7,7 @@ const PathMap = ({ path }) => {
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-        <Polyline key={1} positions={path} color={red} />
+        <Polyline key={1} positions={path} color={"red"} />
     </MapContainer>
   );
 };
