@@ -6,6 +6,8 @@ import Dashboard from "./Dashboard";
 import Path from "./path"
 import Shortest from "./Shortestpath"
 import ShowRoad from "./ShowRoad";
+import Graph from "./Graph";
+import Map from "./Map"
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -15,6 +17,9 @@ export default function Container1(){
           <Route path="/path" element={<><Path/></>} />
           <Route path="/shortestpath" element={<><Shortest/></>} />
           <Route path="/showroad" element={<><ShowRoad/></>}/>
+          <Route path="/graph" element={<><Graph/></>}/>
+          <Route path="/map" element={<><Map/></>}/>
+          <Route path="/dashboard" element={<><Dashboard/></>}/>
 
     </Routes>
     </>)
