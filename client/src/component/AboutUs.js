@@ -150,6 +150,17 @@ const SingleCard = () => {
             <p>Full Stack Developer</p>
           </div>
         </div>
+        <div className="card">
+          <div className="card-info">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQI2BrJdpBvQR7YkfQCs9f_Igzplk6FOaeKA&usqp=CAU"
+              alt="Sample Person"
+              style={{ width: '100%', height: '100%', borderRadius: '6px' }}
+            />
+            <h1>Priyansh Agarwaal</h1>
+            <p>Full Stack Developer</p>
+          </div>
+        </div>
       </div>
      
        

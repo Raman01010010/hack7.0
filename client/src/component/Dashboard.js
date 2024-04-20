@@ -1,52 +1,255 @@
-import { useContext } from "react"
-import { User } from "../context/User"
-import useAxiosPrivate from "../hooks/useAxiosPrivate"
-export default function Dashboard(){
-    const {newUser}=useContext(User)
-    const axiosPrivate=useAxiosPrivate();
-    console.log(newUser)
-   async function handleClick(){
-        console.log("clciked")
+import React, { useEffect } from 'react';
+
+const Dashboard = () => {
  
-        try{
-const res=await axiosPrivate.put('user1/update',{"email":""})
-console.log(res)
-        }catch(error){
-            console.log(error)
-        }
-    }
-    return(<>
-    <section className="text-gray-400 bg-gray-900 body-font">
-  <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-    <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10">
-      <img
-        className="object-cover object-center rounded"
-        alt="hero"
-        src="https://dummyimage.com/720x600"
-      />
-    </div>
-    <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
-      <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
-        Welcome
-        <br className="hidden lg:inline-block" />
-        to Your Dashboard
-      </h1>
-      <p className="mb-8 leading-relaxed">
-        Copper mug try-hard pitchfork pour-over freegan heirloom neutra air
-        plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk
-        tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard
-        chambray.
-      </p>
-      <div className="flex justify-center">
-        <button className="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">
-          View Profile
-        </button>
-        <button onClick={handleClick} className="ml-4 inline-flex text-gray-400 bg-gray-800 border-0 py-2 px-6 focus:outline-none hover:bg-gray-700 hover:text-white rounded text-lg">
-          Explore
-        </button>
+ 
+
+  const styles = `
+  html {
+    box-sizing: border-box;
+  }
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+    padding: 0;
+    margin: 0;
+  }
+  body {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #eee;
+  }
+  .city {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    padding: 4vw;
+    overflow: auto;
+    transform-style: preserve-3d;
+    perspective: 200px;
+    perspective-origin: center;
+    background-image: url('https://i.pinimg.com/564x/3a/19/8f/3a198f4a369be16c37b0f397289dc045.jpg');
+    background-size: contain; /* Adjust as needed */
+    background-position: center;
+}
+
+
+
+
+  .block {
+    position: relative;
+    width: calc(50vw - 12vw);
+    height: calc(50vw - 12vw);
+    margin: 4vw;
+    /* background-color: lightgreen; */
+    background-image: url('https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740');
+    background-size: cover; /* Adjust as needed */
+    background-position: center;
+    box-shadow:
+      0 0 0 1.25vw #fff,
+      0 0 0 3.875vw #eee,
+      0 0 0 4.125vw #fff,
+      0 0 0 6.75vw #eee,
+      0 0 0 8vw #fff;
+}
+
+  .block.double-wide {
+    width: 100vw;
+  }
+  .intersection {
+    position: absolute;
+    display: block;
+    width: 7vw;
+    height: 7vw;
+    background-color: #eee;
+    border: 2px dashed #fff;
+    box-shadow:
+      inset 0 0 0 0.25vw #eee,
+      inset 0 0 0 0.5vw #fff,
+      0 0 0 0.25vw #eee,
+      0 0 0 0.5vw #fff;
+  }
+
+  .intersection:nth-child(1) {
+    top: -7.5vw;
+    left: -7.5vw;
+  }
+
+  .intersection:nth-child(2) {
+    top: -7.5vw;
+    right: -7.5vw;
+  }
+
+  .intersection:nth-child(3) {
+    bottom: -7.5vw;
+    left: -7.5vw;
+  }
+
+  .intersection:nth-child(4) {
+    bottom: -7.5vw;
+    right: -7.5vw;
+  }
+
+  .intersection:nth-child(5) {
+    top: -7.5vw;
+    left: calc(50% - 3.5vw);
+  }
+
+  .intersection:nth-child(6) {
+    bottom: -7.5vw;
+    right: calc(50% - 3.5vw);
+  }
+
+  .vehicle {
+    position: absolute;
+    z-index: 1;
+    top: -3.5vw;
+    left: -3.5vw;
+    width: 3.5vw;
+    height: 2vw;
+    transform-origin: 50% 3.5vw;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Travel-car-topview.svg/768px-Travel-car-topview.svg.png?20201206193611');
+  background-size: cover; /* Adjust as needed */
+  background-position: center; /* Change color here */
+    animation: drive 16s linear infinite;
+  }
+
+  .double-wide .vehicle {
+    animation: drive-wide 16s linear infinite;
+  }
+
+  .block .vehicle:nth-child(2) {
+    animation-delay: -8s;
+  }
+
+  .block:not(.double-wide) + .block:not(.double-wide) .vehicle:nth-child(1) {
+    animation-delay: -1s;
+  }
+
+  .block:not(.double-wide) + .block:not(.double-wide) .vehicle:nth-child(2) {
+    animation-delay: -10s;
+  }
+
+  @keyframes drive {
+    0% { transform: translate(1.75vw, 0) rotate(0); }
+    30% { transform: translate(39.875vw, 0) rotate(0); }
+    33% { transform: translate(39.875vw, 0) rotate(90deg); }
+    42% { transform: translate(39.875vw, 38.125vw) rotate(90deg); }
+    45% { transform: translate(39.875vw, 38.125vw) rotate(180deg); }
+    63% { transform: translate(1.875vw, 38.125vw) rotate(180deg); }
+    66% { transform: translate(1.75vw, 38.125vw) rotate(270deg); }
+    97% { transform: translate(1.75vw, 0) rotate(270deg); }
+    100% { transform: translate(1.75vw, 0) rotate(360deg); }
+  }
+
+  @keyframes drive-wide {
+    0% { transform: translate(1.875vw, 0) rotate(0); }
+    30% { transform: translate(85.875vw, 0) rotate(0); }
+    33% { transform: translate(85.875vw, 0) rotate(90deg); }
+    42% { transform: translate(85.875vw, 38.125vw) rotate(90deg); }
+    45% { transform: translate(85.875vw, 38.125vw) rotate(180deg); }
+    63% { transform: translate(1.75vw, 38.125vw) rotate(180deg); }
+    66% { transform: translate(1.75vw, 38.125vw) rotate(270deg); }
+    97% { transform: translate(1.75vw, 0) rotate(270deg); }
+    100% { transform: translate(1.75vw, 0) rotate(360deg); }
+  }
+`;
+  return (
+    <div>
+        <style>{styles}</style>
+    
+    <div className="city">
+      <div className="block">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings">
+      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+    </div>        
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
+      </div>
+      <div className="block">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings">
+      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+    </div>          
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
+      </div>
+      <div className="block double-wide">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings">
+      {/* <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" /> */}
+    </div>          
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
+      </div>
+      <div className="block">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings">
+      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+    </div>          
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
+      </div>
+      <div className="block">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings">
+      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+    </div>          
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
+      </div>
+      <div className="block double-wide">
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        <div className="intersection"></div>
+        
+        <div className="buildings"></div>
+        
+        <div className="vehicles">
+          <div className="vehicle"></div>
+          <div className="vehicle"></div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
-</>)
-}
+    </div>
+  );
+};
+
+export default Dashboard;

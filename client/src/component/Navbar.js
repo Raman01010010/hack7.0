@@ -82,7 +82,6 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-
               <Button color="inherit" component={Link} to="/about">
                 <FontAwesomeIcon
                   icon={faEnvelope}
@@ -90,6 +89,7 @@ const Navbar = () => {
                 />
                 About Us
               </Button>
+              
               <Button
   color="inherit"
   component={Link}

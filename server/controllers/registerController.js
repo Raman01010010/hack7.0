@@ -2,13 +2,8 @@ const users=require('../model/User')
 const otp=require("../model/otpSchema")
 const handleNewUser=async(req,res)=>{
     var {otp5,email} =req.body
-    
-    /*
-    const adduser=new users({
-        name, email,given_name,picture,token,family_name
 
-    })
-    */
+    
 try{
     const tm= await users.find({email:email});
 console.log(tm);
