@@ -141,7 +141,7 @@ function Ram() {
               <p><strong>Contact Number:</strong> {violation.contactNumber}</p>
               <p><strong>License Number:</strong> {violation.licenseNumber}</p>
               <p><strong>Description:</strong> {violation.description}</p>
-              <p><strong>Resolved:</strong> {violation.resolved ? 'Yes' : 'No'}</p>
+             
             </li>
           ))}
         </ul>
