@@ -2,3 +2,11 @@ Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	bd9cdd32-689f-4b26-854c-
 Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	9bf22f43-e5da-4073-a7a9-2962da51d5bd	POST	http://localhost:3000	/data/getData1m
 Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	5e2b388f-e42e-473e-988e-e8c4f61a690c	POST	http://localhost:3000	/data/getData1m
 Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	4726bb17-9bc2-4170-a99c-028ec85216ce	POST	http://localhost:3000	/data/getData1d
+Sat Apr 20 2024 22:33:30 GMT+0530 (India Standard Time)	f5bb8a74-9596-4863-9658-71cf3a78b916	OPTIONS	http://localhost:3000	/data/addData
+Sat Apr 20 2024 22:33:30 GMT+0530 (India Standard Time)	92d8201a-fd1d-4a33-a18e-5c041cd20b1c	POST	http://localhost:3000	/data/addData
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	cfca8473-3c6e-4276-abe1-e6ea3f5647f4	GET	http://localhost:3000	/refresh
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	5c80492b-0de5-4d6d-b7ff-ebf04e257603	GET	http://localhost:3000	/refresh
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	271f9eb7-bc52-4ac3-9bcf-aed1dbf2690d	POST	http://localhost:3000	/data/getData1d
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	f4eafb35-5ade-4491-8d70-488c68c43960	POST	http://localhost:3000	/data/getData1m
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	e71d9a74-2d4a-4ec9-8bb7-9f3cc71d0797	POST	http://localhost:3000	/data/getData1d
+Sat Apr 20 2024 22:34:06 GMT+0530 (India Standard Time)	3237f113-db94-4da9-a314-d9240a078187	POST	http://localhost:3000	/data/getData1m
