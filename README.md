@@ -14,7 +14,7 @@ that path.
 for refining the AI model.
   
 ## Demo Video Link:
-  <a href="https://youtu.be/UBAtMjP4COo">https://youtu.be/dQw4w9WgXcQ</a>
+  <a href="https://youtu.be/UBAtMjP4COo">Video Link</a>
   
 ## Presentation Link:
   <a href="https://docs.google.com/presentation/d/1EXWk-hxQ_ewx16YbL2Dzmh12XFJxgjtN/edit?usp=sharing&ouid=117851415965395892713&rtpof=true&sd=true"> PPT link here </a>
