@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import abi from "./contractJson/complain.json";
 import { ethers } from "ethers";
-import './App.css';
+// import './App.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function Ram() {
   const [state, setState] = useState({
@@ -19,32 +21,26 @@ function Ram() {
   const [violationLocation, setViolationLocation] = useState('');
   const [violationDescription, setViolationDescription] = useState('');
   const [violations, setViolations] = useState([]);
-
   useEffect(() => {
     const initializeContract = async () => {
       const contractAddress = "0x0572337d3C31653D71323B5A18FF177188408B41";
       const contractABI = abi.abi;
-
       try {
         const { ethereum } = window;
         const accounts = await ethereum.request({
           method: "eth_requestAccounts"
         });
-
         window.ethereum.on("accountsChanged", () => {
           window.location.reload();
         });
-
         setAccount(accounts[0]);
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
-
         const contract = new ethers.Contract(
           contractAddress,
           contractABI,
           signer
         );
-
         setState({ provider, signer, contract });
       } catch (error) {
         console.error(error);
@@ -101,72 +97,59 @@ function Ram() {
   };
 
   return (
-    <div className="App">
-      <h1>Report Violation</h1>
-      <label>
-        Name:
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Vehicle Number:
-        <input type="text" value={vehicleNumber} onChange={(e) => setVehicleNumber(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Date:
-        <input type="text" value={date} onChange={(e) => setDate(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Registered By:
-        <input type="text" value={registeredBy} onChange={(e) => setRegisteredBy(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Contact Number:
-        <input type="text" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        License Number:
-        <input type="text" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Location:
-        <input type="text" value={violationLocation} onChange={(e) => setViolationLocation(e.target.value)} />
-      </label>
-      <br />
-      <label>
-        Description:
-        <input type="text" value={violationDescription} onChange={(e) => setViolationDescription(e.target.value)} />
-      </label>
-      <br />
-      <button onClick={reportViolation}>Report Violation</button>
-
-      <hr />
-
-      <h1>All Violations</h1>
-      <button onClick={fetchViolations}>Fetch Violations</button>
-      <ul>
-        {violations.map((violation) => (
-          <li>
-            Complainant: {violation.complainant}<br />
-            Name: {violation.name}<br />
-            Vehicle Number: {violation.vehicleNumber}<br />
-           
-            Location: {violation.location}<br />
-            Date: {violation.date}<br />
-            Registered By: {violation.registeredBy}<br />
-            Contact Number: {violation.contactNumber}<br />
-            License Number: {violation.licenseNumber}<br />
-            Description: {violation.description}<br />
-            Resolved: {violation.resolved ? 'Yes' : 'No'}
-          </li>
-        ))}
-      </ul>
+    <div className="border border-black">
+    <div className="">
+      <div className="">
+        <h1 className="text-3xl font-bold mb-8">Report Violation</h1>
+        <div className="flex justify-center">
+          <div style={{width:'30vw',padding:'5px'}} className="w-full">
+            <TextField label="Name" variant="outlined" value={name} onChange={(e) => setName(e.target.value)} className="w-full"/>
+            <TextField label="Vehicle Number" variant="outlined" value={vehicleNumber} onChange={(e) => setVehicleNumber(e.target.value)} className="w-full" />
+            <TextField label="Date" variant="outlined" value={date} onChange={(e) => setDate(e.target.value)} className="w-full" />
+            <TextField label="Registered By" variant="outlined" value={registeredBy} onChange={(e) => setRegisteredBy(e.target.value)} className="w-full" />
+          </div>
+          <div style={{width:'30vw',padding:'5px'}}className="w-full">
+            <TextField label="Contact Number" variant="outlined" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} className="w-full" />
+            <TextField label="License Number" variant="outlined" value={licenseNumber} onChange={(e) => setLicenseNumber(e.target.value)} className="w-full" />
+            <TextField label="Location" variant="outlined" value={violationLocation} onChange={(e) => setViolationLocation(e.target.value)} className="w-full" />
+            <TextField label="Description" variant="outlined" value={violationDescription} onChange={(e) => setViolationDescription(e.target.value)} className="w-full" />
+          </div>
+        </div>
+        <div className="flex justify-center"> <Button variant="contained" color="primary" onClick={reportViolation} className="mt-4">
+          Report Violation
+        </Button>
+  </div>
+       
+        <hr className="my-8" />
+  
+        <h1 className="text-3xl font-bold mb-4 flex justify-center">All Violations</h1>
+        <div className='flex justify-center'>
+        <Button variant="contained" color="primary" onClick={fetchViolations} className="mb-4">
+          Fetch Violations
+        </Button></div>
+        <ul className="space-y-4">
+          {violations.map((violation, index) => (
+            <li key={index} className="border p-4 rounded-md">
+              <p><strong>Complainant:</strong> {violation.complainant}</p>
+              <p><strong>Name:</strong> {violation.name}</p>
+              <p><strong>Vehicle Number:</strong> {violation.vehicleNumber}</p>
+              <p><strong>Location:</strong> {violation.location}</p>
+              <p><strong>Date:</strong> {violation.date}</p>
+              <p><strong>Registered By:</strong> {violation.registeredBy}</p>
+              <p><strong>Contact Number:</strong> {violation.contactNumber}</p>
+              <p><strong>License Number:</strong> {violation.licenseNumber}</p>
+              <p><strong>Description:</strong> {violation.description}</p>
+              <p><strong>Resolved:</strong> {violation.resolved ? 'Yes' : 'No'}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
+  </div>
+  
+
+  
+  
   );
 }
 
