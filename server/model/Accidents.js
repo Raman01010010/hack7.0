@@ -9,7 +9,7 @@ const accidentSchema = new Schema({
     address: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     },
     
     longitude: {
