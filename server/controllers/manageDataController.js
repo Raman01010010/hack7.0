@@ -59,11 +59,25 @@ const getData = async(req,res) => {
     }
 }
 const getData1d = async(req,res) => {
-    const date = req.params.date;
-
-    const accidents = await Accidents.find({ date: date });
-
-    res.status(200).json(accidents);
+    try {
+        const currentDate = new Date();
+        const startDate = new Date(currentDate);
+        startDate.setHours(0, 0, 0, 0); // Set time to the beginning of the day
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + 1); // Add one day to get the next day
+    
+        const accidents = await Accidents.find({
+          date: {
+            $gte: startDate.toISOString(),
+            $lt: endDate.toISOString()
+          }
+        });
+    
+        res.status(200).json(accidents);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
 }
 const getData1m = async(req,res) => {
     try {
