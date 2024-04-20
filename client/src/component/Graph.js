@@ -27,7 +27,7 @@ Chart.register(
 );
 
 const AccidentGraph = () => {
-  const [year,setYear]=useState("2024");
+  const [year,setYear]=useState("");
   const DialogBox = ({ onClose }) => {
   function handleC(e){
 setYear(e.target.value);
@@ -153,7 +153,9 @@ console.log(year)
   const [graphType, setGraphType] = useState("date");
 
   const handleGraphTypeChange = (type) => {
+    console.log(type)
     if (type == "month") {
+      console.log("jjjjjjjjjjj");
       handleDialogOpen();
     }
     setGraphType(type);
@@ -234,11 +236,11 @@ console.log(year)
           Show by Vehicle
         </button>
         {/* Link to the map page */}
-        {/* <div className="container">
+        <div className="container">
           <h1>Click to Show Dialog</h1>
           <button onClick={handleDialogOpen}>Show Dialog</button>
           {isDialogOpen && <DialogBox onClose={handleDialogClose} />}
-        </div> */}
+        </div>
         <Link to="/map" className="btn">
           Show Zonal Division
         </Link>
