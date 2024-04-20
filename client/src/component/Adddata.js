@@ -12,19 +12,14 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const Adddata = () => {
   const [accidentDetails, setAccidentDetails] = useState({
     name: "",
     address: "",
     latitude: "",
     longitude: "",
-    description: "",
-    date:""
+    description: ""
   });
-const axios=useAxiosPrivate();
-  
-
   const [locationSuggestions, setLocationSuggestions] = useState([]);
 
   const updateLocationSuggestions = async (query) => {
@@ -80,17 +75,8 @@ const axios=useAxiosPrivate();
       ...prevDetails,
       [name]: value
     }));
-    console.log(accidentDetails);
     updateLocationSuggestions(value); // Update location suggestions based on user input
   };
-  async function addNow() {
-    try {
-      const response = await axios.post("/data/addData", accidentDetails);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error adding data:", error.message);
-    }
-  }
 
   return (
     <Box
@@ -197,11 +183,11 @@ const axios=useAxiosPrivate();
             />
           </Grid>
         </Grid>
-     
-          <Button variant="contained" onClick={addNow} fullWidth sx={{ mt: 3 }}>
-            ADD DATA
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Button variant="contained" fullWidth sx={{ mt: 3 }}>
+            Return Back
           </Button>
-       
+        </Link>
       </Box>
     </Box>
   );

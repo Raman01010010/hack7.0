@@ -1,19 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, BarController, BarElement, Tooltip, Title } from 'chart.js';
+import { axiosPrivate } from '../api/axios';
 Chart.register(CategoryScale, LinearScale, LineController, PointElement, LineElement, BarController, BarElement, Tooltip, Title);
 
 const AccidentGraph = () => {
   // Custom datasets
-  const customDataByDate = [
-    { date: '2024-04-01', accidents: 10 },
-    { date: '2024-04-02', accidents: 15 },
-    { date: '2024-06-03', accidents: 8 },
-    { date: '2024-04-04', accidents: 12 },
-    { date: '2024-09-05', accidents: 6 },
-    // Add more data points as needed
-  ];
+
+  // const [day, setDay] = useState({
+  //   name: "",
+  //   address: "",
+  //   latitude: "",
+  //   longitude: "",
+  //   description: "",
+  //   date:""
+  // });
+  // const [month, setMonth] = useState({
+  //   name: "",
+  //   address: "",
+  //   latitude: "",
+  //   longitude: "",
+  //   description: "",
+  //   date:""
+  // });
+
+
+ 
+  const [accidentDataday, setAccidentDataday] = useState([]);
+  // Fetch data from the backend when the component mounts
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        console.log("called");
+
+        const response = await axiosPrivate.post('/data/getData1d'); // Assuming the API endpoint is '/api/getData1d'
+        setAccidentDataday(response.data); // Update the state variable with fetched data
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData(); // Call the fetchData function
+  }, []); 
+
+  console.log(accidentDataday);
   const customDataByVehicle = [
     { type: 'Car', accidents: 20 },
     { type: 'Truck', accidents: 15 },
@@ -81,8 +111,8 @@ const AccidentGraph = () => {
     <div className="flex flex-col items-center justify-center">
       <h2 className="text-center">Accident Data</h2>
       <div className="w-96 h-96 md:w-3/4 md:h-3/4 lg:w-4/5 lg:h-4/5 xl:w-5/6 xl:h-5/6 mx-auto">
-        {graphType === 'date' && <Line data={prepareDataByDate(customDataByDate)} />}
-        {graphType === 'month' && <Line data={prepareDataByMonth(customDataByDate)} />}
+        {graphType === 'date' && <Line data={prepareDataByDate(accidentDataday)} />}
+        {graphType === 'month' && <Line data={prepareDataByMonth(accidentDataday)} />}
         {graphType === 'vehicle' && <Bar data={prepareDataByVehicle(customDataByVehicle)} />}
       </div>
       <div className="mt-4 flex gap-4 justify-center">
