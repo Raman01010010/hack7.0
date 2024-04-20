@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
@@ -22,6 +21,7 @@ import {
   faEnvelope,
   faMoneyCheckAlt,
   faUser,
+  faShield,
   faBell,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
@@ -46,50 +46,48 @@ const Navbar2 = () => {
   const [name, setName] = useState(null);
   const location = useLocation();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-// Assuming you are using the document.cookie API to manage cookies
+  // Assuming you are using the document.cookie API to manage cookies
 
-// Function to clear all cookies
-function clearAllCookies() {
-  document.cookie.split(";").forEach((c) => {
-    document.cookie = c
-      .replace(/^ +/, "")
-      .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-  });
-}
-console.log(newUser.userid);
-// Example usage in a logout function
-
-async function handleLogout() {
-  // Perform any additional logout logic if needed
-
-  // Clear all cookies
-  //clearAllCookies();
-  console.log(newUser.userid)
-  try {
-    
-    const response = await axios.post("/api/logout", {
-      userid: newUser.userid,
+  // Function to clear all cookies
+  function clearAllCookies() {
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c
+        .replace(/^ +/, "")
+        .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
     });
+  }
+  console.log(newUser.userid);
+  // Example usage in a logout function
 
-    if (response.status === 200) {
-      // Successful logout on the server
-      // Redirect to the login page or perform any other client-side cleanup
-      window.location.href = "/home2";
-    } else {
-      // Server responded with an error status
-      console.error("Failed to logout on the server:", response.statusText);
+  async function handleLogout() {
+    // Perform any additional logout logic if needed
+
+    // Clear all cookies
+    //clearAllCookies();
+    console.log(newUser.userid);
+    try {
+      const response = await axios.post("/api/logout", {
+        userid: newUser.userid,
+      });
+
+      if (response.status === 200) {
+        // Successful logout on the server
+        // Redirect to the login page or perform any other client-side cleanup
+        window.location.href = "/home2";
+      } else {
+        // Server responded with an error status
+        console.error("Failed to logout on the server:", response.statusText);
+        // Optionally, handle the error, show a message, or take appropriate action
+      }
+    } catch (error) {
+      // Error occurred during the axios request
+      console.error("Failed to logout on the server:", error);
       // Optionally, handle the error, show a message, or take appropriate action
     }
-  } catch (error) {
-    // Error occurred during the axios request
-    console.error("Failed to logout on the server:", error);
-    // Optionally, handle the error, show a message, or take appropriate action
   }
-}
 
-
-// In your component, you might have a logout button or link that triggers the handleLogout function
-// <button onClick={handleLogout}>Logout</button>
+  // In your component, you might have a logout button or link that triggers the handleLogout function
+  // <button onClick={handleLogout}>Logout</button>
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -187,39 +185,41 @@ async function handleLogout() {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Connexa
+                Connexa
               </Typography>
-
-              <Button color="inherit" onClick={handleOpenModal}>
-                <FontAwesomeIcon icon={faSearch} />
-              </Button>
 
               <Button color="inherit" component={Link} to="/dashboard">
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-              <Button color="inherit" onClick={fun} component={Link}>
-                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
-                Notification
+              <Button color="inherit" onClick={fun} component={Link} to="/shortestpath">
+                <FontAwesomeIcon
+                  icon={faShield}
+                  style={{ marginRight: "5px" }}
+                />
+                Safest path
               </Button>
 
-             
-         
-             
-             
-             
+              <Button color="inherit" onClick={fun} component={Link} to="/add">
+                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
+                Add accident
+              </Button>
+              <Button color="inherit" onClick={fun} component={Link} to="/ram">
+                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
+                Add violations
+              </Button>
+
               <IconButton
                 onClick={handleLogout}
                 color="inherit"
                 style={{ marginRight: "20px" }}
                 component={Link}
               >
-        <FontAwesomeIcon icon={faRightFromBracket} />{" "}
+                <FontAwesomeIcon icon={faRightFromBracket} />{" "}
               </IconButton>
             </>
           ) : (
             <>
-            
               <Button color="inherit" onClick={handleOpenModal}>
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
@@ -246,15 +246,13 @@ async function handleLogout() {
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleMenuClose}
-              >
-              </Menu> 
+              ></Menu>
             </>
           )}
         </Toolbar>
       </AppBar>
       <div className="m-[10vh]">
-      <Container2 />
-
+        <Container2 />
       </div>
     </>
   );

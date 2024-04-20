@@ -89,7 +89,7 @@ const [thresholdRange5, thresholdRange6] = [600, 900];
             <motion.div className="flex items-center p-4 animate__animated animate__fadeInRight ">
               <motion.img
                 ref={ref1}
-                src={img1}
+                src="https://www.frontiersin.org/files/Articles/631045/frym-09-631045-HTML-r1/image_m/figure-1.jpg"
                 alt="Image 1"
                 className="w-2/5 rounded-lg mr-4"
                 initial={{ opacity: 0, x: 50 }}
@@ -97,16 +97,16 @@ const [thresholdRange5, thresholdRange6] = [600, 900];
                 transition={{ duration: 1 }}
               />
               <div className="flex-1 ">
-              <h1 className="text-4xl	">Your Carrear,Our Responsibilty</h1>
+              <h1 className="text-4xl	">Safest  and Shortest</h1>
 
-                <p>"Welcome to BeBop, your professional hub for networking, career growth, and skill showcase. Connect with professionals, build your digital resume, and explore opportunities in a vibrant community. Elevate your career journey with us!"</p>
+                <p>"Discover the safest and shortest routes with our innovative pathfinding project for secure navigation."</p>
               </div>
             </motion.div>
             <motion.div className="flex items-center p-4 animate__animated animate__fadeInLeft">
               <div className="flex-1">
-            <h1 className="text-6xl	">Video Chat</h1>
+            <h1 className="text-6xl	">Decentralized records</h1>
                 <p className="text-xl mb-4">
-                  Connect face-to-face effortlessly with our Video Chat feature. Seamlessly conduct virtual meetings, interviews, or networking sessions. Experience the power of real-time communication, fostering meaningful connections in a digital world.
+                Our project records traffic violations in a decentralized manner, ensuring transparency and reliability. By decentralizing the data, we enhance accountability and enable secure access for all stakeholders in monitoring and enforcing traffic regulations.
                 </p>
               </div>
               <motion.img
@@ -122,7 +122,7 @@ const [thresholdRange5, thresholdRange6] = [600, 900];
             <motion.div className="flex items-center p-4 animate__animated animate__fadeInRight">
               <motion.img
                 ref={ref3}
-                src={img1}
+                src="https://www.shutterstock.com/image-vector/gpsnavigator-pin-blue-color-mock-260nw-569761816.jpg"
                 alt="Image 3"
                 className="w-2/5 rounded-lg mr-4"
                 initial={{ opacity: 0, x: 50 }}
@@ -130,9 +130,9 @@ const [thresholdRange5, thresholdRange6] = [600, 900];
                 transition={{ duration: 1 }}
               />
               <div className="flex-1">
-              <h1 className="text-6xl	">Resume Builder</h1>
+              <h1 className="text-6xl	">Accident Tracking System</h1>
 
-                <p>                  Build your professional narrative seamlessly with our Resume Builder. Craft customized resumes, showcase your skills, and make a lasting impression. Elevate your career journey with ease and precision using our intuitive and powerful resume-building feature.
+                <p>  Our project efficiently tracks accidents, providing real-time data to emergency services and authorities. It ensures swift response, aids in analyzing accident patterns, and promotes proactive safety measures for the community.
 </p>
               </div>
             </motion.div>
