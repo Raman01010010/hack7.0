@@ -6,7 +6,7 @@ import PathMap from './PathMap';
 const Shortestpath = () => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
-  const [pathsReceived, setPathsReceived] = useState([]);
+  const [data, setData] = useState(null);
 
   const handleSourceChange = (e) => {
     setOrigin(e.target.value);
@@ -19,14 +19,15 @@ const Shortestpath = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try {
-      const response = await axios.get("/get_paths_and_accidents?origin=${origin}&destination=${destination}");
-      setPathsReceived(response.data);
+      const response = await axios.get(`http://localhost:5000/get_paths_and_accidents?origin=${origin}&destination=${destination}`);
+      setData(response.data); 
+      console.log(response.data)
+      console.log(data)
     } catch (error) {
       console.error('Error:', error);
     }
   };
   
-  const sortedPaths = [...pathsReceived].sort((a, b) => a[1] - b[1] );
 
   return (
     <Box
@@ -81,13 +82,16 @@ const Shortestpath = () => {
           </Grid>
         </form>
       </Box>
-      {pathsReceived.length > 0 && pathsReceived[0][0]!="error" && 
-      sortedPaths.map((path, index) => (
+    {data && data.paths.length > 0 && data.paths[0]!="error" && 
+      data.paths.map((path, index) => (
         <li key={index}>
-            <p><PathMap paths={path[0]}/></p>
-            <p>score : {path[1]}</p>
+          <p>Path {index + 1}:</p>
+          <div>
+          <PathMap path={path}/>
+          </div>
+          <p>Accidents Count: {data.accidents_counts[index]}</p>
         </li>
-    ))}
+      ))}
     </Box>
   );
 };

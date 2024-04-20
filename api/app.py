@@ -2,8 +2,10 @@ import pandas as pd
 from math import radians, sin, cos, sqrt, atan2
 from flask import Flask, request, jsonify
 import requests
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/get_paths_and_accidents": {"origins": "*", "supports_credentials": True}})
 
 traindata=pd.read_csv('AccidentsBig.csv')
 
@@ -71,7 +73,7 @@ def get_paths_and_accidents():
     # Call the function to get paths between points
     api_key = 'AIzaSyC8tfwaEKz18BqOeJ8pPplFCjIxJsuNbrU'  # Replace with your Google Maps API key
     paths = get_paths_between_points(api_key, origin, destination, alternatives=True)
-    
+    print(paths)
     if paths:
         # Pre-process the dataset to filter accidents within a certain latitude and longitude range
         lat_min = min(lat for path in paths for lat, _ in path) - distance_threshold
@@ -96,7 +98,17 @@ def get_paths_and_accidents():
 
         # Combine paths and accident counts into a dictionary
         result = {'paths': paths, 'accidents_counts': accidents_counts}
-        
+
+        combined_data = list(zip(result['paths'], result['accidents_counts']))
+
+
+        sorted_combined_data = sorted(combined_data, key=lambda x: x[1])
+
+        sorted_paths, sorted_accidents_counts = zip(*sorted_combined_data)
+
+        result['paths'] = sorted_paths
+        result['accidents_counts'] = sorted_accidents_counts
+
         # Return the result as JSON
         return jsonify(result)
     else:
