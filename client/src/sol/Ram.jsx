@@ -79,14 +79,15 @@ function Ram() {
           complainant: violationDetails[0],
           name: violationDetails[1],
           vehicleNumber: violationDetails[2],
-          timestamp: violationDetails[4], // Assuming timestamp is stored at index 4
-          location: violationDetails[5],
-          date: violationDetails[6],
-          registeredBy: violationDetails[7],
-          contactNumber: violationDetails[8],
-          licenseNumber: violationDetails[9],
-          description: violationDetails[10],
-          resolved: violationDetails[11]
+          location: violationDetails[3], // Rearranged to match contract order
+          timestamp: violationDetails[4],
+          date: violationDetails[5],
+          registeredBy: violationDetails[6],
+          contactNumber: violationDetails[7],
+          licenseNumber: violationDetails[8],
+          violationType: violationDetails[9], // Adjusted index for violation type
+          resolved: violationDetails[10],
+          description: violationDetails[11]
         };
       }));
       console.log("All violations:", violationsData);
@@ -95,6 +96,7 @@ function Ram() {
       console.error('Error fetching violations', error);
     }
   };
+  
 
   return (
     <div className="border border-black">
