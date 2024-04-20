@@ -1,0 +1,4 @@
+Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	bd9cdd32-689f-4b26-854c-7048df6b4ce2	POST	http://localhost:3000	/data/getData1d
+Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	9bf22f43-e5da-4073-a7a9-2962da51d5bd	POST	http://localhost:3000	/data/getData1m
+Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	5e2b388f-e42e-473e-988e-e8c4f61a690c	POST	http://localhost:3000	/data/getData1m
+Sat Apr 20 2024 22:32:47 GMT+0530 (India Standard Time)	4726bb17-9bc2-4170-a99c-028ec85216ce	POST	http://localhost:3000	/data/getData1d
