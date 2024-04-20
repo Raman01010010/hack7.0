@@ -48,9 +48,9 @@ const Dashboard = () => {
     background-position: center;
     box-shadow:
       0 0 0 1.25vw #fff,
-      0 0 0 3.875vw #eee,
+      0 0 0 3.875vw #33323b,
       0 0 0 4.125vw #fff,
-      0 0 0 6.75vw #eee,
+      0 0 0 6.75vw #33323b,
       0 0 0 8vw #fff;
 }
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
     display: block;
     width: 7vw;
     height: 7vw;
-    background-color: #eee;
+    background-color: #33323b;
     border: 2px dashed #fff;
     box-shadow:
       inset 0 0 0 0.25vw #eee,
