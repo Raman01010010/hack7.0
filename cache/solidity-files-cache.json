@@ -1,0 +1,355 @@
+{
+  "_format": "hh-sol-cache-2",
+  "files": {
+    "D:\\DEV2.0\\block\\coffeDapp-main\\coffeDapp-main\\contracts\\chai.sol": {
+      "lastModificationDate": 1713523264019,
+      "contentHash": "536ec2c5ec36c17a1ffa263c23604c89",
+      "sourceName": "contracts/chai.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "chai"
+      ]
+    },
+    "D:\\DEV2.0\\block\\coffeDapp-main\\coffeDapp-main\\contracts\\ram.sol": {
+      "lastModificationDate": 1713544789816,
+      "contentHash": "1bc59fbbf82c67468cc80485cf9b68e0",
+      "sourceName": "contracts/ram.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "ram"
+      ]
+    },
+    "D:\\DEV2.0\\block\\coffeDapp-main\\coffeDapp-main\\contracts\\ram1.sol": {
+      "lastModificationDate": 1713550477788,
+      "contentHash": "e50305b0a985dfef5d0a2cacf8c253cb",
+      "sourceName": "contracts/ram1.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "AccidentRegistry"
+      ]
+    },
+    "D:\\DEV2.0\\block\\coffeDapp-main\\coffeDapp-main\\contracts\\complain.sol": {
+      "lastModificationDate": 1713565345209,
+      "contentHash": "99d87ddcb404ebcea318cf507b3606a8",
+      "sourceName": "contracts/complain.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "complain1"
+      ]
+    },
+    "D:\\DEV2.0\\block\\coffeDapp-main\\coffeDapp-main\\contracts\\ram3.sol": {
+      "lastModificationDate": 1713567184459,
+      "contentHash": "1b2ec72ba496594cbb79111780d2140c",
+      "sourceName": "contracts/ram3.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "Complaint"
+      ]
+    },
+    "D:\\DEV2.0\\hack7.0\\hack7.0\\contracts\\chai.sol": {
+      "lastModificationDate": 1713523264019,
+      "contentHash": "536ec2c5ec36c17a1ffa263c23604c89",
+      "sourceName": "contracts/chai.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "chai"
+      ]
+    },
+    "D:\\DEV2.0\\hack7.0\\hack7.0\\contracts\\complain.sol": {
+      "lastModificationDate": 1713565345209,
+      "contentHash": "99d87ddcb404ebcea318cf507b3606a8",
+      "sourceName": "contracts/complain.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "complain1"
+      ]
+    },
+    "D:\\DEV2.0\\hack7.0\\hack7.0\\contracts\\ram.sol": {
+      "lastModificationDate": 1713544789816,
+      "contentHash": "1bc59fbbf82c67468cc80485cf9b68e0",
+      "sourceName": "contracts/ram.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "ram"
+      ]
+    },
+    "D:\\DEV2.0\\hack7.0\\hack7.0\\contracts\\ram1.sol": {
+      "lastModificationDate": 1713550477788,
+      "contentHash": "e50305b0a985dfef5d0a2cacf8c253cb",
+      "sourceName": "contracts/ram1.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "AccidentRegistry"
+      ]
+    },
+    "D:\\DEV2.0\\hack7.0\\hack7.0\\contracts\\ram3.sol": {
+      "lastModificationDate": 1713567184459,
+      "contentHash": "1b2ec72ba496594cbb79111780d2140c",
+      "sourceName": "contracts/ram3.sol",
+      "solcConfig": {
+        "version": "0.8.17",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "Complaint"
+      ]
+    }
+  }
+}
