@@ -8,11 +8,13 @@ import Shortest from "./Shortestpath"
 import ShowRoad from "./ShowRoad";
 import Graph from "./Graph";
 import Map from "./Map"
+import Ram from "../sol/Ram";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
           <Routes>
-          <Route path="/" element={<><Home/></>} />
+                    <Route path="/ram" element={<><Ram/></>} />
+          <Route path="/t" element={<><Home/></>} />
           <Route path="/add" element={<><Adddata/></>} />
           <Route path="/path" element={<><Path/></>} />
           <Route path="/shortestpath" element={<><Shortest/></>} />
