@@ -18,7 +18,8 @@ const Adddata = () => {
     address: "",
     latitude: "",
     longitude: "",
-    description: ""
+    description: "",
+    date:""
   });
   const [locationSuggestions, setLocationSuggestions] = useState([]);
 
@@ -75,6 +76,7 @@ const Adddata = () => {
       ...prevDetails,
       [name]: value
     }));
+    console.log(accidentDetails);
     updateLocationSuggestions(value); // Update location suggestions based on user input
   };
 

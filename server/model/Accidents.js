@@ -16,12 +16,16 @@ const accidentSchema = new Schema({
         type: String,
         required: true
     },
+    date:{
+        type:String,
+        required: true
+    },
 
     latitude: {
         type: String,
         required: true
     },
-    discription:{
+    description:{
         type:String,
         required: true
     }
