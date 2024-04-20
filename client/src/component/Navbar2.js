@@ -113,62 +113,18 @@ const Navbar2 = () => {
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    // Cleanup function to set isJobMenuOpen to false when component unmounts
-    return () => {
-      setIsJobMenuOpen(false);
-    };
-  }, []);
 
-  useEffect(() => {
-    // Set isJobMenuOpen to true when the location changes to "/showjob"
-    setIsJobMenuOpen(location.pathname === "/showjob");
-  }, [location.pathname]);
-  function fun() {
-    setSh((old) => {
-      return !old;
-    });
-  }
 
-  useEffect(() => {
-    // Fetch data from the backend using axios or your preferred method
-    const fetchData = async () => {
-      try {
-        console.log(searchInput);
-        const response = await axios.post("/connect/searchname", {
-          searchInput,
-        });
 
-        // Access the data property of the response
-        const responseData = response.data;
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
-        // Access the matchedUsernames property from the data
-        const matchedUsernames = responseData.matchedUsernames;
+  // const handleCloseModal = () => {
+  //   setIsModalOpen(false);
+  // };
 
-        // Assuming setName is a state update function
-        setName(matchedUsernames);
-      } catch (error) {
-        console.error("Error fetching data from the backend:", error);
-      }
-    };
-
-    // Call the fetchData function
-
-    // Call the fetchData function
-    fetchData();
-  }, [searchInput]);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleChange = (event, value) => {
-    setSearchInput(value);
-  };
+ 
   console.log(name);
   return (
     <>
@@ -192,7 +148,7 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-              <Button color="inherit" onClick={fun} component={Link} to="/shortestpath">
+              <Button color="inherit"  component={Link} to="/shortestpath">
                 <FontAwesomeIcon
                   icon={faShield}
                   style={{ marginRight: "5px" }}
@@ -200,11 +156,11 @@ const Navbar2 = () => {
                 Safest path
               </Button>
 
-              <Button color="inherit" onClick={fun} component={Link} to="/add">
+              <Button color="inherit"  component={Link} to="/add">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
-              <Button color="inherit" onClick={fun} component={Link} to="/ram">
+              <Button color="inherit" component={Link} to="/ram">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add violations
               </Button>
@@ -220,18 +176,18 @@ const Navbar2 = () => {
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={handleOpenModal}>
+              {/* <Button color="inherit" onClick={handleOpenModal}>
                 <FontAwesomeIcon icon={faSearch} />
-              </Button>
+              </Button> */}
               <IconButton
-                onClick={fun}
+                
                 color="inherit"
                 style={{ marginRight: "20px" }}
                 component={Link}
               >
                 <FontAwesomeIcon icon={faHome} />
               </IconButton>
-              <Button color="inherit" onClick={fun} component={Link}>
+              <Button color="inherit"  component={Link}>
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Notification
               </Button>
