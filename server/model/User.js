@@ -36,10 +36,6 @@ const userSchema = new Schema({
     refreshToken: String,
     location:String,
     status:[{org:String,role:String,desc:String}],
-    education:[{org:String,degree:String,time:String}],
-    skills:{type:Array},
-    projects:[{name:String,tech:Array,colab:Array,link:String}],
-    connection:[String],
     alertedBy: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user_w'
@@ -47,7 +43,14 @@ const userSchema = new Schema({
     alertingTo: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user_w'
-    }]
+    }],
+
+
+    what_your_status: {
+        type: Number,
+        required: false
+    }
+
 });
 
 module.exports = mongoose.model('user_w', userSchema);
