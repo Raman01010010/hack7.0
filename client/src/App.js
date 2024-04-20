@@ -6,7 +6,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Home from './component/Home';
 import Navbar from './component/Navbar';
 import Navbar2 from './component/Navbar2';
+import Ram from './sol/Ram';
 function App() {
+
   const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "" })
 
   return (
@@ -15,6 +17,7 @@ function App() {
       <Router>
      {(!newUser.accessToken)&&<Navbar/>}
      {(newUser.accessToken)&&<Navbar2/>}
+  
       </Router>
     </User.Provider>
     </>
