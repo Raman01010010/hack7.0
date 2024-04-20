@@ -8,19 +8,17 @@ import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; // Import LocalizationProvider
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
 const Adddata = () => {
   const [accidentDetails, setAccidentDetails] = useState({
     name: "",
     address: "",
     latitude: "",
     longitude: "",
-    description: "",
-    date: null, // Store the selected date here
-
+    description: ""
   });
   const [locationSuggestions, setLocationSuggestions] = useState([]);
 
@@ -60,12 +58,7 @@ const Adddata = () => {
       setLocationSuggestions([]);
     }
   };
-  const handleDateChange = (selectedDate) => {
-    setAccidentDetails((prevDetails) => ({
-      ...prevDetails,
-      date: selectedDate, // Update the date property in accidentDetails state
-    }));
-  };
+
   const handleLocationSelection = (suggestion) => {
     setAccidentDetails((prevDetails) => ({
       ...prevDetails,
@@ -161,11 +154,18 @@ const Adddata = () => {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sm={6}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateCalendar
-                value={accidentDetails.date}
-                onChange={handleDateChange}
+              <DatePicker
+                label="Date"
+                value={dayjs(accidentDetails.date)}
+                onChange={(newDate) => {
+                  setAccidentDetails((prevDetails) => ({
+                    ...prevDetails,
+                    date: newDate.toISOString()
+                  }));
+                }}
+                renderInput={(params) => <TextField {...params} fullWidth />}
               />
             </LocalizationProvider>
           </Grid>
@@ -182,7 +182,6 @@ const Adddata = () => {
               onChange={handleChange}
             />
           </Grid>
-          
         </Grid>
         <Link to="/" style={{ textDecoration: "none" }}>
           <Button variant="contained" fullWidth sx={{ mt: 3 }}>
