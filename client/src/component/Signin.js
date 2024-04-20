@@ -128,9 +128,7 @@ const axiosPrivate=useAxiosPrivate()
       <button onClick={handleSubmit}className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
         Sign In
       </button>
-      <button onClick={hand}className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
-        Sign In
-      </button>
+     
       <p className="text-xs mt-3">
         Literally you probably haven't heard of them jean shorts.
       </p>
