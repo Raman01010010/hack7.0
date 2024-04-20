@@ -49,16 +49,37 @@ console.log(formattedDateString); // Output: "2024-04-09"
         res.status(500).json({ error: "An error occurred while saving the accident data" });
     }
 };
-const getData = async(req,res) => {
-    try {
-        const accidents = await Accidents.find();
-        console.log(accidents);
-        res.status(200).json(accidents);
-    } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: "An error occurred while fetching the accident data" });
-    }
+const getData = async (req, res) => {
+  try {
+      // Fetch accidents data
+      const accidents = await Accidents.find();
+
+      // Create an object to store latitude and longitude as keys and frequency as values
+      const coordinatesMap = {};
+
+      // Iterate through accidents to populate coordinatesMap
+      accidents.forEach(accident => {
+          const { latitude, longitude } = accident;
+          const key = `${latitude},${longitude}`;
+          coordinatesMap[key] = coordinatesMap[key] ? coordinatesMap[key] + 1 : 1;
+      });
+      // Convert coordinatesMap to an array of objects
+      const coordinatesArray = Object.entries(coordinatesMap).map(([coordinates, accidents]) => {
+          const [latitude, longitude] = coordinates.split(',');
+          return {
+              latitude,
+              longitude,
+              accidents
+          };
+      });
+
+      res.status(200).json(coordinatesArray);
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "An error occurred while fetching the accident data" });
+  }
 }
+
 
 const getData1d = async (req, res) => {
     try {

@@ -26,7 +26,6 @@ Chart.register(
   Title
 );
 
-
 const AccidentGraph = () => {
   const [year,setYear]=useState("2024");
   const DialogBox = ({ onClose }) => {
@@ -82,6 +81,7 @@ console.log(year)
   const [accidentDatamonth, setAccidentDatamonth] = useState([]);
   // const [year, setear] = useState(new Date().getFullYear());
   const [selectMonth,setSelectMonth]=useState([]);
+
   // const handleYearChange = (year) => {
   //   setyear(year);
   // };
@@ -99,6 +99,7 @@ console.log(year)
     };
     fetchData(); // Call the fetchData function
   }, []);
+ 
   console.log("year kya tha",year);
   useEffect(() => {
     const fetchData = async () => {

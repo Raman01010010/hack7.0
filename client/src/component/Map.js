@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { axiosPrivate } from "../api/axios";
 
 const triangleIcon = L.divIcon({
     className: 'custom-marker',
@@ -9,8 +10,26 @@ const triangleIcon = L.divIcon({
     html: '<div class="w-0 h-0 border-solid border-t-4 border-l-4 border-r-4 border-b-0 border-transparent border-black"></div>'
   });
 
+
+  
 const Map = () => {
+    const [locations, setLocation] = useState([]);
     const mapRef = useRef(null);
+
+    const loadLocation = async () => {
+        try {
+            console.log("vvv");
+
+            const response = await axiosPrivate.post("/data/getData"); // Assuming the API endpoint is '/api/getData1d'
+            setLocation(response.data); // Update the state variable with fetched data
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    };
+
+    useEffect(() => {
+        loadLocation();
+    }, []);
 
     useEffect(() => {
         const mapContainer = document.getElementById('map');
@@ -24,13 +43,7 @@ const Map = () => {
                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     }).addTo(map);
 
-                    const locations = [
-                        { latitude: 40.7128, longitude: -74.006, accidents: 10 },
-                        { latitude: 34.0522, longitude: -118.2437, accidents: 5 },
-                        { latitude: 41.8781, longitude: -87.6298, accidents: 15 },
-                        // Add more locations with accident data
-                    ];
-
+                    console.log("hppppppp", locations);
                     const getMarkerColor = (accidents) => {
                         const colorScale = ['#ff0000', '#00ff00'];
                         const maxAccidents = Math.max(...locations.map(loc => loc.accidents));
@@ -39,6 +52,7 @@ const Map = () => {
                         const index = Math.round(((accidents - minAccidents) / range) * (colorScale.length - 1));
                         return colorScale[index];
                     };
+
                     locations.forEach(({ latitude, longitude, accidents }) => {
                         const markerColor = getMarkerColor(accidents);
                         const marker = L.marker([latitude, longitude], {
@@ -62,8 +76,7 @@ const Map = () => {
         return () => {
             observer.disconnect();
         };
-    }, []);
-
+    }, [locations]);
     return (
         <div>
             <div id="map" style={{ height: 'calc(100vh - 50px)', width: '100%' }}></div>
