@@ -21,6 +21,8 @@ export default function Container1(){
           <Route path="/showroad" element={<><ShowRoad/></>}/>
           <Route path="/graph" element={<><Graph/></>}/>
           <Route path="/map" element={<><Map/></>}/>
+          <Route path="/dashboard" element={<><Dashboard/></>}/>
+
     </Routes>
     </>)
 }

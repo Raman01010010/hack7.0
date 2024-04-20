@@ -6,8 +6,7 @@ const ShowRoad = () => {
         [{ longitude: 34.0522, latitude: -118.2437 }, 0.92], // Destination at index n
         [{ longitude: 51.5074, latitude: -0.1278 }, 0.78],
     ];
-    
-    // Function to generate Google Maps URL from current location to destination
+  
     const generateGoogleMapsUrl = () => {
         // Get the coordinates of current location and destination
         const currentLocation = `${data[0][0].latitude},${data[0][0].longitude}`;
