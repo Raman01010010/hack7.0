@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart, CategoryScale, LinearScale, LineController, PointElement, LineElement, BarController, BarElement, Tooltip, Title } from 'chart.js';
 Chart.register(CategoryScale, LinearScale, LineController, PointElement, LineElement, BarController, BarElement, Tooltip, Title);
@@ -13,7 +14,6 @@ const AccidentGraph = () => {
     { date: '2024-09-05', accidents: 6 },
     // Add more data points as needed
   ];
-
   const customDataByVehicle = [
     { type: 'Car', accidents: 20 },
     { type: 'Truck', accidents: 15 },
@@ -89,6 +89,8 @@ const AccidentGraph = () => {
         <button className="btn" onClick={() => handleGraphTypeChange('date')}>Show by Date</button>
         <button className="btn" onClick={() => handleGraphTypeChange('month')}>Show by Month</button>
         <button className="btn" onClick={() => handleGraphTypeChange('vehicle')}>Show by Vehicle</button>
+        {/* Link to the map page */}
+        <Link to="/map" className="btn">Show Zonal Division</Link>
       </div>
     </div>
   );
