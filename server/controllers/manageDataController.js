@@ -87,29 +87,33 @@ const getData1d = async (req, res) => {
 };
 
 
-const getData1m = async(req,res) => {
-    try {
-        const currentDate = new Date(req.body.date);
-        const month = currentDate.getMonth() + 1; // Month starts from 0
-        const year = currentDate.getFullYear();
-    
-        // Calculate start and end dates for the specified month
-        const startDate = new Date(`${year}-${month.toString().padStart(2, '0')}-01`);
-        const endDate = new Date(new Date(startDate).setMonth(startDate.getMonth() + 1));
-    
-        const accidents = await Accidents.find({
-          date: {
-            $gte: startDate.toISOString(),
-            $lt: endDate.toISOString()
-          }
-        });
-    
-        res.json(accidents);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-      }
-    }
+const getData1m = async (req, res) => {
+  try {
+      // Fetch all accidents from the database
+      const accidents = await Accidents.find();
+
+      // Initialize an object to store the frequency of accidents for each month
+      const monthFrequency = {};
+
+      // Count the occurrences of accidents for each month
+      accidents.forEach((accident) => {
+          const date = new Date(accident.date);
+          const month = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`; // Format: YYYY-MM
+          monthFrequency[month] = (monthFrequency[month] || 0) + 1;
+      });
+
+      // Convert the monthFrequency object to an array of objects
+      const monthFrequencyArray = Object.entries(monthFrequency).map(([month, accidents]) => ({
+          month,
+          accidents
+      }));
+
+      res.json(monthFrequencyArray);
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
 
 module.exports = {addData,getData,getData1d,getData1m};
