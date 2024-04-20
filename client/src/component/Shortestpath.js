@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Typography, TextField, Button, Box, CircularProgress } from '@mui/material';
+import { Grid, Typography, TextField, Button, Box, CircularProgress, Container, Paper, List, ListItem, ListItemText, Divider } from '@mui/material';
 import axios from '../api/axios';
 import PathMap from './PathMap';
 
@@ -17,55 +17,39 @@ const Shortestpath = () => {
     setDestination(e.target.value);
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
       const response = await axios.get(`http://localhost:5000/get_paths_and_accidents?origin=${origin}&destination=${destination}`);
-      setData(response.data); 
+      setData(response.data);
       setLoading(false);
     } catch (error) {
       console.error('Error:', error);
       setLoading(false);
     }
   };
-  
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-      }}
-    >
-      <Box
-        sx={{
-          p: 2,
-          border: '1px solid #ccc',
-          borderRadius: 4,
-          maxWidth: 400,
-          width: '100%',
-        }}
-      >
+    <Container maxWidth="md" sx={{ mt: 15 }}>
+      <Paper elevation={3} sx={{ p: 2 }}>
         <Typography variant="h6" gutterBottom align="center">
           Enter Source and Destination
         </Typography>
         <form onSubmit={handleSubmit}>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 fullWidth
                 id="origin"
                 name="origin"
-                label="origin"
+                label="Origin"
                 value={origin}
                 onChange={handleSourceChange}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} md={6}>
               <TextField
                 required
                 fullWidth
@@ -83,19 +67,28 @@ const Shortestpath = () => {
             </Grid>
           </Grid>
         </form>
-      </Box>
-    {data && data.paths.length > 0 && data.paths[0]!="error" && 
-      data.paths.map((path, index) => (
-        <li key={index}>
-          <p>Path {index + 1}:</p>
-          <div>
-          <PathMap path={path}/>
-          </div>
-          <p>Accidents Count: {data.accidents_counts[index]}</p>
-        </li>
-      ))}
-    </Box>
+      </Paper>
+      {data && data.paths.length > 0 && data.paths[0] !== "error" &&
+        <List sx={{ mt: 4 }}>
+          {data.paths.map((path, index) => (
+            <React.Fragment key={index}>
+              <ListItem>
+                <ListItemText primary={`Path ${index + 1}`} />
+              </ListItem>
+              <ListItem>
+                <PathMap path={path} />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary={`Accidents Count: ${data.accidents_counts[index]}`} />
+              </ListItem>
+              {index !== data.paths.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
+        </List>
+      }
+    </Container>
   );
 };
 
 export default Shortestpath;
+
