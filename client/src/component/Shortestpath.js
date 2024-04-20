@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Typography, TextField, Button, Box } from '@mui/material';
+import { Grid, Typography, TextField, Button, Box, CircularProgress } from '@mui/material';
 import axios from '../api/axios';
 import PathMap from './PathMap';
 
@@ -7,6 +7,7 @@ const Shortestpath = () => {
   const [origin, setOrigin] = useState('');
   const [destination, setDestination] = useState('');
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSourceChange = (e) => {
     setOrigin(e.target.value);
@@ -18,13 +19,14 @@ const Shortestpath = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.get(`http://localhost:5000/get_paths_and_accidents?origin=${origin}&destination=${destination}`);
       setData(response.data); 
-      console.log(response.data)
-      console.log(data)
+      setLoading(false);
     } catch (error) {
       console.error('Error:', error);
+      setLoading(false);
     }
   };
   
@@ -76,7 +78,7 @@ const Shortestpath = () => {
             </Grid>
             <Grid item xs={12}>
               <Button type="submit" variant="contained" color="primary" fullWidth>
-                Submit
+                {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
               </Button>
             </Grid>
           </Grid>
