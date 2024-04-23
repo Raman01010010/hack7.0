@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
 const VehicleSchema = new Schema({
     licensePlate: {
         type: String,
@@ -13,20 +14,30 @@ const VehicleSchema = new Schema({
         type: String,
         required: true
     },
-    phone:{
-        type:String,
-        required:true
+    phone: {
+        type: String,
+        required: true
     },
-    company:{
+    time_duration: {
+        startTime: {
+            type: String,
+            required: true
+        },
+        endTime: {
+            type: String,
+            required: true
+        }
+    },
+    company: {
         type: Schema.Types.ObjectId,
-        ref: 'Company'
+        ref: 'ParkingLot'
     },
-    key:{
-        type:String,
-        required:true
+    key: {
+        type: String,
+        required: true
     },
-    status:{
-        type:String
+    status: {
+        type: String
     }
 });
 
@@ -63,7 +74,15 @@ const ParkingLotSchema = new Schema({
         ref: 'Vehicle' 
     }]
 });
+
 ParkingLotSchema.index({ location: '2dsphere' });
+
+VehicleSchema.methods.isExpired = function() {
+    const currentTime = new Date();
+    const endTime = new Date(this.time_duration.endTime);
+    return endTime < currentTime;
+};
+
 module.exports = {
     Vehicle: mongoose.model('Vehicle', VehicleSchema),
     ParkingLot: mongoose.model('ParkingLot', ParkingLotSchema)
