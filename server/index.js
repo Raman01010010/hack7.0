@@ -13,7 +13,7 @@ const credentials = require('./middleware/credential')
 const PORT=process.env.PORT||3500
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
-const twilio=require('./config/twillioConfig')
+//const twilio=require('./config/twillioConfig')
 connectDB();
 
 

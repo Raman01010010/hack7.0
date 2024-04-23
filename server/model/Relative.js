@@ -7,6 +7,7 @@ const safetyNumberSchema = new mongoose.Schema({
   },
   phoneNumber: {
     type: String,
+    unique:true,
     required: true
   },
   relationship: {
@@ -18,6 +19,6 @@ const safetyNumberSchema = new mongoose.Schema({
   }
 });
 
-const SafetyNumber = mongoose.model('SafetyNumber', safetyNumberSchema);
 
-module.exports = SafetyNumber;
+
+module.exports = mongoose.model('SafetyNumber', safetyNumberSchema);
