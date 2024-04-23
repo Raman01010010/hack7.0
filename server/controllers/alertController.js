@@ -9,11 +9,12 @@ const add =
     async (req, res) => {
         console.log(req.body)
         try {
-            const { name, phoneNumber, relationship, notes } = req.body;
+            const { name, phoneNumber, relationship, notes,user } = req.body;
 
             const safetyNumber = new SafetyNumber({
                 name,
                 phoneNumber,
+                user,
                 relationship,
                 notes
             });
