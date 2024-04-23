@@ -132,7 +132,7 @@ function Ram() {
         <ul className="space-y-4">
           {violations.map((violation, index) => (
             <li key={index} className="border p-4 rounded-md">
-              <p><strong>Complainant:</strong> {violation.complainant}</p>
+              {/* <p><strong>Complainant:</strong> {violation.complainant}</p> */}
               <p><strong>Name:</strong> {violation.name}</p>
               <p><strong>Vehicle Number:</strong> {violation.vehicleNumber}</p>
               <p><strong>Location:</strong> {violation.location}</p>
