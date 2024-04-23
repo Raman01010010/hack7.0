@@ -10,6 +10,7 @@ const cookieParser=require('cookie-parser')
 const credentials = require('./middleware/credential')
 
 
+
 const PORT=process.env.PORT||3500
 const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
@@ -33,9 +34,7 @@ app.use('/refresh',require('./routes/refresh'))
 app.use('/data',require('./routes/manageData'));
 //app.use(verifyJWT)
 app.use('/user1',require('./routes/userUpdate'))
-
-
-
+app.use('/park',require('./routes/parking'));
 app.all('/*',(req,res)=>{
     res.status(404)
     if(req.accepts('html')){
