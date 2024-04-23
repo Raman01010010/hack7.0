@@ -16,13 +16,25 @@ const VehicleSchema = new Schema({
     phone:{
         type:String,
         required:true
+    },
+    company:{
+        type: Schema.Types.ObjectId,
+        ref: 'Company'
+    },
+    key:{
+        type:String,
+        required:true
+    },
+    status:{
+        type:String
     }
 });
+
 const ParkingLotSchema = new Schema({
     location: {
         type: {
             type: String,
-            enum: ['Point'], // Ensure it's a GeoJSON point
+            enum: ['Point'], 
             required: true
         },
         coordinates: {
