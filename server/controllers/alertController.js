@@ -1,8 +1,25 @@
 const Accidents = require('../model/Accidents.js');
 const SafetyNumber=require('./../model/Relative.js')
+const alertservice=require('./../config/twillioConfig.js')
+const client=alertservice.client
 const send = async (req, res) => {
-
-}
+    try {
+      // Assuming you have a user's phone number in the request body
+      const phoneNumber = req.body.phoneNumber;
+  
+      // Send SMS alert using Twilio
+      await client.messages.create({
+        body: 'This is an emergency alert!',
+        from: twilioPhoneNumber,
+        to: phoneNumber
+      });
+  
+      res.status(200).json({ message: `Alert sent to ${phoneNumber}` });
+    } catch (error) {
+      console.error('Error sending SMS:', error);
+      res.status(500).json({ message: 'Error sending SMS' });
+    }
+  }
 
 
 const add =
@@ -25,6 +42,7 @@ const add =
             res.status(400).json({ message: error.message });
         }
     }
+
 
 
 
