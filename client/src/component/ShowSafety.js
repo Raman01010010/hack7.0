@@ -4,11 +4,12 @@ import AddAlertIcon from '@mui/icons-material/AddAlert';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import { useEffect, useState,useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { User } from '../context/User';
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
@@ -24,13 +25,13 @@ const Map = (props) => {
         if (!mapContainer || mapRef.current) return;
 
         // Initialize the map with a single point
-        const map = L.map(mapContainer).setView([props.pos.latitude,props.pos.longitude], 10); // Set the view to New York City
+        const map = L.map(mapContainer).setView([props.pos.latitude, props.pos.longitude], 10); // Set the view to New York City
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         // Add a marker for the single point
-        const marker = L.marker([props.pos.latitude,props.pos.longitude]).addTo(map); // New York City coordinates
+        const marker = L.marker([props.pos.latitude, props.pos.longitude]).addTo(map); // New York City coordinates
         // Popup text for the marker
 
         // Store the map instance in the ref
@@ -52,62 +53,65 @@ const Map = (props) => {
 };
 
 function GeolocationComponent() {
-  const [position, setPosition] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+    const { loc, setLoc } = React.useContext(User)
+    const [position, setPosition] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    let locationTimeout;
+    useEffect(() => {
+        let locationTimeout;
 
-    const getLocation = () => {
-      console.log("raman");
-      if (navigator.geolocation) {
-        locationTimeout = setTimeout(getLocation, 10000);
-    
-        navigator.geolocation.getCurrentPosition(
-          (pos) => {
+        const getLocation = () => {
+            console.log("raman");
+            if (navigator.geolocation) {
+                locationTimeout = setTimeout(getLocation, 10000);
+
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => {
+                        clearTimeout(locationTimeout);
+                        setPosition(pos.coords);
+                        setLoc([pos.coords.latitude, pos.coords.longitude])
+                        setLoading(false);
+                    },
+                    (err) => {
+                        clearTimeout(locationTimeout);
+                        setError(err);
+                        setLoading(false);
+                    }
+                );
+            } else {
+                // Fallback for no geolocation
+                setError({ message: 'Geolocation not supported' });
+                setLoading(false);
+            }
+        };
+
+        getLocation();
+
+        return () => {
+            // Cleanup function
             clearTimeout(locationTimeout);
-            setPosition(pos.coords);
-            setLoading(false);
-          },
-          (err) => {
-            clearTimeout(locationTimeout);
-            setError(err);
-            setLoading(false);
-          }
-        );
-      } else {
-        // Fallback for no geolocation
-        setError({ message: 'Geolocation not supported' });
-        setLoading(false);
-      }
-    };
+        };
+    }, []);
 
-    getLocation();
-
-    return () => {
-      // Cleanup function
-      clearTimeout(locationTimeout);
-    };
-  }, []);
-
-  return (
-    <div>
-        rmananan
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {position && (
+    return (
         <div>
-          <p>Latitude: {position.latitude}</p>
-          <p>Longitude: {position.longitude}</p>
+            rmananan
+            {loading && <p>Loading...</p>}
+            {error && <p>Error: {error.message}</p>}
+            {position && (
+                <div>
+                    <p>Latitude: {position.latitude}</p>
+                    <p>Longitude: {position.longitude}</p>
+                </div>
+            )}
+            {position && <Map pos={position} />}
         </div>
-      )}
-     {position&& <Map pos={position}/>}
-    </div>
-  );
+    );
 }
 
 export default function ShowSafety() {
+    const {loc,setLoc}=React.useContext(User)
     const axios = useAxiosPrivate()
     const [checked, setChecked] = React.useState(['wifi']);
     const [position, setPosition] = useState([0, 0]);
@@ -141,48 +145,50 @@ export default function ShowSafety() {
         fetchData(); // Call the async function immediately
 
     }, []);
- 
- 
+
+async function send(){
+    console.log(loc)
+} 
 
     return (
         <>
- <div>
-    <div>
-<GeolocationComponent/>
+            <div>
+                <div>
+                    <GeolocationComponent />
 
-</div>
-    </div>
-            
-                    {data.map((item) => {
-                        return (
-                            <div
-                                class="  p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                                <div className='flex justify-between'>
-                                    <div class="mr-4 ">
-                                        <img alt="candice" src="https://docs.material-tailwind.com/img/face-1.jpg"
-                                            class="relative inline-block h-12 w-12 !rounded-full  object-cover " />
-                                    </div>
-                                    <div>
-                                        <h6
-                                            class="block font-sans mr-4 text-base antialiased font-semibold tracking-normal text-blue-gray-900">
-                                            {item.name}
-                                        </h6>
-                                        <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700">
-                                            {item.relationship}
+                </div>
+            </div>
 
-                                        </p>
+            {data.map((item) => {
+                return (
+                    <div
+                        class="  p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        <div className='flex justify-between'>
+                            <div class="mr-4 ">
+                                <img alt="candice" src="https://docs.material-tailwind.com/img/face-1.jpg"
+                                    class="relative inline-block h-12 w-12 !rounded-full  object-cover " />
+                            </div>
+                            <div>
+                                <h6
+                                    class="block font-sans mr-4 text-base antialiased font-semibold tracking-normal text-blue-gray-900">
+                                    {item.name}
+                                </h6>
+                                <p class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700">
+                                    {item.relationship}
 
-                                    </div>
+                                </p>
 
-                                    <Button variant="contained">Alert<AddAlertIcon /></Button>
-
-                                </div>
                             </div>
 
-                        )
-                    })}
+                            <Button variant="contained" onClick={send}>Alert<AddAlertIcon /></Button>
+
+                        </div>
+                    </div>
+
+                )
+            })}
 
 
-                </>
+        </>
     );
 }
