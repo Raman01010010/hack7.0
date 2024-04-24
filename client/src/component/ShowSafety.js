@@ -5,7 +5,7 @@ import useAxiosPrivate from '../hooks/useAxiosPrivate';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { useEffect, useState, useRef } from 'react';
-
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -97,7 +97,7 @@ function GeolocationComponent() {
 
     return (
         <div>
-            rmananan
+           
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             {position && (
@@ -178,12 +178,10 @@ async function send(item){
             {data.map((item) => {
                 return (
                     <div
-                        class="  p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                        <div className='flex justify-between'>
+                        class="flex justify-center  p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                        <div className='flex justify-between md:w-[50vw]'>
                             <div class="mr-4 ">
-                                <img alt="candice" src="https://docs.material-tailwind.com/img/face-1.jpg"
-                                    class="relative inline-block h-12 w-12 !rounded-full  object-cover " />
-                            </div>
+      <AssuredWorkloadIcon style={{ fontSize: '3em' }}/>                           </div>
                             <div>
                                 <h6
                                     class="block font-sans mr-4 text-base antialiased font-semibold tracking-normal text-blue-gray-900">
