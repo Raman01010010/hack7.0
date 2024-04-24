@@ -185,14 +185,14 @@ const Navbar2 = () => {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              SafeNet
+                SafeNet
               </Typography>
 
               <Button color="inherit" component={Link} to="/dashboard">
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-              <Button color="inherit" onClick={fun} component={Link} to="/shortestpath">
+              <Button color="inherit"  component={Link} to="/shortestpath">
                 <FontAwesomeIcon
                   icon={faShield}
                   style={{ marginRight: "5px" }}
@@ -200,11 +200,27 @@ const Navbar2 = () => {
                 Safest path
               </Button>
 
-              <Button color="inherit" onClick={fun} component={Link} to="/add">
+              <Button color="inherit"  component={Link} to="/safety">
+                <FontAwesomeIcon
+                  icon={faShield}
+                  style={{ marginRight: "5px" }}
+                />
+                Add Safety Detail
+              </Button>
+
+              <Button color="inherit"  component={Link} to="/showSafety">
+                <FontAwesomeIcon
+                  icon={faShield}
+                  style={{ marginRight: "5px" }}
+                />
+                Send Alert
+              </Button>
+
+              <Button color="inherit"  component={Link} to="/add">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
-              <Button color="inherit" onClick={fun} component={Link} to="/ram">
+              <Button color="inherit"  component={Link} to="/ram">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add violations
               </Button>
@@ -224,14 +240,14 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
               <IconButton
-                onClick={fun}
+                
                 color="inherit"
                 style={{ marginRight: "20px" }}
                 component={Link}
               >
                 <FontAwesomeIcon icon={faHome} />
               </IconButton>
-              <Button color="inherit" onClick={fun} component={Link}>
+              <Button color="inherit"  component={Link}>
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Notification
               </Button>

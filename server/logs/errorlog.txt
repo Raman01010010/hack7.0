@@ -74,3 +74,4 @@ Fri Nov 24 2023 21:51:46 GMT+0530 (India Standard Time)	5661de93-2a3e-4007-8382-
 Fri Nov 24 2023 21:51:46 GMT+0530 (India Standard Time)	1ec73cd2-2202-4704-8532-c1fdeddea096	Error :Not allowed by cors
 Sat Apr 20 2024 12:14:48 GMT+0530 (India Standard Time)	a3a17e1f-df47-443d-85f5-f22aa2855609	SyntaxError :Unexpected token 'r', "{"name":random,
 ""... is not valid JSON
+Wed Apr 24 2024 20:43:37 GMT+0530 (India Standard Time)	74e9e16c-94f6-4cf5-84e3-0c0339c8a9a5	SyntaxError :Expected ',' or '}' after property value in JSON at position 70

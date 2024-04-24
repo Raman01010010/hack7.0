@@ -15,7 +15,7 @@ const verifyJWT=(req,res,next)=>{
             req.roles=decoded.UserInfo.roles
             req.userid=decoded.UserInfo.userid
             console.log("verified")
-            console.log(req.user)
+            console.log(req.userid)
             next()
         }
     )

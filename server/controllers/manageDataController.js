@@ -49,59 +49,92 @@ console.log(formattedDateString); // Output: "2024-04-09"
         res.status(500).json({ error: "An error occurred while saving the accident data" });
     }
 };
-const getData = async(req,res) => {
+const getData = async (req, res) => {
+  try {
+      // Fetch accidents data
+      const accidents = await Accidents.find();
+
+      // Create an object to store latitude and longitude as keys and frequency as values
+      const coordinatesMap = {};
+
+      // Iterate through accidents to populate coordinatesMap
+      accidents.forEach(accident => {
+          const { latitude, longitude } = accident;
+          const key = `${latitude},${longitude}`;
+          coordinatesMap[key] = coordinatesMap[key] ? coordinatesMap[key] + 1 : 1;
+      });
+      // Convert coordinatesMap to an array of objects
+      const coordinatesArray = Object.entries(coordinatesMap).map(([coordinates, accidents]) => {
+          const [latitude, longitude] = coordinates.split(',');
+          return {
+              latitude,
+              longitude,
+              accidents
+          };
+      });
+
+      res.status(200).json(coordinatesArray);
+  } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "An error occurred while fetching the accident data" });
+  }
+}
+
+
+const getData1d = async (req, res) => {
     try {
-        const accidents = await Accidents.find();
-        res.status(200).json(accidents);
+        // Aggregate to group accidents by date and count occurrences
+        const addressArray = await Accidents.aggregate([
+            {
+                $group: {
+                    _id: "$date",
+                    count: { $sum: 1 }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    date: "$_id",
+                    accidents: "$count"
+                }
+            }
+        ]);
+        console.log("Address Array:", addressArray); // Log the address array
+        res.status(200).json(addressArray);
     } catch (error) {
-        console.error("Error:", error);
-        res.status(500).json({ error: "An error occurred while fetching the accident data" });
-    }
-}
-const getData1d = async(req,res) => {
-    try {
-        const currentDate = new Date();
-        const startDate = new Date(currentDate);
-        startDate.setHours(0, 0, 0, 0); // Set time to the beginning of the day
-        const endDate = new Date(startDate);
-        endDate.setDate(startDate.getDate() + 1); // Add one day to get the next day
-    
-        const accidents = await Accidents.find({
-          date: {
-            $gte: startDate.toISOString(),
-            $lt: endDate.toISOString()
-          }
-        });
-    
-        res.status(200).json(accidents);
-      } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).json({ error: "Internal Server Error" });
-      }
-}
-const getData1m = async(req,res) => {
-    try {
-        const currentDate = new Date(req.body.date);
-        const month = currentDate.getMonth() + 1; // Month starts from 0
-        const year = currentDate.getFullYear();
-    
-        // Calculate start and end dates for the specified month
-        const startDate = new Date(`${year}-${month.toString().padStart(2, '0')}-01`);
-        const endDate = new Date(new Date(startDate).setMonth(startDate.getMonth() + 1));
-    
-        const accidents = await Accidents.find({
-          date: {
-            $gte: startDate.toISOString(),
-            $lt: endDate.toISOString()
-          }
-        });
-    
-        res.json(accidents);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        res.status(500).json({ error: "Internal Server Error" });
-      }
     }
+};
+
+
+const getData1m = async (req, res) => {
+  try {
+      // Fetch all accidents from the database
+      const accidents = await Accidents.find();
+
+      // Initialize an object to store the frequency of accidents for each month
+      const monthFrequency = {};
+
+      // Count the occurrences of accidents for each month
+      accidents.forEach((accident) => {
+          const date = new Date(accident.date);
+          const month = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}`; // Format: YYYY-MM
+          monthFrequency[month] = (monthFrequency[month] || 0) + 1;
+      });
+
+      // Convert the monthFrequency object to an array of objects
+      const monthFrequencyArray = Object.entries(monthFrequency).map(([month, accidents]) => ({
+          month,
+          accidents
+      }));
+
+      res.json(monthFrequencyArray);
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
 
 module.exports = {addData,getData,getData1d,getData1m};
