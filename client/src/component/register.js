@@ -35,8 +35,7 @@ const ParkingForm = () => {
             // Send form data to the server
             const response = await axios.post("/park/addcomp", formData);
             console.log("pm");
-            console.log(response.data); // Log response from the server
-            // Reset the form after successful submission
+            console.log(response.data); 
             console.log("succes");
             setFormData({
                 parkingLotName: '',

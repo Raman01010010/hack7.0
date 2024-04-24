@@ -30,6 +30,36 @@ const addparkinglot = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+const showdata = async (req, res) => {
+    console.log("entered1");
+
+    try {
+    console.log("entered");
+        // Fetch data from the ParkingLot collection using Mongoose, selecting specific fields
+        const parkingLots = await ParkingLot.find({}, 'location parkingLotName firstName lastName totalSlots vehiclesParked email phone');
+        
+        // Modify each document to calculate slotsAvailable
+        const parkingLotsWithSlotsAvailable = parkingLots.map(parkingLot => {
+            const slotsAvailable = parkingLot.totalSlots - parkingLot.vehiclesParked.length;
+            return {
+                location: parkingLot.location,
+                parkingLotName: parkingLot.parkingLotName,
+                firstName: parkingLot.firstName,
+                lastName: parkingLot.lastName,
+                slotsAvailable: slotsAvailable,
+                email: parkingLot.email,
+                phone: parkingLot.phone
+            };
+        });
+
+        // Send the modified data as a response to the client
+        res.status(200).json(parkingLotsWithSlotsAvailable);
+    } catch (error) {
+        // Handle errors
+        res.status(500).json({ message: error.message });
+    }
+};
+
 
 const takeinVehicle = async (req, res) => {
     try {
@@ -114,4 +144,4 @@ const bookparking = async (req, res) => {
     }
 };
 
-module.exports = { addparkinglot ,bookparking,takeoutVehicle,takeinVehicle};
+module.exports = { addparkinglot ,bookparking,takeoutVehicle,takeinVehicle,showdata};
