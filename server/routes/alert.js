@@ -5,4 +5,5 @@ const alertController=require('../controllers/alertController')
 router.post('/send',alertController.send)
 router.post('/add',alertController.add)
 router.post('/get',alertController.getAll)
+router.post('/getAlert',alertController.getAlert)
 module.exports=router
