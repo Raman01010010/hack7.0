@@ -2305,3 +2305,12 @@ Wed Apr 24 2024 20:27:07 GMT+0530 (India Standard Time)	ad5bb8b7-41a1-498a-8f9a-
 Wed Apr 24 2024 20:27:07 GMT+0530 (India Standard Time)	d2d0e411-aa85-40e0-b453-f80fa386dbb8	POST	http://localhost:3000	/alert/get
 Wed Apr 24 2024 20:27:08 GMT+0530 (India Standard Time)	43a18504-d05d-4cc6-b0e1-7b5711a798fa	OPTIONS	http://localhost:3000	/alert/get
 Wed Apr 24 2024 20:27:08 GMT+0530 (India Standard Time)	3f934c93-a22c-4ec2-bd4f-041094f9a6d0	POST	http://localhost:3000	/alert/get
+Wed Apr 24 2024 20:37:33 GMT+0530 (India Standard Time)	d8dbb125-b762-47ab-9402-2bc9e253fa88	POST	undefined	/alert/send
+Wed Apr 24 2024 20:38:55 GMT+0530 (India Standard Time)	02024c9b-17e8-4bd2-abb5-6f3b7d044c2b	POST	undefined	/alert/send
+Wed Apr 24 2024 20:43:37 GMT+0530 (India Standard Time)	32a0331c-bc3d-4646-810d-b8077c83ae02	POST	undefined	/alert/send
+Wed Apr 24 2024 20:43:47 GMT+0530 (India Standard Time)	568d8a14-1567-43d8-b1d4-1e6e21376c55	POST	undefined	/alert/send
+Wed Apr 24 2024 20:44:52 GMT+0530 (India Standard Time)	90ef9f0d-e12e-4b10-ae9a-1e833cf90da8	POST	undefined	/alert/send
+Wed Apr 24 2024 20:47:10 GMT+0530 (India Standard Time)	cc0593fe-5361-41e8-a5b3-c0e646be21ab	POST	undefined	/alert/send
+Wed Apr 24 2024 20:51:28 GMT+0530 (India Standard Time)	dc73a22a-608c-48f3-8901-23316da35151	POST	undefined	/alert/add
+Wed Apr 24 2024 20:51:40 GMT+0530 (India Standard Time)	2062366f-18ee-4851-8ab8-607f106390da	POST	undefined	/alert/send
+Wed Apr 24 2024 20:52:26 GMT+0530 (India Standard Time)	070f637b-ec12-4c94-ba56-831a5c818221	POST	undefined	/alert/send

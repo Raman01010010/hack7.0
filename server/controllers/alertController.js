@@ -1,27 +1,51 @@
 const Accidents = require('../model/Accidents.js');
-const SafetyNumber=require('./../model/Relative.js')
-const alertservice=require('./../config/twillioConfig.js')
-const nodemailer=require("nodemailer")
-
-const client=alertservice.client
+const SafetyNumber = require('../model/Relative.js');
+const alertService = require('../config/twillioConfig.js');
+const nodemailer = require("nodemailer");
+const Alert = require('../model/alert.js'); // Import the Alert model
+const client = alertService.client;
+const User = require('../model/User');
 const send = async (req, res) => {
-    try {
-      // Assuming you have a user's phone number in the request body
-      const phoneNumber = req.body.phoneNumber;
-  
-      // Send SMS alert using Twilio
+  try {
+    const phoneNumber = req.body.phoneNumber;
+    const email = req.body.email;
+    const message = req.body.message;
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude;
+req.userid="658d45c616bae47d92b240d0";
+    // Save alert details in the database
+    const newAlert = new Alert({
+      user:req.userid,
+      message: message,
+      latitude: latitude,
+      longitude: longitude
+    });
+   const res1= await newAlert.save(); // Save the alert document
+console.log(res1);
+const res2=await User.find({_id:req.userid});
+console.log(res2)
+    // Send SMS alert using Twilio
+    if (phoneNumber) {
       await client.messages.create({
-        body: 'This is an emergency alert!',
+        body: 'This is an emergency alert from ' + res2[0].name + '. Email: ' + res2[0].email + '. The person can be found at http://localhost:3000/watch/' + res1._id + ' !',
+
         from: '+12563447753',
         to: phoneNumber
       });
-  
-      res.status(200).json({ message: `Alert sent to ${phoneNumber}` });
-    } catch (error) {
-      console.error('Error sending SMS:', error);
-      res.status(500).json({ message: 'Error sending SMS' });
     }
+    
+    // Send email alert using Nodemailer
+    if (email) {
+      await sendEmail("", 'This is an emergency alert from ' + res2[0].name + '. Email: ' + res[0].email + '. The person can be found at http://localhost:3000/watch/' + res1._id + '!', "rmnprjrrr@gmail.com", "", "rmnprjrrr@gmail.com");
+    }
+
+    res.status(200).json({ message: `Alert sent to ${phoneNumber}` });
+  } catch (error) {
+    console.error('Error sending alert:', error);
+    res.status(500).json({ message: 'Error sending alert' });
   }
+}
+
 
 
 const add =
@@ -71,8 +95,8 @@ const add =
             to:send_to,
             replyTo:reply_to,
             subject:"One time password for College Connect",
-            html:`<h1>Welcome to college connct </h1>
-            <h2>Connect with your college friends and interact with them at one place </h2>Your otp for login is ${message}`
+            html:`<h1>Welcome to SafeNet </h1>
+            <h2> ${message}</h2>`
         }
         //send email
         transporter.sendMail(options,function(err,info){
