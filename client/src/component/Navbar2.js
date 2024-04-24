@@ -113,18 +113,62 @@ const Navbar2 = () => {
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    // Cleanup function to set isJobMenuOpen to false when component unmounts
+    return () => {
+      setIsJobMenuOpen(false);
+    };
+  }, []);
 
+  useEffect(() => {
+    // Set isJobMenuOpen to true when the location changes to "/showjob"
+    setIsJobMenuOpen(location.pathname === "/showjob");
+  }, [location.pathname]);
+  function fun() {
+    setSh((old) => {
+      return !old;
+    });
+  }
 
+  useEffect(() => {
+    // Fetch data from the backend using axios or your preferred method
+    const fetchData = async () => {
+      try {
+        console.log(searchInput);
+        const response = await axios.post("/connect/searchname", {
+          searchInput,
+        });
 
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(true);
-  // };
+        // Access the data property of the response
+        const responseData = response.data;
 
-  // const handleCloseModal = () => {
-  //   setIsModalOpen(false);
-  // };
+        // Access the matchedUsernames property from the data
+        const matchedUsernames = responseData.matchedUsernames;
 
- 
+        // Assuming setName is a state update function
+        setName(matchedUsernames);
+      } catch (error) {
+        console.error("Error fetching data from the backend:", error);
+      }
+    };
+
+    // Call the fetchData function
+
+    // Call the fetchData function
+    fetchData();
+  }, [searchInput]);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (event, value) => {
+    setSearchInput(value);
+  };
   console.log(name);
   return (
     <>
@@ -141,7 +185,7 @@ const Navbar2 = () => {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              SafeNet
+                SafeNet
               </Typography>
 
               <Button color="inherit" component={Link} to="/dashboard">
@@ -156,11 +200,27 @@ const Navbar2 = () => {
                 Safest path
               </Button>
 
+              <Button color="inherit"  component={Link} to="/safety">
+                <FontAwesomeIcon
+                  icon={faShield}
+                  style={{ marginRight: "5px" }}
+                />
+                Add Safety Detail
+              </Button>
+
+              <Button color="inherit"  component={Link} to="/showSafety">
+                <FontAwesomeIcon
+                  icon={faShield}
+                  style={{ marginRight: "5px" }}
+                />
+                Send Alert
+              </Button>
+
               <Button color="inherit"  component={Link} to="/add">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
-              <Button color="inherit" component={Link} to="/ram">
+              <Button color="inherit"  component={Link} to="/ram">
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add violations
               </Button>
@@ -176,9 +236,9 @@ const Navbar2 = () => {
             </>
           ) : (
             <>
-              {/* <Button color="inherit" onClick={handleOpenModal}>
+              <Button color="inherit" onClick={handleOpenModal}>
                 <FontAwesomeIcon icon={faSearch} />
-              </Button> */}
+              </Button>
               <IconButton
                 
                 color="inherit"

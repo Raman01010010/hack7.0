@@ -10,10 +10,10 @@ import Ram from './sol/Ram';
 function App() {
 
   const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "" })
-
+  const [loc,setLoc]=React.useState([])
   return (
     <>
-    <User.Provider value={{newUser,setNewUser}}>
+    <User.Provider value={{newUser,setNewUser,loc,setLoc}}>
       <Router>
      {(!newUser.accessToken)&&<Navbar/>}
      {(newUser.accessToken)&&<Navbar2/>}

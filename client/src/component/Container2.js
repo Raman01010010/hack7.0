@@ -9,6 +9,9 @@ import ShowRoad from "./ShowRoad";
 import Graph from "./Graph";
 import Map from "./Map"
 import Ram from "../sol/Ram";
+import AddSafety from "./AddSafety";
+import ShowSafety from "./ShowSafety";
+import GetLocation from "./GetLocation";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -21,7 +24,10 @@ export default function Container1(){
           <Route path="/showroad" element={<><ShowRoad/></>}/>
           <Route path="/graph" element={<><Graph/></>}/>
           <Route path="/map" element={<><Map/></>}/>
+          <Route path="/safety" element={<><AddSafety/></>}/>
+          <Route path="/showsafety" element={<><ShowSafety/></>}/>
           <Route path="/dashboard" element={<><Dashboard/></>}/>
+          <Route path="/watch/:alertId" element={<><GetLocation/></>}/>
 
     </Routes>
     </>)
