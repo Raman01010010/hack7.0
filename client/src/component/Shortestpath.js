@@ -68,7 +68,7 @@ const Shortestpath = () => {
           </Grid>
         </form>
       </Paper>
-      {data && data.paths.length > 0 && data.paths[0] !== "error" &&
+      {data &&  data.paths && data.paths.length > 0 && data.paths[0] !== "error" &&
         <List sx={{ mt: 4 }}>
           {data.paths.map((path, index) => (
             <React.Fragment key={index}>
