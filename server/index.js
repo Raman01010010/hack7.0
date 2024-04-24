@@ -35,8 +35,8 @@ app.use('/data',require('./routes/manageData'));
 //
 app.use('/user1',require('./routes/userUpdate'))
 app.use(verifyJWT)
-app.use('/alert',require('./routes/alert'))
 
+app.use('/alert',require('./routes/alert'))
 
 app.all('/*',(req,res)=>{
     res.status(404)

@@ -1,10 +1,11 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { User } from '../context/User';
 
 import { Link, useParams } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import useAxiosPrivate from '../hooks/useAxiosPrivate';
 
 const Map = (props) => {
     console.log(props)
@@ -15,13 +16,13 @@ const Map = (props) => {
         if (!mapContainer || mapRef.current) return;
 
         // Initialize the map with a single point
-        const map = L.map(mapContainer).setView([props.pos.latitude,props.pos.longitude], 10); // Set the view to New York City
+        const map = L.map(mapContainer).setView([props.pos.latitude, props.pos.longitude], 10); // Set the view to New York City
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         // Add a marker for the single point
-        const marker = L.marker([props.pos.latitude,props.pos.longitude]).addTo(map); // New York City coordinates
+        const marker = L.marker([props.pos.latitude, props.pos.longitude]).addTo(map); // New York City coordinates
         // Popup text for the marker
 
         // Store the map instance in the ref
@@ -43,28 +44,41 @@ const Map = (props) => {
 };
 
 function GetLocation() {
-  const [position, setPosition] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-    const {alertId}=useParams()
- console.log(alertId);
+    const [position, setPosition] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [alertData,setAlertData]=useState({})
+    const { alertId, newUser } = useParams()
+    console.log(alertId);
+    const axiosPrivate = useAxiosPrivate()
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axiosPrivate.post("/alert/getAlert", { id: alertId });
+                console.log(response.data);
+                setPosition(response.data);
+                setAlertData(response.data)
+            } catch (error) {
+                console.error("Error fetching data:", error.message);
+            }
+        };
+        fetchData()
+    }, [newUser])
 
- 
-
-  return (
-    <div>
-        rmananan
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error.message}</p>}
-      {position && (
+    return (
         <div>
-          <p>Latitude: {position.latitude}</p>
-          <p>Longitude: {position.longitude}</p>
+          
+          
+            {position && (
+                <div>
+                    <p>Latitude: {position.latitude}</p>
+                    <p>Longitude: {position.longitude}</p>
+                    <p>message {alertData.message}</p>
+                </div>
+            )}
+            {position && <Map pos={position} />}
         </div>
-      )}
-     {position&& <Map pos={position}/>}
-    </div>
-  );
+    );
 }
 
 export default GetLocation;
