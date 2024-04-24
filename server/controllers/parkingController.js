@@ -2,19 +2,32 @@ const { Vehicle, ParkingLot } = require('../model/Parking');
 const generateVerificationKey = require('../utils/generateVerificationKey'); // Import function to generate verification key
 const addparkinglot = async (req, res) => {
     try {
-        const { parkingLotName, location, timestart, timeend, totalSlots } = req.body;
+        const { parkingLotName, locationType,latitude,longitude, firstName, lastName, phone, email, totalSlots } = req.body;
+
+        // Extract location coordinates from the request body
+        console.log(req.body);
+
+        // Create a new ParkingLot object according to the schema
         const newParkingLot = new ParkingLot({
-            parkingLotName,
-            location,
-            timestart, 
-            timeend,
-            totalSlots
+            location: {
+                type: 'Point',
+                coordinates: [longitude, latitude]
+            },
+            parkingLotName: parkingLotName,
+            firstName: firstName,
+            lastName: lastName,
+            totalSlots: totalSlots,
+            phone: phone,
+            email: email
         });
+        console.log(newParkingLot);
         const savedParkingLot = await newParkingLot.save();
         console.log("viv", savedParkingLot);
+        // Send the saved ParkingLot object in the response
         res.status(201).json(savedParkingLot); 
     } catch (error) {
-        res.status(500).json({ message: error.message }); // Handle errors
+        // Handle errors
+        res.status(500).json({ message: error.message });
     }
 };
 

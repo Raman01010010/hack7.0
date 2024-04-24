@@ -9,6 +9,7 @@ import ShowRoad from "./ShowRoad";
 import Graph from "./Graph";
 import Map from "./Map"
 import Ram from "../sol/Ram";
+import Register from "./register"
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -22,6 +23,8 @@ export default function Container1(){
           <Route path="/graph" element={<><Graph/></>}/>
           <Route path="/map" element={<><Map/></>}/>
           <Route path="/dashboard" element={<><Dashboard/></>}/>
+          <Route path="/register" element={<><Register/></>}/>
+
 
     </Routes>
     </>)

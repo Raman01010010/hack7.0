@@ -57,17 +57,25 @@ const ParkingLotSchema = new Schema({
         type: String,
         required: true
     },
-    timestart: {
-        type: String,
-        required: true
+    firstName:{
+        type:String,
+        required:true
     },
-    timeend:{
-        type: String,
-        required: true
+    lastName:{
+        type:String,
+        required:true
     },
     totalSlots: {
         type: Number,
         required: true
+    },
+    phone:{
+        type:String,
+        required:true
+    },
+    email:{
+        type:String ,
+        required:true
     },
     vehiclesParked: [{
         type: Schema.Types.ObjectId,
