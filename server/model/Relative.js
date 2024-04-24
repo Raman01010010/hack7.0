@@ -10,10 +10,14 @@ const safetyNumberSchema = new mongoose.Schema({
     ref: 'user_w',
     required:true
   },
+  email:{
+    type: String,
+    unique:true
+  },
   phoneNumber: {
     type: String,
     unique:true,
-    required: true
+   // required: true
   },
   relationship: {
     type: String,
