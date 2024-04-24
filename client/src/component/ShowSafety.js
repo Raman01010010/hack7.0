@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 import AddAlertIcon from '@mui/icons-material/AddAlert';
 import useAxiosPrivate from '../hooks/useAxiosPrivate';
@@ -11,7 +10,13 @@ import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+
+
+import 'leaflet/dist/leaflet.css';
+
 const Map = (props) => {
+    console.log(props)
     const mapRef = useRef(null);
 
     useEffect(() => {
@@ -19,13 +24,13 @@ const Map = (props) => {
         if (!mapContainer || mapRef.current) return;
 
         // Initialize the map with a single point
-        const map = L.map(mapContainer).setView(props.pos, 10); // Set the view to New York City
+        const map = L.map(mapContainer).setView([props.pos.latitude,props.pos.longitude], 10); // Set the view to New York City
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
         // Add a marker for the single point
-        const marker = L.marker(props.pos).addTo(map); // New York City coordinates
+        const marker = L.marker([props.pos.latitude,props.pos.longitude]).addTo(map); // New York City coordinates
         // Popup text for the marker
 
         // Store the map instance in the ref
@@ -38,7 +43,7 @@ const Map = (props) => {
 
     return (
         <div>
-            <div id="map" style={{ height: 'calc(100vh - 50px)', width: '100%' }}></div>
+            <div id="map" style={{ height: 'calc(50vh)', width: '100%' }}></div>
             <div style={{ textAlign: 'center' }}>
                 <Link to="/graph" className="btn">Back to Graph</Link>
             </div>
@@ -46,7 +51,61 @@ const Map = (props) => {
     );
 };
 
+function GeolocationComponent() {
+  const [position, setPosition] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    let locationTimeout;
+
+    const getLocation = () => {
+      console.log("raman");
+      if (navigator.geolocation) {
+        locationTimeout = setTimeout(getLocation, 10000);
+    
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            clearTimeout(locationTimeout);
+            setPosition(pos.coords);
+            setLoading(false);
+          },
+          (err) => {
+            clearTimeout(locationTimeout);
+            setError(err);
+            setLoading(false);
+          }
+        );
+      } else {
+        // Fallback for no geolocation
+        setError({ message: 'Geolocation not supported' });
+        setLoading(false);
+      }
+    };
+
+    getLocation();
+
+    return () => {
+      // Cleanup function
+      clearTimeout(locationTimeout);
+    };
+  }, []);
+
+  return (
+    <div>
+        rmananan
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {position && (
+        <div>
+          <p>Latitude: {position.latitude}</p>
+          <p>Longitude: {position.longitude}</p>
+        </div>
+      )}
+     {position&& <Map pos={position}/>}
+    </div>
+  );
+}
 
 export default function ShowSafety() {
     const axios = useAxiosPrivate()
@@ -83,32 +142,17 @@ export default function ShowSafety() {
 
     }, []);
  
-    useEffect(() => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position11) => {
-            console.log(position11)
-            setPosition([position11.coords.latitude, position11.coords.longitude]);
-          },
-          (error) => {
-            setError(error.message);
-          }
-        );
-        console.log(position,"rmnvnxbvnxb")
-      } else {
-        setError('Geolocation is not supported by this browser.');
-      }
-    }, []);
+ 
 
     return (
         <>
  <div>
-    <Map pos={position}/>
-    </div>
-            <div class="relative flex justify-center text-gray-700 bg-white shadow-md  rounded-xl bg-clip-border">
-                
-                <nav class=" min-w-[240px]  gap-1 p-2 font-sans text-base font-normal text-blue-gray-700">
+    <div>
+<GeolocationComponent/>
 
+</div>
+    </div>
+            
                     {data.map((item) => {
                         return (
                             <div
@@ -139,7 +183,6 @@ export default function ShowSafety() {
                     })}
 
 
-                </nav>
-            </div></>
+                </>
     );
 }
