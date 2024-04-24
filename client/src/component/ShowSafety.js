@@ -15,6 +15,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
 import 'leaflet/dist/leaflet.css';
+import { axiosPrivate } from '../api/axios';
 
 const Map = (props) => {
     console.log(props)
@@ -146,7 +147,22 @@ export default function ShowSafety() {
 
     }, []);
 
-async function send(){
+async function send(item){
+    try {
+        const response = await axiosPrivate.post('/alert/send', {
+            "email":item.email,
+            "phoneNumber":item.phoneNumber,
+             "latitude": loc[0],
+            "longitude": loc[1],
+            "message":"i need you"
+          }
+          
+          );
+        return response.data;
+      } catch (error) {
+        console.error('Error sending alert:', error);
+        throw error;
+      }
     console.log(loc)
 } 
 
@@ -180,7 +196,7 @@ async function send(){
 
                             </div>
 
-                            <Button variant="contained" onClick={send}>Alert<AddAlertIcon /></Button>
+                            <Button variant="contained" onClick={()=>send(item)}>Alert<AddAlertIcon /></Button>
 
                         </div>
                     </div>

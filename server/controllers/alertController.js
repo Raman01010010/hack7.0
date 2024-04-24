@@ -6,13 +6,15 @@ const Alert = require('../model/alert.js'); // Import the Alert model
 const client = alertService.client;
 const User = require('../model/User');
 const send = async (req, res) => {
-  try {
     const phoneNumber = req.body.phoneNumber;
     const email = req.body.email;
     const message = req.body.message;
     const latitude = req.body.latitude;
     const longitude = req.body.longitude;
-req.userid="658d45c616bae47d92b240d0";
+    console.log(req.userid)
+  try {
+
+//req.userid="658d45c616bae47d92b240d0";
     // Save alert details in the database
     const newAlert = new Alert({
       user:req.userid,
@@ -30,7 +32,7 @@ console.log(res2)
         body: 'This is an emergency alert from ' + res2[0].name + '. Email: ' + res2[0].email + '. The person can be found at http://localhost:3000/watch/' + res1._id + ' !',
 
         from: '+12563447753',
-        to: phoneNumber
+        to: `+91${phoneNumber}`
       });
     }
     
