@@ -14,6 +14,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { User } from "../context/User";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AddSafety = () => {
   const {newUser}=React.useContext(User)
 console.log(newUser)  
@@ -33,6 +35,7 @@ const axios=useAxiosPrivate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    toast("Hello!");
     setsafteyDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value

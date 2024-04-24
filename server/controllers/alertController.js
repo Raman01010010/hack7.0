@@ -83,8 +83,28 @@ const add =
             }
         })
     }
-    module.exports=sendEmail
+   const getAll=async (req, res) => {
+    try {
+      // Extract user ID from request parameters
+      const userId = "658d45c616bae47d92b240d0";
+  
+      // Query the database to find safety numbers associated with the user ID
+      const safetyNumbers = await SafetyNumber.find({ user: userId });
+  
+      // If no safety numbers found for the user ID, return appropriate response
+      if (!safetyNumbers) {
+        return res.status(404).json({ message: 'No safety numbers found for the user ID.' });
+      }
+  
+      // If safety numbers found, return them as a response
+      res.status(200).json(safetyNumbers);
+    } catch (error) {
+      // If an error occurs, return an error response
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  }
 
 
 
-module.exports = { send,add };
+module.exports = { send,add,getAll };

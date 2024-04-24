@@ -10,6 +10,7 @@ import Graph from "./Graph";
 import Map from "./Map"
 import Ram from "../sol/Ram";
 import AddSafety from "./AddSafety";
+import ShowSafety from "./ShowSafety";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -23,6 +24,7 @@ export default function Container1(){
           <Route path="/graph" element={<><Graph/></>}/>
           <Route path="/map" element={<><Map/></>}/>
           <Route path="/safety" element={<><AddSafety/></>}/>
+          <Route path="/showsafety" element={<><ShowSafety/></>}/>
           <Route path="/dashboard" element={<><Dashboard/></>}/>
 
     </Routes>
