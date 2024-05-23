@@ -1,10 +1,11 @@
 const TimeSlot = require('../model/timeSlotSchema');
 const book = async (req, res) => {
-  const { date, startTime, endTime } = req.body;
+  const { date, startTime, endTime, parkingProvider } = req.body;
 
   // Find any conflicting slot
-  const conflictingSlot = await TimeSlot.findOne({
+  const conflictingSlot = await TimeSlot.find({
     date,
+    parkingProvider,
     booked: true,
     $or: [
       {
@@ -13,18 +14,19 @@ const book = async (req, res) => {
       }
     ]
   });
+  lim = 20;
 
-  if (conflictingSlot) {
-    return res.status(400).json({ message: 'Time slot is already booked' });
+  if (conflictingSlot.lenght > lim) {
+    return res.status(400).json({ message: 'Time slot is already booked', conf: conflictingSlot });
   }
 
   // Create and save the new time slot
-  const timeSlot = new TimeSlot({ date, startTime, endTime, booked: true });
+  const timeSlot = new TimeSlot({ date, parkingProvider, startTime, endTime, booked: true });
   await timeSlot.save();
 
-  res.status(200).json({ message: 'Time slot booked successfully' });
+  res.status(200).json({ message: 'Time slot booked successfully', conflictingSlot });
 };
-const booked= async (req, res) => {
+const booked = async (req, res) => {
   const { date } = req.body;
 
   if (!date) {
@@ -36,4 +38,4 @@ const booked= async (req, res) => {
   res.status(200).json(bookedSlots);
 }
 
-  module.exports={book,booked}
+module.exports = { book, booked }
