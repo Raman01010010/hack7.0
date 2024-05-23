@@ -12,6 +12,8 @@ import Ram from "../sol/Ram";
 import AddSafety from "./AddSafety";
 import ShowSafety from "./ShowSafety";
 import GetLocation from "./GetLocation";
+import MyLoc from "./MyLocation";
+
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -28,7 +30,9 @@ export default function Container1(){
           <Route path="/showsafety" element={<><ShowSafety/></>}/>
           <Route path="/dashboard" element={<><Dashboard/></>}/>
           <Route path="/watch/:alertId" element={<><GetLocation/></>}/>
-
+          
+          <Route path="/my" element={<><MyLoc/></>}/>
+          
     </Routes>
     </>)
 }
