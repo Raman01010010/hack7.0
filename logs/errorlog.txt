@@ -79,3 +79,5 @@ Thu May 23 2024 17:36:08 GMT+0530 (India Standard Time)	4d5fa864-d1b6-42c4-8b38-
 Thu May 23 2024 17:36:08 GMT+0530 (India Standard Time)	f211a070-edba-43a8-80bf-e31c8f73bf0b	Error :Not allowed by cors
 Thu May 23 2024 17:37:41 GMT+0530 (India Standard Time)	40dc292d-49aa-4f27-ab8b-44e81c7d36f3	Error :Not allowed by cors
 Thu May 23 2024 17:37:41 GMT+0530 (India Standard Time)	37693739-3638-4242-9270-790dbbe8898c	Error :Not allowed by cors
+Thu May 23 2024 18:07:41 GMT+0530 (India Standard Time)	6bb619b1-cb36-4702-89ee-93ae7957bcfe	Error :Not allowed by cors
+Thu May 23 2024 18:26:12 GMT+0530 (India Standard Time)	d3baad67-e941-4b59-922c-e463a17b9a06	SyntaxError :Expected double-quoted property name in JSON at position 27

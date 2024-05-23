@@ -34,6 +34,7 @@ app.use('/refresh',require('./routes/refresh'))
 app.use('/data',require('./routes/manageData'));
 //
 app.use('/user1',require('./routes/userUpdate'))
+app.use('/slot',require('./routes/slots'))
 app.use(verifyJWT)
 
 app.use('/alert',require('./routes/alert'))
