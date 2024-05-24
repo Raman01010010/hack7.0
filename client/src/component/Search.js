@@ -32,6 +32,7 @@ const Search = () => {
     if (dataFetched) {
       console.log("vivek2", parkingLots);
       console.log("done")
+    
       console.log("vivek2", parkingLots.availableParkingLots);
       navigate('/showdata');
     }

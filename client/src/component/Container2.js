@@ -13,6 +13,7 @@ import Register from "./register"
 import Showdata from "./Showdata"
 import Bookit from "./Bookit";
 import Search from "./Search";
+import Ticket from "./Ticket";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -28,9 +29,9 @@ export default function Container1(){
           <Route path="/dashboard" element={<><Dashboard/></>}/>
           <Route path="/register" element={<><Register/></>}/>
           <Route path="/showdata" element={<><Showdata/></>}/>
-          <Route path="/book/:id" element={<Bookit />} />
+          <Route path="/book/:id/:company" element={<Bookit />} />
           <Route path="/search" element={<Search />} />
-
+          <Route path="/ticket" element={<Ticket />} />
     </Routes>
     </>)
 }

@@ -1,12 +1,17 @@
-import React, { useContext, useEffect,useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { User } from "../context/User";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const Bookit = () => {
-  const { arrivalDate,departureDate } = useContext(User);
+  const axios = useAxiosPrivate();
+  const { arrivalDate, departureDate } = useContext(User);
+  const { id, company } = useParams(); // Get the company ID from URL params
+  const navigate = useNavigate();
 
-  const { companyId } = useParams(); // Get the company ID from URL params
   const [formData, setFormData] = useState({
+    compid: id,
+    compName: company,
     licensePlate: '',
     vehicleType: '',
     ownerName: '',
@@ -22,20 +27,32 @@ const Bookit = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Company ID:', companyId);
-    console.log('Form Data:', formData);
-    // Reset form fields if needed
-    setFormData({
-      licensePlate: '',
-      vehicleType: '',
-      ownerName: '',
-      phone: '',
-      startTime: '',
-      endTime: ''
-    });
+    console.log("Submitting form with data:", formData);
+    try {
+      const response = await axios.post('/park/bookit', formData);
+      if (response.status !== 200) {
+        throw new Error('Failed to book the slot');
+      }
+      console.log('Booking successful:', response.data);
+      // Navigate to the ticket page with form data
+      navigate('/ticket', { state: { formData, companyId: id } });
+      // Reset form fields (optional)
+      setFormData({
+        compid: id,
+        compName: company,
+        licensePlate: '',
+        vehicleType: '',
+        ownerName: '',
+        phone: '',
+        startTime: arrivalDate,
+        endTime: departureDate
+      });
+
+    } catch (error) {
+      console.error('Error booking the slot:', error.message);
+    }
   };
 
   return (
@@ -93,6 +110,7 @@ const Bookit = () => {
             id="startTime"
             name="startTime"
             value={formData.startTime}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -102,6 +120,7 @@ const Bookit = () => {
             id="endTime"
             name="endTime"
             value={formData.endTime}
+            onChange={handleChange}
           />
         </div>
         <button type="submit">Book Slot</button>

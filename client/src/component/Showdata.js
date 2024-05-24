@@ -5,11 +5,9 @@ import { User } from "../context/User";
 
 const Showdata = () => {
   const { parkingLots } = useContext(User);
-
   useEffect(() => {
     console.log("vivek", parkingLots);
   }, [parkingLots]);
-
   return (
     <div>
       {parkingLots.length === 0 ? (
@@ -43,7 +41,7 @@ const Showdata = () => {
                     <Typography variant="body1">
                       Phone: {parkingLot.phone}
                     </Typography>
-                    <Link to={`/book/${parkingLot._id}`} style={{ textDecoration: 'none' }}>
+                    <Link to={`/book/${parkingLot._id}/${parkingLot.parkingLotName}`} style={{ textDecoration: 'none' }}>
                     <Button variant="contained" color="primary" style={{ marginTop: '1rem' }}>
                       Book Slot
                     </Button>
