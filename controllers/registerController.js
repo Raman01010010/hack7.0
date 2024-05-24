@@ -4,7 +4,7 @@ const users=require('../model/User')
 const otp=require("../model/otpSchema")
 const handleNewUser=async(req,res)=>{
     var {otp5,email} =req.body
-    
+    console.log(otp5)
     /*
     const adduser=new users({
         name, email,given_name,picture,token,family_name
