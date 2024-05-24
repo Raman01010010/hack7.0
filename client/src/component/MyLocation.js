@@ -47,7 +47,7 @@ const Map = (props) => {
     );
 };
 
-function GeolocationComponent() {
+function MyLoc() {
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -103,4 +103,4 @@ function GeolocationComponent() {
   );
 }
 
-export default GeolocationComponent;
+export default MyLoc;
