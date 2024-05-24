@@ -11,7 +11,7 @@ const getAlert=async(req,res)=>{
 
   try {
     // Find the alert by ID in the database
-    const alert = await Alert.findById(alertId);
+    const alert = await Alert.findById(alertId).populate('user','name email');
 
     if (!alert) {
       // If no alert found with the provided ID, return 404 Not Found

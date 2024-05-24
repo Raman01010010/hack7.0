@@ -7,6 +7,7 @@ import Otp from "./Otp";
 import Persist from "./Persist";
 import ShowSafety from "./ShowSafety";
 import MyLocation from "./MyLocation";
+import GetLocation from "./GetLocation";
 export default function Container1(){
     return(<>
     <Persist/>
@@ -19,6 +20,7 @@ export default function Container1(){
           <Route path="/about" element={<><AboutUs/></>} />
           <Route path="/showsafety" element={<><ShowSafety/></>}/>
           <Route path="/my" element={<><MyLocation/></>}/>
+          <Route path="/watch/:alertId" element={<><GetLocation/></>}/>
     </Routes>
 
     </>)

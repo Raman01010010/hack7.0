@@ -10,9 +10,7 @@ import { Link } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { User } from '../context/User';
-
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-
+import { TextField } from '@mui/material';
 
 import 'leaflet/dist/leaflet.css';
 import { axiosPrivate } from '../api/axios';
@@ -47,7 +45,7 @@ const Map = (props) => {
         <div>
             <div id="map" style={{ height: 'calc(50vh)', width: '100%' }}></div>
             <div style={{ textAlign: 'center' }}>
-                <Link to="/graph" className="btn">Back to Graph</Link>
+              
             </div>
         </div>
     );
@@ -97,7 +95,7 @@ function GeolocationComponent() {
 
     return (
         <div>
-           
+
             {loading && <p>Loading...</p>}
             {error && <p>Error: {error.message}</p>}
             {position && (
@@ -112,12 +110,10 @@ function GeolocationComponent() {
 }
 
 export default function ShowSafety() {
-    const {loc,setLoc}=React.useContext(User)
+    const { loc, setLoc } = React.useContext(User)
     const axios = useAxiosPrivate()
     const [checked, setChecked] = React.useState(['wifi']);
-    const [position, setPosition] = useState([0, 0]);
-    const [error, setError] = useState(null);
-    const position1 = [22.171841, 76.065422]
+   const [message,setmessage]=React.useState('I am in danger please help me')
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
@@ -147,24 +143,24 @@ export default function ShowSafety() {
 
     }, []);
 
-async function send(item){
-    try {
-        const response = await axiosPrivate.post('/alert/send', {
-            "email":item.email,
-            "phoneNumber":item.phoneNumber,
-             "latitude": loc[0],
-            "longitude": loc[1],
-            "message":"i need you"
-          }
-          
-          );
-        return response.data;
-      } catch (error) {
-        console.error('Error sending alert:', error);
-        throw error;
-      }
-    console.log(loc)
-} 
+    async function send(item) {
+        try {
+            const response = await axiosPrivate.post('/alert/send', {
+                "email": item.email,
+                "phoneNumber": item.phoneNumber,
+                "latitude": loc[0],
+                "longitude": loc[1],
+                "message": message
+            }
+
+            );
+            return response.data;
+        } catch (error) {
+            console.error('Error sending alert:', error);
+            throw error;
+        }
+        console.log(loc)
+    }
 
     return (
         <>
@@ -174,14 +170,15 @@ async function send(item){
 
                 </div>
             </div>
-
+            <div className='flex justify-center my-5'>
+            <TextField  onChange={(e)=>{setmessage(e.target.value)}} style={{ width: '90vw' }} id="outlined-basic" value={message} label={message} variant="outlined" /></div>
             {data.map((item) => {
                 return (
                     <div
                         class="flex justify-center  p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                         <div className='flex justify-between md:w-[50vw]'>
                             <div class="mr-4 ">
-      <AssuredWorkloadIcon style={{ fontSize: '3em' }}/>                           </div>
+                                <AssuredWorkloadIcon style={{ fontSize: '3em' }} />                           </div>
                             <div>
                                 <h6
                                     class="block font-sans mr-4 text-base antialiased font-semibold tracking-normal text-blue-gray-900">
@@ -194,7 +191,7 @@ async function send(item){
 
                             </div>
 
-                            <Button variant="contained" onClick={()=>send(item)}>Alert<AddAlertIcon /></Button>
+                            <Button variant="contained" onClick={() => send(item)}>Alert<AddAlertIcon /></Button>
 
                         </div>
                     </div>

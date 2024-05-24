@@ -191,7 +191,8 @@ const Footer = () => {
       </a>
     </li>
   </ul>
-  <p>©2021 Nadine Coelho | All Rights Reserved</p>
+  <p> (c) {new Date().getFullYear()} SAFENet</p>
+
 </footer>
      
     </div>

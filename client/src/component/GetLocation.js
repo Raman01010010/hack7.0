@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { User } from '../context/User';
-
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { Link, useParams } from 'react-router-dom';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -35,14 +35,46 @@ const Map = (props) => {
 
     return (
         <div>
-            <div id="map" style={{ height: 'calc(100vh - 50px)', width: '100%' }}></div>
+            <div id="map" style={{ height: 'calc(100vh - 30vh)', width: '100%' }}></div>
             <div style={{ textAlign: 'center' }}>
-                <Link to="/graph" className="btn">Back to Graph</Link>
+              
             </div>
         </div>
     );
 };
-
+const ChatBubble = ({ message, sender }) => {
+    const bubbleStyles = {
+      maxWidth: '60%',
+      padding: '10px 15px',
+      borderRadius: '20px',
+      margin: '10px 0',
+      display: 'inline-block',
+     
+      lineHeight: '1.4',
+    };
+  
+    const senderStyles = {
+      ...bubbleStyles,
+      backgroundColor: '#007aff',
+      color: 'white',
+      borderBottomRightRadius: '0px',
+      alignSelf: 'flex-end',
+    };
+  
+    const receiverStyles = {
+      ...bubbleStyles,
+      backgroundColor: '#e5e5ea',
+      color: 'black',
+      borderBottomLeftRadius: '0px',
+      alignSelf: 'flex-start',
+    };
+  
+    return (
+      <div style={sender === 'me' ? senderStyles : receiverStyles}>
+        {message}
+      </div>
+    );
+  };
 function GetLocation() {
     const [position, setPosition] = useState(null);
     const [error, setError] = useState(null);
@@ -54,7 +86,7 @@ function GetLocation() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axiosPrivate.post("/alert/getAlert", { id: alertId });
+                const response = await axiosPrivate.post("/alert2/getAlert", { id: alertId });
                 console.log(response.data);
                 setPosition(response.data);
                 setAlertData(response.data)
@@ -64,19 +96,43 @@ function GetLocation() {
         };
         fetchData()
     }, [newUser])
-
+    const profileContainerStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        padding: '20px',
+        maxWidth: '600px',
+        margin: 'auto',
+        border: '1px solid #e5e5e5',
+        borderRadius: '10px',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+      };
+    
+      const textStyle = {
+        fontSize: '20px',
+        margin: '5px 0',
+      };
     return (
         <div>
           
-          
-            {position && (
+          {position && (
                 <div>
-                    <p>Latitude: {position.latitude}</p>
-                    <p>Longitude: {position.longitude}</p>
-                    <p>message {alertData.message}</p>
+                    
+                    <div style={profileContainerStyles}>
+                        <AccountBoxIcon style={{ fontSize: '100px', color: '#007aff' }} />
+      <p style={textStyle}>Sender Name: {alertData.user.name}</p>
+      <p style={textStyle}>Sender Email: {alertData.user.email}</p>
+      <div style={{ ...textStyle, fontSize: '24px', textAlign: 'center' }}>
+        <ChatBubble message={alertData.message} sender="me" />
+      </div>
+    
+              </div>
                 </div>
             )}
-            {position && <Map pos={position} />}
+            
+            {position &&<><Map pos={position} /><p>Latitude: {position.latitude}</p>
+                    <p>Longitude: {position.longitude}</p></> }
+          
         </div>
     );
 }
