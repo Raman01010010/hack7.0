@@ -6,27 +6,21 @@ import { User } from "../context/User";
 
 const Search = () => {
   const axios = useAxiosPrivate();
-  // const [parkingLots, setParkingLots] = useState([]);
   const [address, setAddress] = useState('');
-  const [arrivalDate, setArrivalDate] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
   const [dataFetched, setDataFetched] = useState(false); // Track if data has been fetched
   const navigate = useNavigate();
-  const {parkingLots,setParkingLots } = useContext(User);
+  const {parkingLots,setParkingLots,arrivalDate ,setArrivalDate,departureDate,setDepartureDate} = useContext(User);
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
-
     try {
       const response = await axios.post('/park/showdata', {
         address,
         start: arrivalDate,
         departure: departureDate
       });
-
       if (response.status !== 200) {
         throw new Error('Failed to fetch data');
       }
-
       setParkingLots(response.data);
       setDataFetched(true); // Set the dataFetched flag to true
       console.log("Parking lots data:", response.data);
@@ -34,11 +28,11 @@ const Search = () => {
       console.error('Error fetching data:', error.message);
     }
   };
-
   useEffect(() => {
     if (dataFetched) {
       console.log("vivek2", parkingLots);
       console.log("done")
+      console.log("vivek2", parkingLots.availableParkingLots);
       navigate('/showdata');
     }
   }, [dataFetched, parkingLots, navigate]); 

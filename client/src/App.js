@@ -11,9 +11,11 @@ function App() {
 
   const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "" })
   const [parkingLots, setParkingLots] = React.useState([]);
+  const [arrivalDate, setArrivalDate] = React.useState('');
+  const [departureDate, setDepartureDate] = React.useState('');
    return (
     <>
-    <User.Provider value={{newUser,setNewUser,parkingLots,setParkingLots}}>
+    <User.Provider value={{newUser,setNewUser,parkingLots,setParkingLots,arrivalDate,departureDate,setArrivalDate,setDepartureDate}}>
       <Router>
      {(!newUser.accessToken)&&<Navbar/>}
      {(newUser.accessToken)&&<Navbar2/>}

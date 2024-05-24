@@ -1,73 +1,112 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { Card, CardContent, Typography, Button, Container } from '@mui/material';
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import React, { useContext, useEffect,useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { User } from "../context/User";
 
 const Bookit = () => {
-  const { id } = useParams();
-  const [parkingLot, setParkingLot] = useState(null);
-  const axios = useAxiosPrivate();
-  const navigate = useNavigate();
+  const { arrivalDate,departureDate } = useContext(User);
 
-  useEffect(() => {
-    const fetchParkingLotDetails = async () => {
-      try {
-        const response = await axios.post('/park/bookit',id);
-        if (response.status !== 200) {
-          throw new Error('Failed to fetch data');
-        }
-        setParkingLot(response.data);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-      }
-    };
-    fetchParkingLotDetails();
-  }, [id, axios]);
+  const { companyId } = useParams(); // Get the company ID from URL params
+  const [formData, setFormData] = useState({
+    licensePlate: '',
+    vehicleType: '',
+    ownerName: '',
+    phone: '',
+    startTime: arrivalDate,
+    endTime: departureDate
+  });
 
-  const handleRegister = () => {
-    // Add registration logic here
-    alert('Registered successfully!');
-    navigate('/');
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
 
-  if (!parkingLot) {
-    return <Typography>Loading...</Typography>;
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Company ID:', companyId);
+    console.log('Form Data:', formData);
+    // Reset form fields if needed
+    setFormData({
+      licensePlate: '',
+      vehicleType: '',
+      ownerName: '',
+      phone: '',
+      startTime: '',
+      endTime: ''
+    });
+  };
 
   return (
-    <Container>
-      <Typography variant="h3" gutterBottom align="center">
-        Parking Lot Details
-      </Typography>
-      <Card variant="outlined">
-        <CardContent>
-          <Typography variant="h5" component="h2" gutterBottom>
-            {parkingLot.parkingLotName}
-          </Typography>
-          <Typography variant="body1">
-            Location: {parkingLot.location.coordinates[0]}, {parkingLot.location.coordinates[1]}
-          </Typography>
-          <Typography variant="body1">
-            Owner: {parkingLot.firstName} {parkingLot.lastName}
-          </Typography>
-          <Typography variant="body1">
-            Slots Available: {parkingLot.slotsAvailable}
-          </Typography>
-          <Typography variant="body1">
-            Email: {parkingLot.email}
-          </Typography>
-          <Typography variant="body1">
-            Phone: {parkingLot.phone}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Company: {parkingLot.companyName}
-          </Typography>
-          <Button variant="contained" color="primary" onClick={handleRegister}>
-            Register
-          </Button>
-        </CardContent>
-      </Card>
-    </Container>
+    <div>
+      <h2>Book Parking Slot</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="licensePlate">License Plate:</label>
+          <input
+            type="text"
+            id="licensePlate"
+            name="licensePlate"
+            value={formData.licensePlate}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="vehicleType">Vehicle Type:</label>
+          <input
+            type="text"
+            id="vehicleType"
+            name="vehicleType"
+            value={formData.vehicleType}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="ownerName">Owner Name:</label>
+          <input
+            type="text"
+            id="ownerName"
+            name="ownerName"
+            value={formData.ownerName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="phone">Phone:</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="startTime">Start Time:</label>
+          <input
+            type="datetime-local"
+            id="startTime"
+            name="startTime"
+            value={formData.startTime}
+          />
+        </div>
+        <div>
+          <label htmlFor="endTime">End Time:</label>
+          <input
+            type="datetime-local"
+            id="endTime"
+            name="endTime"
+            value={formData.endTime}
+          />
+        </div>
+        <button type="submit">Book Slot</button>
+      </form>
+    </div>
   );
 };
 

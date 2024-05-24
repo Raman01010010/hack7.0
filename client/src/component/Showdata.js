@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Grid, Typography, Card, CardContent } from '@mui/material';
+import { Grid, Typography, Card, CardContent, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { User } from "../context/User";
 
@@ -18,9 +18,8 @@ const Showdata = () => {
         </Typography>
       ) : (
         <Grid container spacing={3} justifyContent="center">
-          {parkingLots.map((parkingLot, index) => (
+          {parkingLots.availableParkingLots.map((parkingLot, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <Link to={`/bookit/${parkingLot.id}`} style={{ textDecoration: 'none' }}>
                 <Card variant="outlined" style={{ cursor: 'pointer' }}>
                   <CardContent>
                     <Typography variant="h5" component="h2" gutterBottom>
@@ -44,9 +43,13 @@ const Showdata = () => {
                     <Typography variant="body1">
                       Phone: {parkingLot.phone}
                     </Typography>
+                    <Link to={`/book/${parkingLot._id}`} style={{ textDecoration: 'none' }}>
+                    <Button variant="contained" color="primary" style={{ marginTop: '1rem' }}>
+                      Book Slot
+                    </Button>
+                  </Link>
                   </CardContent>
                 </Card>
-              </Link>
             </Grid>
           ))}
         </Grid>
