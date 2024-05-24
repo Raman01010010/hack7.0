@@ -6,6 +6,8 @@ import { User } from "../context/User";
 
 const Search = () => {
   const axios = useAxiosPrivate();
+  const {newUser} = useContext(User);
+  console.log(newUser.userid,"fuckit")
   const [address, setAddress] = useState('');
   const [dataFetched, setDataFetched] = useState(false); // Track if data has been fetched
   const navigate = useNavigate();

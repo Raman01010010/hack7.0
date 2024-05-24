@@ -85,13 +85,53 @@ const ParkingLotSchema = new Schema({
 
 ParkingLotSchema.index({ location: '2dsphere' });
 
-VehicleSchema.methods.isExpired = function() {
-    const currentTime = new Date();
-    const endTime = new Date(this.time_duration.endTime);
-    return endTime < currentTime;
-};
 
+
+const timeSlotSchema = new mongoose.Schema({
+    parkingProvider: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ParkingLot',
+      required: false,
+    },
+    date: { type: Date, required: true },
+    startTime: { type: String, required: true },
+    endTime: { type: String, required: true },
+    booked: { type: Boolean, default: false },
+    bookedBy: {
+      type: String,
+      required: false,
+    },
+    licensePlate: {
+      type: String,
+      required: false
+    },
+    vehicleType: {
+      type: String,
+      required: false
+    },
+    ownerName: {
+      type: String,
+      required: false
+    },
+    phone: {
+      type: String,
+      required: false
+    },
+    company: {
+      type: Schema.Types.ObjectId,
+      ref: 'ParkingLot'
+    },
+    key: {
+      type: String,
+      required: false
+    },
+   
+  });
+  
+  module.exports = 
+  
 module.exports = {
+    TimeSlot: mongoose.model('TimeSlot', timeSlotSchema),
     Vehicle: mongoose.model('Vehicle', VehicleSchema),
     ParkingLot: mongoose.model('ParkingLot', ParkingLotSchema)
 };

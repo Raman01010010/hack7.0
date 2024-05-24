@@ -5,12 +5,12 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
 const Bookit = () => {
   const axios = useAxiosPrivate();
-  const { arrivalDate, departureDate } = useContext(User);
+  const { arrivalDate, departureDate, newUser } = useContext(User);
   const { id, company } = useParams(); // Get the company ID from URL params
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     compid: id,
+    userid: newUser.username,
     compName: company,
     licensePlate: '',
     vehicleType: '',
@@ -29,15 +29,22 @@ const Bookit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting form with data:", formData);
     try {
       const response = await axios.post('/park/bookit', formData);
       if (response.status !== 200) {
         throw new Error('Failed to book the slot');
       }
       console.log('Booking successful:', response.data);
-      // Navigate to the ticket page with form data
-      navigate('/ticket', { state: { formData, companyId: id } });
+
+      // Navigate to the ticket page with form data and booking key
+      navigate('/ticket', {
+        state: {
+          formData,
+          companyId: id,
+          bookingKey: response.data.key
+        }
+      });
+
       // Reset form fields (optional)
       setFormData({
         compid: id,
@@ -49,12 +56,10 @@ const Bookit = () => {
         startTime: arrivalDate,
         endTime: departureDate
       });
-
     } catch (error) {
       console.error('Error booking the slot:', error.message);
     }
   };
-
   return (
     <div>
       <h2>Book Parking Slot</h2>

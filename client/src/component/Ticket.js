@@ -1,9 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import TicketPDF from './TicketPDF'; // Import the TicketPDF component
 
 const Ticket = () => {
   const location = useLocation();
-  const { formData, companyId } = location.state;
+  const { formData, companyId, bookingKey } = location.state;
 
   return (
     <div>
@@ -17,6 +19,12 @@ const Ticket = () => {
       <p><strong>Phone:</strong> {formData.phone}</p>
       <p><strong>Start Time:</strong> {formData.startTime}</p>
       <p><strong>End Time:</strong> {formData.endTime}</p>
+      <p><strong>Booking Key:</strong> {bookingKey}</p>
+      
+      {/* Add a PDF download link */}
+      <PDFDownloadLink document={<TicketPDF formData={formData} companyId={companyId} bookingKey={bookingKey} />} fileName="ticket.pdf">
+        {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Download PDF')}
+      </PDFDownloadLink>
     </div>
   );
 };

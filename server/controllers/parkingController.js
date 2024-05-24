@@ -1,5 +1,4 @@
-const { Vehicle, ParkingLot } = require('../model/Parking');
-const {TimeSlot} = require('../model/timeSlotSchema');
+const { Vehicle, ParkingLot,TimeSlot } = require('../model/Parking');
 const axios = require('axios');
 
 
@@ -164,40 +163,64 @@ const takeoutVehicle = async (req, res) => {
         res.status(500).json({ message: error.message }); // Handle errors
     }
 };
-
 const bookparking = async (req, res) => {
+    console.log("stage1");
     try {
-        const { licensePlate, vehicleType, ownerName, phone, compid, start_time, end_time } = req.body;
-        
-        const key = generateVerificationKey();
-        
-        const parkingLot = await ParkingLot.findById(compid);
-        
-        if (!parkingLot) {
-            return res.status(404).json({ message: 'Parking lot not found' });
+      const { licensePlate, vehicleType, ownerName, phone, compid, startTime, endTime, userid } = req.body;
+      const key = generateVerificationKey();
+      const parkingLot = await ParkingLot.findById(compid);
+      console.log("parkinglotfound");
+      
+      if (!parkingLot) {
+        return res.status(404).json({ message: 'Parking lot not found' });
+      }
+      
+      const newVehicle = new Vehicle({
+        licensePlate,
+        vehicleType,
+        ownerName,
+        phone,
+        company: compid,
+        key,
+        time_duration: {
+          startTime,
+          endTime
         }
-            const newVehicle = new Vehicle({
-            licensePlate,
-            vehicleType,
-            ownerName,
-            phone,
-            company: parkingLot._id, // Set company to the parking lot's _id
-            key, 
-            time_duration: {
-                startTime: start_time,
-                endTime: end_time
-            }
-        });
-        
-        const savedVehicle = await newVehicle.save();
-        
-        parkingLot.vehiclesParked.push(savedVehicle._id);
+      });
+      
+      const savedVehicle = await newVehicle.save();
+      console.log("vehicle saved");
+      console.log(key,"kkkkkkkkkk")
+      const newItem = new TimeSlot({
+        licensePlate,
+        vehicleType,
+        ownerName,
+        phone,
+        company: compid,
+        key,
+        startTime,
+        endTime,
+        date: new Date(), // assuming current date for simplicity, adjust as needed
+        booked: true,
+        bookedBy: userid, // assuming you have user info in req.user
+        parkingProvider: compid,
+      });
+  
+      try {
+        const savedTimeSlot = await newItem.save();
+        console.log("item saved");
+        parkingLot.vehiclesParked.push(savedVehicle);
         await parkingLot.save();
-        
-        res.status(201).json({ message: 'Vehicle booked successfully', vehicle: savedVehicle, key });
+        console.log("finally done")
+        res.status(200).json({ message: 'Vehicle booked successfully', vehicle: savedVehicle, key });
+      } catch (saveTimeSlotError) {
+        console.error("Error saving TimeSlot:", saveTimeSlotError.message);
+        res.status(500).json({ message: 'Error saving TimeSlot', error: saveTimeSlotError.message });
+      }
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      console.error("Error:", error.message);
+      res.status(500).json({ message: error.message });
     }
-};
-
+  };
+  module.exports = bookparking;
 module.exports = { addparkinglot ,bookparking,takeoutVehicle,takeinVehicle,showdata};

@@ -9,7 +9,7 @@ import Navbar2 from './component/Navbar2';
 import Ram from './sol/Ram';
 function App() {
 
-  const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "" })
+  const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "","userid":"" })
   const [parkingLots, setParkingLots] = React.useState([]);
   const [arrivalDate, setArrivalDate] = React.useState('');
   const [departureDate, setDepartureDate] = React.useState('');
