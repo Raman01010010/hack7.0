@@ -172,7 +172,7 @@ const Navbar2 = () => {
   console.log(name);
   return (
     <>
-      <AppBar position="fixed">
+      <AppBar position="fixed" sx={{ background: "green" }}>
         <Toolbar>
           {isLargeScreen ? (
             <>
@@ -192,14 +192,7 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-              <Button color="inherit"  component={Link} to="/shortestpath">
-                <FontAwesomeIcon
-                  icon={faShield}
-                  style={{ marginRight: "5px" }}
-                />
-                Safest path
-              </Button>
-
+             
               <Button color="inherit"  component={Link} to="/safety">
                 <FontAwesomeIcon
                   icon={faShield}
@@ -220,10 +213,7 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
-              <Button color="inherit"  component={Link} to="/ram">
-                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
-                Add violations
-              </Button>
+           
 
               <IconButton
                 onClick={handleLogout}

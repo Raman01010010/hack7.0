@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import logo from './logo.jpg'
 const Dashboard = () => {
  
  
@@ -29,7 +29,7 @@ const Dashboard = () => {
     transform-style: preserve-3d;
     perspective: 200px;
     perspective-origin: center;
-    background-image: url('https://i.pinimg.com/564x/3a/19/8f/3a198f4a369be16c37b0f397289dc045.jpg');
+    background-image: url('https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8');
     background-size: contain; /* Adjust as needed */
     background-position: center;
 }
@@ -43,7 +43,7 @@ const Dashboard = () => {
     height: calc(50vw - 12vw);
     margin: 4vw;
     /* background-color: lightgreen; */
-    background-image: url('https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740');
+    background-image: url('https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8');
     background-size: cover; /* Adjust as needed */
     background-position: center;
     box-shadow:
@@ -167,7 +167,7 @@ const Dashboard = () => {
         <div className="intersection"></div>
         
         <div className="buildings">
-      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+      <img src="https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8" alt="building" />
     </div>        
         <div className="vehicles">
           <div className="vehicle"></div>
@@ -181,7 +181,7 @@ const Dashboard = () => {
         <div className="intersection"></div>
         
         <div className="buildings">
-      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+      <img src="https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8" alt="building" />
     </div>          
         <div className="vehicles">
           <div className="vehicle"></div>
@@ -197,7 +197,7 @@ const Dashboard = () => {
         <div className="intersection"></div>
         
         <div className="buildings">
-      {/* <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" /> */}
+      {/* <img src="https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8" alt="building" /> */}
     </div>          
         <div className="vehicles">
           <div className="vehicle"></div>
@@ -211,7 +211,7 @@ const Dashboard = () => {
         <div className="intersection"></div>
         
         <div className="buildings">
-      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+      <img src="https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8" alt="building" />
     </div>          
         <div className="vehicles">
           <div className="vehicle"></div>
@@ -225,7 +225,7 @@ const Dashboard = () => {
         <div className="intersection"></div>
         
         <div className="buildings">
-      <img src="https://img.freepik.com/premium-photo/top-view-buildings_948023-1461.jpg?w=740" alt="building" />
+      <img src="https://i.ibb.co/GxHrf9J/4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8.jpg" alt="4cf6fafb-1735-45b8-b8fd-a1e5d3bd91f8" alt="building" />
     </div>          
         <div className="vehicles">
           <div className="vehicle"></div>
