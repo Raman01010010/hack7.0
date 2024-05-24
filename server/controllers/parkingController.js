@@ -108,7 +108,6 @@ const showdata = async (req, res) => {
         }
     }
 
-        console.log("sneha verma");
         console.log(vacantParkingLots);
         res.json({ availableParkingLots: vacantParkingLots });
     } catch (error) {

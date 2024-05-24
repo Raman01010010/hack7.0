@@ -13,8 +13,6 @@ const Search = () => {
   const [dataFetched, setDataFetched] = useState(false); // Track if data has been fetched
   const navigate = useNavigate();
   const {parkingLots,setParkingLots } = useContext(User);
-
-  
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
 
