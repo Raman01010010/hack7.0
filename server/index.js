@@ -48,7 +48,7 @@ mongoose.connection.once('open', () => {
 });
 
 // Schedule the task to run every hour
-cron.schedule('*/1 * * * *', () => {
+cron.schedule('0 * * * *', () => {
     removeExpiredVehicles(); // Call the function inside the cron job
 
     console.log('This task will run every 15 minutes');
