@@ -18,10 +18,10 @@ const navigate=useNavigate()
   async function handleSubmit(){
 
    const res= await verifyOtp(otp1)
-   console.log(res)
-   if(res.status==201||res.status==202)
+   console.log(res.response)
+   if(res?.status===200){
     console.log("success")
-navigate('../signin')
+navigate('../signin')}
   }
   async function  handleChange(event){
     console.log(newUser)

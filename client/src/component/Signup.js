@@ -44,7 +44,7 @@ check();
 
   async function handleSubmit(){
    const res= await addClient(newUser)
-   console.log(res)
+   console.log(res.response)
    if(res.status==201||res.status==202){
     console.log("success")
     navigate('/otp')}

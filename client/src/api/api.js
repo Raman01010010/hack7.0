@@ -1,7 +1,7 @@
 import axios, { axiosPrivate } from "./axios"
 export const addUser=async (data)=>{
     try{
-        return await axios.post(`/check`,data)
+        return (await axios.post(`/check`,data))
 
     }catch(error){
         console.log("Error add",error.response)
