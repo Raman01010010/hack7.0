@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { TextField, Button, Grid, Typography, Container } from '@mui/material';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
-
+import { useContext } from "react";
+import { User } from "../context/User";
 const ParkingForm = () => {
     const axios = useAxiosPrivate();
+    const {address,arrivalDate,departureDate}=useContext(User)
 
     const [formData, setFormData] = useState({
         parkingLotName: '',
@@ -37,6 +39,7 @@ const ParkingForm = () => {
             console.log("pm");
             console.log(response.data); 
             console.log("succes");
+            
             setFormData({
                 parkingLotName: '',
                 locationType: '',

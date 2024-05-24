@@ -1,9 +1,12 @@
 const { Vehicle, ParkingLot } = require('../model/Parking');
+const {TimeSlot} = require('../model/timeSlotSchema');
+const axios = require('axios');
+
+
 const generateVerificationKey = require('../utils/generateVerificationKey'); // Import function to generate verification key
 const addparkinglot = async (req, res) => {
     try {
         const { parkingLotName, locationType,latitude,longitude, firstName, lastName, phone, email, totalSlots } = req.body;
-
         // Extract location coordinates from the request body
         console.log(req.body);
 
@@ -30,30 +33,84 @@ const addparkinglot = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
+
+
+
+const getcoordinate = async (address) => {
+    try {
+        const apiKey = '55810e9a0db5484fae278428320f9add';
+        const encodedAddress = encodeURIComponent(address);
+        const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodedAddress}&key=${apiKey}`;
+        
+        const response = await axios.get(url);
+
+        if (response.data.results && response.data.results.length > 0) {
+            const { lat, lng } = response.data.results[0].geometry;
+            return { lat, lng };
+        } else {
+            throw new Error('No results found for the address');
+        }
+    } catch (error) {
+        throw new Error(`Failed to get coordinates for address: ${error.message}`);
+    }
+};
+
 const showdata = async (req, res) => {
-    console.log("entered1");
+    const { address, start, departure } = req.body;
+    console.log(req.body);
 
     try {
-    console.log("entered");
-        // Fetch data from the ParkingLot collection using Mongoose, selecting specific fields
-        const parkingLots = await ParkingLot.find({}, 'location parkingLotName firstName lastName totalSlots vehiclesParked email phone');
+        console.log("entered");
+
+        // Convert start and departure times to Date objects if they are not already
+        const startTime = new Date(start);
+        const endTime = new Date(departure);
+        console.log(startTime, " vivej  ", endTime);
+
+        // Get coordinates for the provided address
+        const { lat, lng } = await getcoordinate(address);
+        console.log({ lat, lng });
+
+        // Find all parking lots within a certain radius from the provided address
+        const radiusInRadians = 2000 / 6378.1;        console.log("fffffff")
+        // console.log(ParkingLot)
         
-        // Modify each document to calculate slotsAvailable
-        const parkingLotsWithSlotsAvailable = parkingLots.map(parkingLot => {
-            const slotsAvailable = parkingLot.totalSlots - parkingLot.vehiclesParked.length;
-            return {
-                location: parkingLot.location,
-                parkingLotName: parkingLot.parkingLotName,
-                firstName: parkingLot.firstName,
-                lastName: parkingLot.lastName,
-                slotsAvailable: slotsAvailable,
-                email: parkingLot.email,
-                phone: parkingLot.phone
-            };
+        const parkingLots = await ParkingLot.find({
+            location: {
+                $geoWithin: {
+                    $centerSphere: [[lng, lat], radiusInRadians]
+                }
+            }
+        });
+        
+        console.log("fssssssssssss")
+      console.log(parkingLots,"viiiiii")
+      const vacantParkingLots = [];
+
+      for (const parkingLot of parkingLots) {
+        const totalSlots = parkingLot.totalSlots;
+        
+        // Find all vehicles parked in this parking lot within the given time range
+        const bookedVehicles = await Vehicle.find({
+            parkingLot: parkingLot._id,
+            'time_duration.startTime': { $lt: endTime },
+            'time_duration.endTime': { $gt: startTime }
         });
 
-        // Send the modified data as a response to the client
-        res.status(200).json(parkingLotsWithSlotsAvailable);
+        // Calculate the total booked slots in the given time range
+        const bookedSlots = bookedVehicles.length;
+
+        // Check if the total booked slots are less than the total slots of the parking lot
+        if (bookedSlots < totalSlots) {
+            vacantParkingLots.push(parkingLot);
+        }
+    }
+
+        console.log("sneha verma");
+        console.log(vacantParkingLots);
+        res.json({ availableParkingLots: vacantParkingLots });
     } catch (error) {
         // Handle errors
         res.status(500).json({ message: error.message });

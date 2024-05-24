@@ -11,6 +11,8 @@ import Map from "./Map"
 import Ram from "../sol/Ram";
 import Register from "./register"
 import Showdata from "./Showdata"
+import Bookit from "./Bookit";
+import Search from "./Search";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -26,6 +28,9 @@ export default function Container1(){
           <Route path="/dashboard" element={<><Dashboard/></>}/>
           <Route path="/register" element={<><Register/></>}/>
           <Route path="/showdata" element={<><Showdata/></>}/>
+          <Route path="/bookit/:id" element={<Bookit />} />
+          <Route path="/search" element={<Search />} />
+
     </Routes>
     </>)
 }

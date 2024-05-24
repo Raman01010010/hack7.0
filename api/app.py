@@ -24,7 +24,6 @@ def get_paths_between_points(api_key, origin, destination, alternatives=True):
         'key': api_key,
         'alternatives': str(alternatives).lower()  # Convert boolean to string ('true' or 'false')
     }
-
     # Send the API request
     response = requests.get(endpoint, params=params)
     
@@ -114,7 +113,6 @@ def get_paths_and_accidents():
     else:
         return jsonify({'error': 'No paths found.'})
     
-
 if __name__ == "__main__":
     app.run(debug=True)
 
