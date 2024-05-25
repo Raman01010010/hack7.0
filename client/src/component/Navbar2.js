@@ -24,6 +24,7 @@ import {
   faShield,
   faBell,
   faSearch,
+  faChartSimple,
 } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
@@ -192,7 +193,10 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
-             
+              <Button color="inherit" component={Link} to="/graph">
+  <FontAwesomeIcon icon={faChartSimple} style={{ marginRight: "5px" }} />
+  Graph
+</Button>
               <Button color="inherit"  component={Link} to="/safety">
                 <FontAwesomeIcon
                   icon={faShield}
