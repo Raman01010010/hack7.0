@@ -7,15 +7,23 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import Chip from "@mui/material/Chip";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'; // Import LocalizationProvider
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs from "dayjs";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
-import { User } from "../context/User";
+
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { User } from "../context/User";
+import LinearProgress from '@mui/material/LinearProgress';
+
+import CircularProgress from '@mui/material/CircularProgress';
+
+function LinearIndeterminate() {
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CircularProgress />
+    </Box>
+  );
+}
 const AddSafety = () => {
   const {newUser}=React.useContext(User)
 console.log(newUser)  
@@ -35,7 +43,7 @@ const axios=useAxiosPrivate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    toast("Hello!");
+  
     setsafteyDetails((prevDetails) => ({
       ...prevDetails,
       [name]: value
@@ -47,12 +55,23 @@ const axios=useAxiosPrivate();
     try {
       const response = await axios.post("/alert/add", safteyDetails);
       console.log(response.data);
+      toast('Data added successfully');
+      setsafteyDetails({
+        name: "",
+        phoneNumber: "",
+        email: "",
+        notes: "",
+        relationship: "",
+        user:newUser.userid
+       
+      })
     } catch (error) {
       console.error("Error adding data:", error.message);
     }
   }
 
   return (
+    <>
     <Box
       sx={{
         display: "flex",
@@ -133,10 +152,15 @@ const axios=useAxiosPrivate();
      
           <Button variant="contained" onClick={addNow} fullWidth sx={{ mt: 3 }}>
             ADD DATA
+          
           </Button>
-       
+         
+          <ToastContainer/>
+     
       </Box>
     </Box>
+    
+     </>
   );
 };
 

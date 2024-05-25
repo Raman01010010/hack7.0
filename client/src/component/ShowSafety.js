@@ -14,6 +14,7 @@ import { TextField } from '@mui/material';
 
 import 'leaflet/dist/leaflet.css';
 import { axiosPrivate } from '../api/axios';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Map = (props) => {
     console.log(props)
@@ -154,10 +155,10 @@ export default function ShowSafety() {
             }
 
             );
+            toast('Alert sent successfully');
             return response.data;
         } catch (error) {
-            console.error('Error sending alert:', error);
-            throw error;
+            toast('Error sending alert');
         }
         console.log(loc)
     }
@@ -192,7 +193,7 @@ export default function ShowSafety() {
                             </div>
 
                             <Button variant="contained" onClick={() => send(item)}>Alert<AddAlertIcon /></Button>
-
+<ToastContainer/>
                         </div>
                     </div>
 

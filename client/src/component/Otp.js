@@ -3,11 +3,14 @@ import { useContext } from "react"
 import React from "react"
 import { useNavigate } from 'react-router-dom';
 import { addClient, addUser, verifyOtp } from "../api/api"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Box, LinearProgress } from "@mui/material";
 export default function Otp(){
   const [col,setCol]=React.useState('gray')
   const {newUser,setNewUser}=useContext(User)
 const [otp1,setOtp]=React.useState({"otp5":"","email":newUser.email})
-
+const [loading,setLoading]=React.useState(false)
 
 
 const navigate=useNavigate()
@@ -16,12 +19,21 @@ const navigate=useNavigate()
 
 
   async function handleSubmit(){
-
+setLoading(true)
    const res= await verifyOtp(otp1)
    console.log(res.response)
+    setLoading(false)
    if(res?.status===200){
     console.log("success")
-navigate('../signin')}
+    toast("OTP Verified! Accoun Created Successfully! Please Sign In");
+    setTimeout(() => {navigate('../signin')}, 2000);
+
+}
+else{
+  console.log(res.data)
+  toast(res.response.data)
+
+}
   }
   async function  handleChange(event){
     console.log(newUser)
@@ -72,11 +84,19 @@ navigate('../signin')}
         />
       </div>
    
+{loading?
+      <button className="rounded">
+            <Box sx={{ width: '100%', height: '100%' }}>
+              <LinearProgress color="secondary" sx={{ height: '5vh' }} />
+            </Box>
+          </button>:
       <button onClick={handleSubmit}className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
         Verify
-      </button>
-      <p className="text-xs mt-3">
-        Literally you probably haven't heard of them jean shorts.
+      </button>}
+      <ToastContainer />
+      <p className="text-l text-white mt-3">
+      Please check your email for the OTP!
+      Check spam folder if not found in inbox.
       </p>
     </div>
   </div>

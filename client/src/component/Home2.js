@@ -9,7 +9,10 @@ import 'animate.css/animate.css';
 import { useInView } from 'react-intersection-observer';
 import About from "./AboutUs"
 import Footer from "./Footer"
-import { Button } from '@mui/material';
+import { Button, CircularProgress } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Home2 = () => {
   const pageStyle = {
     background: '#212534',
@@ -67,7 +70,7 @@ const Home2 = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [isScrollingIn1, isScrollingIn2, isScrollingIn3]);
-
+  const fun1 = () => toast("Wow so easy!");
   return (
     <>
       <Element name="home2">
@@ -79,6 +82,7 @@ const Home2 = () => {
                 <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                   Sign In
                 </button>
+             
               </Link>
               <Link to="/signup" className="text-white">
                 <button className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
@@ -86,7 +90,10 @@ const Home2 = () => {
                 </button>
 
               </Link>
-            
+              <button onClick={fun1} className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
+        toast
+                </button>
+                <ToastContainer />
               <Link to="/my" className="text-white">
                 <button className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
                   Sign Up
