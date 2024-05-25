@@ -27,12 +27,12 @@ Chart.register(
 );
 
 const AccidentGraph = () => {
-  const [year,setYear]=useState("");
+  const [year, setYear] = useState("");
   const DialogBox = ({ onClose }) => {
-  function handleC(e){
-setYear(e.target.value);
-console.log(year)
-  }
+    function handleC(e) {
+      setYear(e.target.value);
+      console.log(year)
+    }
     return (
       <div
         data-aos="flip-right"
@@ -44,11 +44,11 @@ console.log(year)
               x
             </div>
           </div>
-  
+
           <div className=" p-4 rounded shadow-md">
             <p className="mb-4">Please select Year</p>
             <div className="flex justify-center">
-             <input onChange={handleC} value={year} type="text"/>
+              <input onChange={handleC} value={year} type="text" />
             </div>
             <button onClick={onClose}>OK</button>
           </div>
@@ -66,7 +66,7 @@ console.log(year)
     setIsDialogOpen(false);
   };
 
-  
+
 
   const customDataByDate = [
     { date: "2024-04-01", accidents: 10 },
@@ -76,11 +76,11 @@ console.log(year)
     { date: "2024-09-05", accidents: 6 },
     // Add more data points as needed
   ];
-  
+
   const [accidentDataday, setAccidentDataday] = useState([]);
   const [accidentDatamonth, setAccidentDatamonth] = useState([]);
   // const [year, setear] = useState(new Date().getFullYear());
-  const [selectMonth,setSelectMonth]=useState([]);
+  const [selectMonth, setSelectMonth] = useState([]);
 
   // const handleYearChange = (year) => {
   //   setyear(year);
@@ -99,8 +99,8 @@ console.log(year)
     };
     fetchData(); // Call the fetchData function
   }, []);
- 
-  console.log("year kya tha",year);
+
+  console.log("year kya tha", year);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -125,8 +125,8 @@ console.log(year)
     };
     fetchData();
   }, [year]);
-  
-  
+
+
   console.log(selectMonth);
   useEffect(() => {
     const fetchData = async () => {
@@ -175,26 +175,28 @@ console.log(year)
       ],
     };
   };
-  
-  const prepareDataByMonth = (data) => {
-  return {
-    labels: data.map((item) => item.month),
-    datasets: [
-      {
-        label: "Number of Accidents",
-        data: data.map((item) => item.accidents),
-        fill: false,
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-      },
-    ],
-  };
-};
 
-// Inside the return statement of the component:
-{graphType === "month" && (
-  <Line data={prepareDataByMonth(selectMonth)} />
-)}
+  const prepareDataByMonth = (data) => {
+    return {
+      labels: data.map((item) => item.month),
+      datasets: [
+        {
+          label: "Number of Accidents",
+          data: data.map((item) => item.accidents),
+          fill: false,
+          borderColor: "rgb(75, 192, 192)",
+          tension: 0.1,
+        },
+      ],
+    };
+  };
+
+  // Inside the return statement of the component:
+  {
+    graphType === "month" && (
+      <Line data={prepareDataByMonth(selectMonth)} />
+    )
+  }
   const prepareDataByVehicle = (data) => {
     return {
       labels: data.map((item) => item.type),
@@ -209,7 +211,7 @@ console.log(year)
     };
   };
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col bg-white items-center justify-center">
       <h2 className="text-center">Accident Data</h2>
       <div className="w-96 h-96 md:w-3/4 md:h-3/4 lg:w-4/5 lg:h-4/5 xl:w-5/6 xl:h-5/6 mx-auto">
         {graphType === "date" && (
