@@ -10,7 +10,8 @@ import Ram from './sol/Ram';
 function App() {
 
   const [newUser, setNewUser] = React.useState({ "email": "", "username": "", "pwd": "", "name": "", "accessToken": "","userid":"" })
-  const [loc,setLoc]=React.useState([])  const [parkingLots, setParkingLots] = React.useState([]);
+  const [loc,setLoc]=React.useState([]) 
+   const [parkingLots, setParkingLots] = React.useState([]);
   const [arrivalDate, setArrivalDate] = React.useState('');
   const [departureDate, setDepartureDate] = React.useState('');
    return (
