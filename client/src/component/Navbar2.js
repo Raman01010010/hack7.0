@@ -17,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
+  faRegistered,
   faUserFriends,
   faEnvelope,
   faMoneyCheckAlt,
@@ -24,6 +25,7 @@ import {
   faShield,
   faPlus,
   faBell,
+  faSquareParking,
   faSearch,
   faTriangleExclamation,
   faChartSimple,
@@ -210,6 +212,14 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
+              <Button color="inherit" component={Link} to="/register">
+                <FontAwesomeIcon icon={faRegistered} style={{ marginRight: "5px" }} />
+                Register
+              </Button>
+              <Button color="inherit" component={Link} to="/search">
+                <FontAwesomeIcon icon={faSquareParking} style={{ marginRight: "5px" }} />
+                Parking
+              </Button>
               
               <IconButton
                 onClick={handleLogout}
@@ -269,6 +279,22 @@ const Navbar2 = () => {
               <IconButton color="inherit" style={{ marginRight: "10px" }} component={Link} to="/" onClick={handleLogout}>
   <FontAwesomeIcon icon={faRightFromBracket} />
 </IconButton>
+<IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/register"
+              >
+                <FontAwesomeIcon icon={faRegistered} />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/search"
+              >
+                <FontAwesomeIcon icon={faSquareParking} />
+              </IconButton>
               {/* <IconButton
                 color="inherit"
                 onClick={handleMenuOpen}

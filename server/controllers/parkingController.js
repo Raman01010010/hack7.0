@@ -39,6 +39,7 @@ const addparkinglot = async (req, res) => {
 
 const getcoordinate = async (address) => {
     try {
+        console.log("mai aaya hu")
         const apiKey = '55810e9a0db5484fae278428320f9add';
         const encodedAddress = encodeURIComponent(address);
         const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodedAddress}&key=${apiKey}`;
@@ -47,6 +48,7 @@ const getcoordinate = async (address) => {
 
         if (response.data.results && response.data.results.length > 0) {
             const { lat, lng } = response.data.results[0].geometry;
+            console.log("kkkk",lat,lng)
             return { lat, lng };
         } else {
             throw new Error('No results found for the address');
@@ -70,12 +72,12 @@ const showdata = async (req, res) => {
 
         // Get coordinates for the provided address
         const { lat, lng } = await getcoordinate(address);
-        console.log({ lat, lng });
-
+        console.log( lat, lng );
+ console.log("hello")
         // Find all parking lots within a certain radius from the provided address
-        const radiusInRadians = 2000 / 6378.1;        console.log("fffffff")
+        const radiusInRadians = 2 / 6378.1;        console.log("fffffff")
         // console.log(ParkingLot)
-        
+        console.log(radiusInRadians,"bta na")
         const parkingLots = await ParkingLot.find({
             location: {
                 $geoWithin: {

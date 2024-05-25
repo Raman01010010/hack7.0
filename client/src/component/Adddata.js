@@ -90,7 +90,6 @@ const axios=useAxiosPrivate();
   };
   async function addNow() {
     setLoading(true);
-
     try {
       const response = await axios.post("/data/addData", accidentDetails);
       console.log(response.data);
