@@ -1,8 +1,10 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from 'react-router-dom';
+
 import Autocomplete from "@mui/material/Autocomplete";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -14,7 +16,6 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import swal from 'sweetalert';
 import { TailSpin } from 'react-loader-spinner';
-
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const Adddata = () => {
   const [loading, setLoading] = useState(false);
@@ -100,6 +101,7 @@ const axios=useAxiosPrivate();
         timer: 3000
       });
       setLoading(false);
+      navigate('/dashboard');
 
     } catch (error) {
       console.error("Error adding data:", error.message);
@@ -108,6 +110,17 @@ const axios=useAxiosPrivate();
     }
 
   }
+  const navigate = useNavigate(); // Access to navigate function
+
+  useEffect(() => {
+    // Automatically reset loading state after a delay (for demonstration)
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 3000); // Change the delay as needed
+
+    return () => clearTimeout(timeout);
+  }, [loading]);
+
 
   return (
     <Box
