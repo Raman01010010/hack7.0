@@ -22,8 +22,10 @@ import {
   faMoneyCheckAlt,
   faUser,
   faShield,
+  faPlus,
   faBell,
   faSearch,
+  faTriangleExclamation,
   faChartSimple,
 } from "@fortawesome/free-solid-svg-icons";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -139,34 +141,24 @@ const Navbar2 = () => {
         const response = await axios.post("/connect/searchname", {
           searchInput,
         });
-
         // Access the data property of the response
         const responseData = response.data;
-
         // Access the matchedUsernames property from the data
         const matchedUsernames = responseData.matchedUsernames;
-
         // Assuming setName is a state update function
         setName(matchedUsernames);
       } catch (error) {
         console.error("Error fetching data from the backend:", error);
       }
     };
-
-    // Call the fetchData function
-
-    // Call the fetchData function
     fetchData();
   }, [searchInput]);
-
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
-
   const handleChange = (event, value) => {
     setSearchInput(value);
   };
@@ -188,16 +180,18 @@ const Navbar2 = () => {
               <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 SafeNet
               </Typography>
-
               <Button color="inherit" component={Link} to="/dashboard">
                 <FontAwesomeIcon icon={faHome} style={{ marginRight: "5px" }} />
                 Home
               </Button>
               <Button color="inherit" component={Link} to="/graph">
-  <FontAwesomeIcon icon={faChartSimple} style={{ marginRight: "5px" }} />
-  Graph
-</Button>
-              <Button color="inherit"  component={Link} to="/safety">
+                <FontAwesomeIcon
+                  icon={faChartSimple}
+                  style={{ marginRight: "5px" }}
+                />
+                Graph
+              </Button>
+              <Button color="inherit" component={Link} to="/safety">
                 <FontAwesomeIcon
                   icon={faShield}
                   style={{ marginRight: "5px" }}
@@ -205,25 +199,24 @@ const Navbar2 = () => {
                 Add Safety Detail
               </Button>
 
-              <Button color="inherit"  component={Link} to="/showSafety">
+              <Button color="inherit" component={Link} to="/showSafety">
                 <FontAwesomeIcon
-                  icon={faShield}
+                  icon={faTriangleExclamation}
                   style={{ marginRight: "5px" }}
                 />
                 Send Alert
               </Button>
-
-              <Button color="inherit"  component={Link} to="/add">
-                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
+              <Button color="inherit" component={Link} to="/add">
+                <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
-           
-
+              
               <IconButton
                 onClick={handleLogout}
                 color="inherit"
-                style={{ marginRight: "20px" }}
+                style={{ marginRight: "10px" }}
                 component={Link}
+
               >
                 <FontAwesomeIcon icon={faRightFromBracket} />{" "}
               </IconButton>
@@ -234,21 +227,52 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
               <IconButton
-                
                 color="inherit"
-                style={{ marginRight: "20px" }}
+                style={{ marginRight: "10px" }}
                 component={Link}
+                to="/dashboard"
               >
                 <FontAwesomeIcon icon={faHome} />
               </IconButton>
-              <Button color="inherit"  component={Link}>
-                <FontAwesomeIcon icon={faBell} style={{ marginRight: "5px" }} />
-                Notification
-              </Button>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/graph"
+              >
+                <FontAwesomeIcon icon={faChartSimple} />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/safety"
+              >
+                <FontAwesomeIcon icon={faShield} />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/showSafety"
+              >
+                <FontAwesomeIcon icon={faTriangleExclamation} />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/add"
+              >
+                <FontAwesomeIcon icon={faPlus} />
+              </IconButton>
+              <IconButton color="inherit" style={{ marginRight: "10px" }} component={Link} to="/" onClick={handleLogout}>
+  <FontAwesomeIcon icon={faRightFromBracket} />
+</IconButton>
               {/* <IconButton
                 color="inherit"
                 onClick={handleMenuOpen}
-                style={{ marginRight: "20px" }}
+                style={{ marginRight: "10px" }}
               >
                 <FontAwesomeIcon icon={faUserFriends} />
               </IconButton> */}
