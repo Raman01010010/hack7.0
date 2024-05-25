@@ -14,6 +14,11 @@ import ShowSafety from "./ShowSafety";
 import GetLocation from "./GetLocation";
 import MyLoc from "./MyLocation";
 
+import Register from "./register"
+import Showdata from "./Showdata"
+import Bookit from "./Bookit";
+import Search from "./Search";
+import Ticket from "./Ticket";
 export default function Container1(){
     return(<>
     {/* <Dashboard/> */}
@@ -32,7 +37,11 @@ export default function Container1(){
           <Route path="/watch/:alertId" element={<><GetLocation/></>}/>
           
           <Route path="/my" element={<><MyLoc/></>}/>
-          
+                    <Route path="/register" element={<><Register/></>}/>
+          <Route path="/showdata" element={<><Showdata/></>}/>
+          <Route path="/book/:id/:company" element={<Bookit />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/ticket" element={<Ticket />} />
     </Routes>
     </>)
 }

@@ -73,7 +73,6 @@ const axios=useAxiosPrivate();
     }));
     setLocationSuggestions([]); // Clear location suggestions after selection
   };
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setAccidentDetails((prevDetails) => ({
