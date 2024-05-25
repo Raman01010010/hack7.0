@@ -55,7 +55,7 @@ const ChatBubble = ({ message, sender }) => {
   
     const senderStyles = {
       ...bubbleStyles,
-      backgroundColor: '#007aff',
+      backgroundColor: '#808836',
       color: 'white',
       borderBottomRightRadius: '0px',
       alignSelf: 'flex-end',
@@ -119,7 +119,7 @@ function GetLocation() {
                 <div>
                     
                     <div style={profileContainerStyles}>
-                        <AccountBoxIcon style={{ fontSize: '100px', color: '#007aff' }} />
+                        <AccountBoxIcon style={{ fontSize: '100px', color: '#808836' }} />
       <p style={textStyle}>Sender Name: {alertData.user.name}</p>
       <p style={textStyle}>Sender Email: {alertData.user.email}</p>
       <div style={{ ...textStyle, fontSize: '24px', textAlign: 'center' }}>
@@ -130,8 +130,8 @@ function GetLocation() {
                 </div>
             )}
             
-            {position &&<><Map pos={position} /><p>Latitude: {position.latitude}</p>
-                    <p>Longitude: {position.longitude}</p></> }
+            {position &&<><Map pos={position} /><div className='flex justify-center gap-2'><p>Latitude: {position.latitude}</p>
+                    <p>Longitude: {position.longitude}</p></div></> }
           
         </div>
     );

@@ -98,10 +98,11 @@ const axios=useAxiosPrivate();
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        minHeight: "100vh"
+        minHeight: "100vh",
+       
       }}
     >
-      <Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: 4, maxWidth: 400 }}>
+      <Box sx={{ p: 2, background: "#ffffff", border: "1px solid #ccc", borderRadius: 4, maxWidth: 400 }}>
         <Typography variant="h6" gutterBottom align="center">
           Accident details
         </Typography>

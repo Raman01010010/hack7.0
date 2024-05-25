@@ -172,7 +172,7 @@ const Navbar2 = () => {
   console.log(name);
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "green" }}>
+      <AppBar position="fixed" sx={{ background: "#808836" }}>
         <Toolbar>
           {isLargeScreen ? (
             <>
@@ -257,7 +257,7 @@ const Navbar2 = () => {
           )}
         </Toolbar>
       </AppBar>
-      <div className="m-[10vh]">
+      <div className="bg-[#D10363] mt-[10vh]">
         <Container2 />
       </div>
     </>

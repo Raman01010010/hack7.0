@@ -82,7 +82,7 @@ export default function Signup() {
 
   }
   return (<>
-    <section className="text-gray-400 bg-gray-900 body-font">
+    <section className="text-gray-400 bg-[#D10363] body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
           <h1 className="title-font font-medium text-3xl text-white">
@@ -151,14 +151,14 @@ export default function Signup() {
                 <LinearProgress color="secondary" sx={{ height: '5vh' }} />
               </Box>
             </button> :
-            <button onClick={handleSubmit} className="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
+            <button onClick={handleSubmit} className="text-white bg-[#808836] border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg">
               Button
             </button>}
 
 
           <ToastContainer />
-          <p className="text-xs mt-3">
-            Literally you probably haven't heard of them jean shorts.
+          <p className="text-l mt-3">
+            Please wait while we let you in!!
           </p>
         </div>
       </div>

@@ -164,14 +164,15 @@ export default function ShowSafety() {
     }
 
     return (
-        <>
+        <div className='bg-white'>
             <div>
                 <div>
                     <GeolocationComponent />
 
                 </div>
             </div>
-            <div className='flex justify-center my-5'>
+
+            <div className='flex  justify-center my-5'>
             <TextField  onChange={(e)=>{setmessage(e.target.value)}} style={{ width: '90vw' }} id="outlined-basic" value={message} label={message} variant="outlined" /></div>
             {data.map((item) => {
                 return (
@@ -201,6 +202,6 @@ export default function ShowSafety() {
             })}
 
 
-        </>
+        </div>
     );
 }

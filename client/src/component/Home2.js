@@ -75,7 +75,7 @@ const Home2 = () => {
     <>
       <Element name="home2">
         <div style={pageStyle}>
-          <div className="text-center text-white p-4">
+          <div className="text-center bg-[#D10363] text-white p-4">
             <h1 className="text-6xl mb-8 font-bold">Welcome to the SafeNet</h1>
             <div className="space-x-4 mt-8">
               <Link to="/signin" className="text-white">

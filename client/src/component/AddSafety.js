@@ -72,6 +72,7 @@ const axios=useAxiosPrivate();
 
   return (
     <>
+    <div>
     <Box
       sx={{
         display: "flex",
@@ -80,7 +81,7 @@ const axios=useAxiosPrivate();
         minHeight: "100vh"
       }}
     >
-      <Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: 4, maxWidth: 400 }}>
+      <Box sx={{ p: 2, background: "white", border: "1px solid #ccc", borderRadius: 4, maxWidth: 400 }}>
         <Typography variant="h6" gutterBottom align="center">
           saftey details
         </Typography>
@@ -159,7 +160,7 @@ const axios=useAxiosPrivate();
      
       </Box>
     </Box>
-    
+    </div>
      </>
   );
 };

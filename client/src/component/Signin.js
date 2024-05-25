@@ -104,7 +104,7 @@ export default function Signin() {
 
   }
   return (<>
-    <section className="text-gray-400 bg-gray-900 body-font">
+    <section className="text-gray-400 bg-[#D10363] body-font">
       <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
           <h1 className="title-font font-medium text-3xl text-white">
@@ -148,7 +148,7 @@ export default function Signin() {
             <Box sx={{ width: '100%', height: '100%' }}>
               <LinearProgress color="secondary" sx={{ height: '5vh' }} />
             </Box>
-          </button>:<button onClick={handleSubmit} className="text-white bg-indigo-500 border-0  focus:outline-none hover:bg-green-600 rounded text-lg">
+          </button>:<button onClick={handleSubmit} className="text-white bg-[#808836] border-0  focus:outline-none hover:bg-green-600 rounded text-lg">
             Sign In
 
           </button>
