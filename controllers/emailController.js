@@ -81,7 +81,7 @@ const sendEmail=async(subjects,message,send_to,send_from,reply_to)=>{
                     color: #1f1f1f;
                   "
                 >
-                 EMERGENCY ALERT
+                OTP for SAFENet
                 </h1>
                 <p
                   style="
@@ -100,7 +100,7 @@ const sendEmail=async(subjects,message,send_to,send_from,reply_to)=>{
                     font-weight: 500;
                     letter-spacing: 0.56px;
                   "
-                >Thank you for choosing Archisketch Company. Use the following OTP to complete the procedure to change your email address. OTP is valid for 10 minutes. Do not share this code with others
+                >Thank you for registering to SAFENet. Use the following OTP to complete the procedure to confirm your email address. OTP is valid for 10 minutes. Do not share this code with others.
                
                 </p>
                 <p
