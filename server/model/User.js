@@ -11,7 +11,6 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
-
     username: {
         type: String,
         required: true
@@ -45,12 +44,11 @@ const userSchema = new Schema({
         ref: 'user_w'
     }],
 
-
-    what_your_status: {
-        type: Number,
-        required: false
+    idCardPhoto: {
+        type: String, 
+        required: false 
     }
-
+    
 });
 
 module.exports = mongoose.model('user_w', userSchema);

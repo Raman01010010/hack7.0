@@ -17,6 +17,7 @@ export const addClient=async (data)=>{
         return error
     }
 }
+
 export const verifyOtp=async (data)=>{
     try{
         return await axios.post(`/user/otp`,data)
