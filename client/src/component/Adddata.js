@@ -12,8 +12,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
+import swal from 'sweetalert';
+import { TailSpin } from 'react-loader-spinner';
+
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const Adddata = () => {
+  const [loading, setLoading] = useState(false);
+
   const [accidentDetails, setAccidentDetails] = useState({
     name: "",
     address: "",
@@ -83,12 +88,25 @@ const axios=useAxiosPrivate();
     updateLocationSuggestions(value); // Update location suggestions based on user input
   };
   async function addNow() {
+    setLoading(true);
+
     try {
       const response = await axios.post("/data/addData", accidentDetails);
       console.log(response.data);
+      swal({
+        title: "Successfully added",
+        icon: "success",
+        button: false,
+        timer: 3000
+      });
+      setLoading(false);
+
     } catch (error) {
       console.error("Error adding data:", error.message);
+      setLoading(false);
+
     }
+
   }
 
   return (
@@ -199,7 +217,7 @@ const axios=useAxiosPrivate();
         </Grid>
      
           <Button variant="contained" onClick={addNow} fullWidth sx={{ mt: 3 }}>
-            ADD DATA
+          {loading? <TailSpin height={25} color="white"/>:'ADD data'} 
           </Button>
        
       </Box>
