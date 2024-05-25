@@ -33,7 +33,8 @@ app.use('/auth',require('./routes/auth'))
 app.use('/refresh',require('./routes/refresh'))
 app.use('/data',require('./routes/manageData'));
 //
-app.use('/user1',require('./routes/userUpdate'))
+app.use('/user1', require('./routes/userUpdate'));
+app.use('/park', require('./routes/parking'));
 app.use('/slot',require('./routes/slots'))
 app.use('/alert2',require('./routes/alert2'))
 app.use(verifyJWT)
