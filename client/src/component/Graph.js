@@ -14,6 +14,11 @@ const AccidentGraph = () => {
     { date: '2024-09-05', accidents: 6 },
     // Add more data points as needed
   ];
+
+
+
+
+  
   const customDataByVehicle = [
     { type: 'Car', accidents: 20 },
     { type: 'Truck', accidents: 15 },
