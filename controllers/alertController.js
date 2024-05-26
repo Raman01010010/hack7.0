@@ -59,7 +59,7 @@ const send = async (req, res) => {
 
         // Send email alert using Nodemailer
         if (email) {
-            await sendEmail("", 'This is an emergency alert from ' + res2[0].name + '. Email: ' + res2[0].email + '. The person can be found at '+process.env.URL+'/watch/' + res1._id + '!', "rmnprjrrr@gmail.com", "", "rmnprjrrr@gmail.com");
+            await sendEmail("", 'This is an emergency alert from ' + res2[0].name + '. Email: ' + res2[0].email + '. The person can be found at '+process.env.URL+'/watch/' + res1._id + '!', email, "", email);
         }
 
         res.status(200).json({ message: `Alert sent to ${phoneNumber}` });
@@ -75,7 +75,8 @@ const add =
     async (req, res) => {
         console.log(req.body)
         try {
-            const { name, phoneNumber, relationship, notes, user, email } = req.body;
+          const user=req.userid;
+            const { name, phoneNumber, relationship, notes, email } = req.body;
 
             const safetyNumber = new SafetyNumber({
                 name,
