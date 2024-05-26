@@ -311,7 +311,7 @@ const Navbar2 = () => {
           )}
         </Toolbar>
       </AppBar>
-      <div className="bg-[#D10363] mt-[10vh]">
+      <div className="mt-[10vh]">
         <Container2 />
       </div>
     </>
