@@ -3,8 +3,8 @@ import axios from 'axios';
 
 //Sanskar1751978@
 //const BASE_URL='http://172.31.73.1:3500/'
-//const BASE_URL="https://safenet.azurewebsites.net"
-const BASE_URL='http://localhost:3500'
+const BASE_URL="https://safenet.azurewebsites.net"
+//const BASE_URL='http://localhost:3500'
 //axios.defaults.withCredentials = true;
 export default axios.create({
     baseURL: BASE_URL,
