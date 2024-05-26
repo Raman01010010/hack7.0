@@ -66,6 +66,7 @@ const axios=useAxiosPrivate();
        
       })
     } catch (error) {
+      toast('Error adding data');
       console.error("Error adding data:", error.message);
     }
   }
