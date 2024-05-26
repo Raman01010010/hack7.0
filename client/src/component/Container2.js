@@ -35,7 +35,6 @@ export default function Container1() {
             <Route path="/showsafety" element={<><ShowSafety /></>} />
             <Route path="/dashboard" element={<><Dashboard /></>} />
             <Route path="/watch/:alertId" element={<><GetLocation /></>} />
-
             <Route path="/my" element={<><MyLoc /></>} />
             <Route path="/register" element={<><Register /></>} />
             <Route path="/showdata" element={<><Showdata /></>} />
