@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from 'react-router-dom';
+import axios2 from 'axios';
+import backgroundImage from '../utility/pexels-dominika-kwiatkowska-1796968-3368844.jpg'; // Import your background image
 
 import Autocomplete from "@mui/material/Autocomplete";
 import { Link } from "react-router-dom";
@@ -19,7 +21,39 @@ import { TailSpin } from 'react-loader-spinner';
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 const Adddata = () => {
   const [loading, setLoading] = useState(false);
-
+  const styles = {
+    container: {
+      position: 'relative',
+      borderRadius: '8px',
+      maxWidth: '600px',
+      margin: 'auto',
+      textAlign: 'center',
+      overflow: 'hidden', // Hide overflow to prevent blurry edges
+    },
+    backgroundImage: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      zIndex: -1,
+      filter: 'blur(5px)', // Apply blur effect
+      backgroundImage: `url(${backgroundImage})`, // Use the imported image
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+    heading: {
+        // marginBottom: '1rem',
+        fontSize: '2rem',
+        color: '#343a40',
+      },
+    overlay: {
+        backgroundColor: 'rgba(300, 400, 300, 0.6)', // Add a semi-transparent overlay
+        padding: '2rem',
+        borderRadius: '8px',
+        boxShadow: '0 0 20px rgba(0,0,0,0.1)',
+      },
+};
   const [accidentDetails, setAccidentDetails] = useState({
     name: "",
     address: "",
@@ -32,7 +66,43 @@ const axios=useAxiosPrivate();
   
 
   const [locationSuggestions, setLocationSuggestions] = useState([]);
+  const handleGetCoordinatesClick = async() => {
+    const { address } = accidentDetails;
+    if (address.trim() !== '') {
+      const { lat, lng } = await getCoordinates(address);
+      setAccidentDetails(prevFormData => ({
+        ...prevFormData,
+        latitude: lat,
+        longitude: lng
+    }));
+    } else {
+      swal({
+        title: "Please enter an address",
+        icon: "warning",
+        button: "OK",
+      });
+    }
+  };
+  const getCoordinates = async (address) => {
+    const apiKey = '55810e9a0db5484fae278428320f9add';
+    const encodedAddress = encodeURIComponent(address);
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodedAddress}&key=${apiKey}`;
 
+    try {
+        const response = await axios2.get(url);
+
+        if (response.data.results && response.data.results.length > 0) {
+            const { lat, lng } = response.data.results[0].geometry;
+            console.log("Coordinates:", lat, lng);
+            return { lat, lng };
+        } else {
+            throw new Error('No results found for the address.');
+        }
+    } catch (error) {
+        console.error('Error getting coordinates:', error.message);
+        throw error;
+    }
+}
   const updateLocationSuggestions = async (query) => {
     const apiKey = "55810e9a0db5484fae278428320f9add";
 
@@ -110,7 +180,6 @@ const axios=useAxiosPrivate();
 
   }
   const navigate = useNavigate(); // Access to navigate function
-
   useEffect(() => {
     // Automatically reset loading state after a delay (for demonstration)
     const timeout = setTimeout(() => {
@@ -119,9 +188,16 @@ const axios=useAxiosPrivate();
 
     return () => clearTimeout(timeout);
   }, [loading]);
-
+  const [data,setData]=useState(false)
+  useEffect(() => {
+    // Update location suggestions when address input changes
+    
+    updateLocationSuggestions(accidentDetails.address);
+  }, [accidentDetails.address]);
 
   return (
+    <>
+    <div style={styles.backgroundImage}></div>
     <Box
       sx={{
         display: "flex",
@@ -131,10 +207,15 @@ const axios=useAxiosPrivate();
        
       }}
     >
-      <Box sx={{ p: 2, background: "#ffffff", border: "1px solid #ccc", borderRadius: 4, maxWidth: 400 }}>
-        <Typography variant="h6" gutterBottom align="center">
-          Accident details
-        </Typography>
+       
+
+
+       <div style={styles.overlay}>
+
+      <Box sx={{ p: 2, borderRadius: 4, maxWidth: 400 }}>
+      <h1 style={styles.heading}>Add Accident Details</h1>
+
+
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -158,6 +239,11 @@ const axios=useAxiosPrivate();
               value={accidentDetails.address}
               onChange={handleChange}
             />
+          </Grid>
+          <Grid item xs={12}>
+            <Button variant="outlined" onClick={handleGetCoordinatesClick} fullWidth>
+              Get Coordinates
+            </Button>
           </Grid>
           {locationSuggestions.length > 0 && (
             <Grid item xs={12}>
@@ -227,13 +313,15 @@ const axios=useAxiosPrivate();
             />
           </Grid>
         </Grid>
-     
+        
           <Button variant="contained" onClick={addNow} fullWidth sx={{ mt: 3 }}>
           {loading? <TailSpin height={25} color="white"/>:'ADD data'} 
           </Button>
-       
+          
       </Box>
+      </div>
     </Box>
+    </>
   );
 };
 
