@@ -330,10 +330,11 @@ const getAll = async (req, res) => {
         // Extract user ID from request parameters
         //req.userid="658d45c616bae47d92b240d0"
         const userId = req.userid;
+        console.log(userId)
 
         // Query the database to find safety numbers associated with the user ID
         const safetyNumbers = await SafetyNumber.find({ user: userId });
-
+console.log(safetyNumbers)
         // If no safety numbers found for the user ID, return appropriate response
         if (!safetyNumbers) {
             return res.status(404).json({ message: 'No safety numbers found for the user ID.' });

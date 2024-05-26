@@ -55,7 +55,8 @@ console.log(user)
 
         // Send authorization roles and access token to user
         res.json({ 
-            //roles, 
+            //roles,
+            userid:foundUser._id, 
             accessToken,"username":foundUser.username,"email":foundUser.email,"picture":foundUser.picture });
 
     } else {
