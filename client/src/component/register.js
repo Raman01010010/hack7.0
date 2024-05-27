@@ -44,8 +44,8 @@ const ParkingForm = () => {
     };
     const [loading, setLoading] = useState(false);
     const axios = useAxiosPrivate();
-    const { address, arrivalDate, departureDate } = useContext(User);
-
+    const { address, arrivalDate, departureDate,newUser } = useContext(User);
+     console.log(newUser.email)
     const [formData, setFormData] = useState({
         parkingLotName: '',
         locationType: '',
@@ -54,7 +54,7 @@ const ParkingForm = () => {
         firstName: '',
         lastName: '',
         phone: '',
-        email: '',
+        email: newUser.email,
         totalSlots: ''
     });
 

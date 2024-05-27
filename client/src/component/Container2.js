@@ -19,6 +19,8 @@ import Showdata from "./Showdata"
 import Bookit from "./Bookit";
 import Search from "./Search";
 import Ticket from "./Ticket";
+import Verify from "./Verify";
+import { Modal } from "@mui/material";
 export default function Container1() {
     return (<>
         {/* <Dashboard/> */}
@@ -41,6 +43,9 @@ export default function Container1() {
             <Route path="/book/:id/:company" element={<Bookit />} />
             <Route path="/search" element={<Search />} />
             <Route path="/ticket" element={<Ticket />} />
+            <Route path="/verify" element={<Verify />} />
+            <Route path="/modal" element={<Modal />} />
+
         </Routes>
     </>)
 }
