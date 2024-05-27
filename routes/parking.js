@@ -5,9 +5,6 @@ const parkingcontroller=require('../controllers/parkingController')
 router.post('/addcomp',parkingcontroller.addparkinglot);
 router.post('/bookit',parkingcontroller.bookparking);
 // router.post('/takeout',parkingcontroller.takeoutVehicle);
-// router.post('/takein',parkingcontroller.takeinVehicle);
+router.post('/verify',parkingcontroller.verifykey);
 router.post('/showdata',parkingcontroller.showdata);
-
-
-
 module.exports=router

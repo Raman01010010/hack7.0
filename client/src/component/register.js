@@ -6,12 +6,46 @@ import swal from 'sweetalert';
 import { User } from "../context/User";
 import axios2 from 'axios';
 import { TailSpin } from 'react-loader-spinner';
+import backgroundImage from '../utility/pexels-expect-best-79873-323705.jpg'; // Import your background image
 
 const ParkingForm = () => {
+    const styles = {
+        container: {
+          position: 'relative',
+          borderRadius: '8px',
+          maxWidth: '600px',
+          margin: 'auto',
+          textAlign: 'center',
+          overflow: 'hidden', // Hide overflow to prevent blurry edges
+        },
+        backgroundImage: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          zIndex: -1,
+          filter: 'blur(5px)', // Apply blur effect
+          backgroundImage: `url(${backgroundImage})`, // Use the imported image
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        },
+        heading: {
+            marginBottom: '2rem',
+            fontSize: '2rem',
+            color: '#343a40',
+          },
+        overlay: {
+            backgroundColor: 'rgba(255, 255, 255, 0.5)', // Add a semi-transparent overlay
+            padding: '2rem',
+            borderRadius: '8px',
+            boxShadow: '0 0 20px rgba(0,0,0,0.1)',
+          },
+    };
     const [loading, setLoading] = useState(false);
     const axios = useAxiosPrivate();
-    const { address, arrivalDate, departureDate } = useContext(User);
-
+    const { address, arrivalDate, departureDate,newUser } = useContext(User);
+     console.log(newUser.email)
     const [formData, setFormData] = useState({
         parkingLotName: '',
         locationType: '',
@@ -20,7 +54,7 @@ const ParkingForm = () => {
         firstName: '',
         lastName: '',
         phone: '',
-        email: '',
+        email: newUser.email,
         totalSlots: ''
     });
 
@@ -113,10 +147,11 @@ const ParkingForm = () => {
     }, [loading]);
 
     return (
+        <>
+        <div style={styles.backgroundImage}></div>
         <Container maxWidth="sm">
-            <Typography variant="h4" gutterBottom>
-                Parking Reservation Form
-            </Typography>
+        <div style={styles.overlay}>
+        <h1 style={styles.heading}>Register your Parking</h1>
             <form onSubmit={handleSubmit}>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
@@ -144,6 +179,7 @@ const ParkingForm = () => {
                             variant="contained"
                             color="primary"
                             onClick={handleGetCoordinatesClick}
+                            style={{ width: '100px' }}
                         >
                             Get Coordinates
                         </Button>
@@ -228,7 +264,10 @@ const ParkingForm = () => {
                     {loading ? <TailSpin height={25} color="white" /> : 'Register'}
                 </Button>
             </form>
+            </div>
+
         </Container>
+        </>
     );
 }
 

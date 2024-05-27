@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Element } from 'react-scroll';
 import { motion } from 'framer-motion';
-import img1 from "./image.png";
+import img1 from "../utility/pexels-pok-rie-33563-1004409.jpg";
 // import img2 from "./pexels-anna-shvets-4226140.jpg";
 // import img3 from "./pexels-lukas-590016 (1).jpg"
+import img4 from "../utility/pexels-pixabay-263402.jpg"
 import 'animate.css/animate.css';
 import { useInView } from 'react-intersection-observer';
 import About from "./AboutUs"
@@ -75,7 +76,7 @@ const Home2 = () => {
     <>
       <Element name="home2">
         <div style={pageStyle}>
-          <div className="text-center bg-[#D10363] text-white p-4">
+          <div className="text-center bg-purple-600	 text-white p-4">
             <h1 className="text-6xl mb-8 font-bold">Welcome to the SafeNet</h1>
             <div className="space-x-4 mt-8">
               <Link to="/signin" className="text-white">
@@ -90,41 +91,43 @@ const Home2 = () => {
                 </button>
 
               </Link>
-              <button onClick={fun1} className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
+              {/* <button onClick={fun1} className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
         toast
-                </button>
+                </button> */}
                 <ToastContainer />
-              <Link to="/my" className="text-white">
+              {/* <Link to="/my" className="text-white">
                 <button className="border border-green-500 hover:bg-green-500 hover:text-white text-green-500 font-bold py-2 px-4 rounded">
                   Sign Up
-                </button>
+                </button> */}
 
-              </Link>
+              {/* </Link> */}
             </div>
 
             <div className="space-y-8">
-              <motion.div className="flex items-center p-4 animate__animated animate__fadeInRight ">
-                <motion.img
-                  ref={ref1}
-                  src="https://www.frontiersin.org/files/Articles/631045/frym-09-631045-HTML-r1/image_m/figure-1.jpg"
-                  alt="Image 1"
-                  className="w-2/5 rounded-lg mr-4"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={inView1 && isScrollingIn1 ? { opacity: 1, x: 0 } : {}}
-                  transition={{ duration: 1 }}
-                />
-                <div className="flex-1 ">
-                  <h1 className="text-4xl	">Safest  and Shortest</h1>
 
-                  <p>"Discover the safest and shortest routes with our innovative pathfinding project for secure navigation."</p>
-                </div>
-              </motion.div>
+<motion.div className="flex items-center p-4 animate__animated animate__fadeInRight">
+  <motion.img
+    ref={ref1}
+    src={img4}
+    alt="Image 1"
+    className="w-2/5 rounded-lg mr-4"
+    initial={{ opacity: 0, x: 50 }}
+    animate={inView1 && isScrollingIn1 ? { opacity: 1, x: 0 } : {}}
+    transition={{ duration: 1 }}
+  />
+  <div className="flex-1">
+    <h1 className="text-4xl">Alert System</h1>
+    <p>
+      The project features a one-click emergency alert system that notifies selected contacts and shares the user's location during an accident, ensuring prompt assistance and enhancing safety in emergencies.
+    </p>
+  </div>
+</motion.div>
+
               <motion.div className="flex items-center p-4 animate__animated animate__fadeInLeft">
                 <div className="flex-1">
-                  <h1 className="text-6xl	">Decentralized records</h1>
+                  <h1 className="text-6xl	">Online Parking</h1>
                   <p className="text-xl mb-4">
-                    Our project records traffic violations in a decentralized manner, ensuring transparency and reliability. By decentralizing the data, we enhance accountability and enable secure access for all stakeholders in monitoring and enforcing traffic regulations.
-                  </p>
+                  The online parking registration system streamlines parking spot reservations with features like easy booking, real-time availability tracking, and user-friendly management tools, enhancing convenience and efficiency in parking operations.                  </p>
                 </div>
                 <motion.img
                   ref={ref2}

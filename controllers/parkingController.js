@@ -33,14 +33,48 @@ const addparkinglot = async (req, res) => {
     }
 };
 
+const verifykey = async (req, res) => {
+    try {
+        const { keyentered, email } = req.body;
+        
+        // Validate the input
+        if (!keyentered || !email) {
+            return res.status(400).json({ message: "Key and email are required." });
+        }
 
+        // Find the company ID from the email in the ParkingLot schema
+        const company = await ParkingLot.findOne({ email: email });
+
+        if (!company) {
+            return res.status(404).json({ message: "Company not found." });
+        }
+
+        // Find the vehicle by key and company
+        const vehicle = await Vehicle.findOne({ key: keyentered, company: company._id });
+
+        if (vehicle) {
+            res.status(200).json({
+                message: "Vehicle found.",
+                vehicleDetails: vehicle,
+                isPresent: true
+            });
+        } else {
+            res.status(404).json({
+                message: "Vehicle not found.",
+                isPresent: false
+            });
+        }
+    } catch (error) {
+        console.error("Error verifying key:", error);
+        res.status(500).json({ message: "Internal server error." });
+    }
+};
 const getcoordinate = async (address) => {
     try {
         console.log("Fetching coordinates");
         const apiKey = '55810e9a0db5484fae278428320f9add';
         const encodedAddress = encodeURIComponent(address);
         const url = `https://api.opencagedata.com/geocode/v1/json?q=${encodedAddress}&key=${apiKey}`;
-        
         const response = await axios.get(url);
 
         if (response.data.results && response.data.results.length > 0) {
@@ -223,4 +257,4 @@ const bookparking = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
-module.exports = { addparkinglot ,bookparking,showdata};
+module.exports = { addparkinglot ,bookparking,showdata,verifykey};

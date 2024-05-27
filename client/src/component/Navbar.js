@@ -63,7 +63,7 @@ const Navbar = () => {
 
   return (
     <>
-      <AppBar position="fixed" sx={{ background: "#FF9A00" }}>
+    <AppBar position="fixed" sx={{ background: 'rgb(88 28 135)' }}>
         <Toolbar>
           <IconButton
             size="large"

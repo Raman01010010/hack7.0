@@ -13,7 +13,7 @@ const SingleCard = () => {
 
           body {
             min-height: 100vh;
-            background: #212534;
+            background: rgb(147 51 234);
             display: flex;
             align-items: center;
             flex-direction: column;
