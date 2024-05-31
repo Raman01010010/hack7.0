@@ -21,6 +21,10 @@ import Search from "./Search";
 import Ticket from "./Ticket";
 import Verify from "./Verify";
 import { Modal } from "@mui/material";
+import io  from "socket.io-client";
+const socket = io("http://localhost:3500");
+
+
 export default function Container1() {
     return (<>
         {/* <Dashboard/> */}

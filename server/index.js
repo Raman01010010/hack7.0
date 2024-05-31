@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credential');
 const cron = require('node-cron');
 const { removeExpiredVehicles } = require('./controllers/croncontroller'); // Adjust the path as necessary
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3500;
 const mongoose = require('mongoose');
