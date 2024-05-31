@@ -212,6 +212,11 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add accident
               </Button>
+
+              <Button color="inherit"  onClick={fun} component={Link} to="/goAuthrize">
+              <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />  
+           Upload ID
+        </Button>
               <Button color="inherit" component={Link} to="/register">
                 <FontAwesomeIcon icon={faRegistered} style={{ marginRight: "5px" }} />
                 Register

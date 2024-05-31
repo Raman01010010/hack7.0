@@ -6,4 +6,5 @@ const otpController=require('../controllers/otpController')
 router.post('/register',otpController)
 
 router.post('/otp',registerController.handleNewUser)
+
 module.exports=router

@@ -37,6 +37,9 @@ app.use('/user1', require('./routes/userUpdate'));
 app.use('/park', require('./routes/parking'));
 app.use('/slot',require('./routes/slots'))
 app.use('/alert2',require('./routes/alert2'))
+
+app.use('/req', require('./routes/verify'));
+
 app.use(verifyJWT)
 
 app.use('/alert',require('./routes/alert'))
