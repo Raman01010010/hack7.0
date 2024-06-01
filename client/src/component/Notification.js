@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { User } from "../context/User";
 import {useState,useEffect,useContext} from 'react'
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 export default function AccordionUsage({socket}) {
 
@@ -87,6 +88,10 @@ export default function AccordionUsage({socket}) {
     overflowY: 'auto' // Optional: if content overflows, enable vertical scrolling
   };
 
+  const fun = ()=>{
+    Navigate('./adminpage')
+  }
+
   return (
 
     
@@ -104,9 +109,11 @@ export default function AccordionUsage({socket}) {
                     >
                         Notification {index + 1}
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <div onClick={() => fun}>
+                    <AccordionDetails >
                         {element.email} has requested to verify ID
                     </AccordionDetails>
+                    </div>
                 </Accordion>
             </div>
         ))
