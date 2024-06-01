@@ -36,6 +36,15 @@ export default function AccordionUsage({socket}) {
                 console.log(notif);
             }
         });
+        socket.on('rejectedNotf', ({ email }) => {
+            console.log("notification");
+
+            if (newUser.email === email) {
+                const tn = `${email} Your verification request has been rejected`;
+                setNotif(old => [...old, tn]);
+                console.log(notif);
+            }
+        });
 
       }, [socket]);
 
@@ -74,7 +83,7 @@ export default function AccordionUsage({socket}) {
     backgroundRepeat: 'no-repeat',
     width: '100vw',
     height: '100vh',
-    padding: '20px', // Optional: add some padding for inner content
+    padding: '15px', // Optional: add some padding for inner content
     overflowY: 'auto' // Optional: if content overflows, enable vertical scrolling
   };
 

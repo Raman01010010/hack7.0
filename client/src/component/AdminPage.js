@@ -56,7 +56,7 @@ const AdminPage = ({socket}) => {
             console.log("Response data:", res.data);
             toast.success("Request deleted successfully!");
             const email = currentCardData.email;
-            // socket.emit('rejected',{email});
+            socket.emit('rejected',{email});
         } catch (error) {
             console.error("Error deleting data:", error);
             toast.error("Error deleting request. Please try again later.");
@@ -71,16 +71,26 @@ const AdminPage = ({socket}) => {
             console.log("Response data:", res.data);
             toast.success("Request accepted successfully!");
             const email = currentCardData.email;
-            // socket.emit('accepted',{email});
+            socket.emit('accepted',{email});
         } catch (error) {
             console.error("Error accepting data:", error);
             toast.error("Error accepting request. Please try again later.");
         }
-        
+
     }
 
     return (
-        <>
+        <div style={{ 
+            backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/008/014/115/non_2x/tropical-leaves-background-design-summer-leaves-flat-illustration-simple-banner-with-copy-space-free-vector.jpg)', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center', 
+            backgroundRepeat: 'no-repeat', 
+            width: '100vw', 
+            height: '100vh', 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center'
+          }}>
             <div className="flex flex-wrap justify-center space-x-96 mt-16 w-full px-4">
                 <div className="relative max-w-sm min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-xl">
                     <div className="card bg-slate-300 py-6 border-2 border-black rounded-xl">
@@ -156,7 +166,7 @@ const AdminPage = ({socket}) => {
             </div> 
             <ToastContainer />
 
-        </>
+        </div>
     );
 };
 

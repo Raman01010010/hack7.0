@@ -26,11 +26,11 @@ const GoAuthorize = ({ socket }) => {
 
 
 
-    useEffect(() => {
-        if (newUser?.email === 'priyanshusingh202010@gmail.com') {
-            navigate('/adminpage');
-        }
-    }, [newUser, navigate]);
+    // useEffect(() => {
+    //     if (newUser?.email === 'priyanshusingh202010@gmail.com') {
+    //         navigate('/adminpage');
+    //     }
+    // }, [newUser, navigate]);
 
 
     const handleUserTypeChange = (e) => {
