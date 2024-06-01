@@ -165,6 +165,32 @@ const Navbar2 = () => {
     setSearchInput(value);
   };
   console.log(name);
+
+
+  const [allowed, setAllowed] = useState(false);
+  useEffect(() => {
+    const checkEmail = async () => {
+      try {
+        const res = await axios.post("http://localhost:3500/check/checkSuser", { email: newUser.email });
+
+        // Check if any object in res.data array contains the email
+        const emailExists = res.data.some(user => user.email === newUser.email);
+        console.log("here hlo ", res)
+        // Update allowed state based on the presence of the email
+        setAllowed(emailExists);
+
+      } catch (error) {
+        console.error("Error checking email:", error);
+        setAllowed(false);  // Optionally set allowed to false if there's an error
+      }
+    };
+
+    if (newUser && newUser.email) {
+      checkEmail();
+    }
+
+  }, [newUser]);
+
   return (
     <>
       <AppBar position="fixed" sx={{ background: "#808836" }}>
@@ -208,15 +234,26 @@ const Navbar2 = () => {
                 />
                 Send Alert
               </Button>
-              <Button color="inherit" component={Link} to="/add">
+
+              {allowed === true ?( <Button color="inherit" component={Link} to="/add">
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add accident
-              </Button>
+              </Button>):null}
+             
 
-              <Button color="inherit"  onClick={fun} component={Link} to="/goAuthrize">
-              <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />  
-           Upload ID
-        </Button>
+              {newUser.email === "priyanshusingh202010@gmail.com" ? (
+                <Button color="inherit" onClick={fun} component={Link} to="/adminpage">
+                  <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
+                  Show Request
+                </Button>
+              ) : (
+                <Button color="inherit" onClick={fun} component={Link} to="/goAuthrize">
+                  <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
+                  Upload ID
+                </Button>
+              )}
+
+
               <Button color="inherit" component={Link} to="/register">
                 <FontAwesomeIcon icon={faRegistered} style={{ marginRight: "5px" }} />
                 Register
@@ -225,7 +262,7 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faSquareParking} style={{ marginRight: "5px" }} />
                 Parking
               </Button>
-              
+
               <IconButton
                 onClick={handleLogout}
                 color="inherit"
@@ -235,6 +272,13 @@ const Navbar2 = () => {
               >
                 <FontAwesomeIcon icon={faRightFromBracket} />{" "}
               </IconButton>
+
+              <Button color="inherit" component={Link} to="/notification">
+                <FontAwesomeIcon icon={faBell} style={{ marginRight: '5px', fontSize: '24px' }} />
+                {/* Notification */}
+              </Button>
+
+
             </>
           ) : (
             <>
@@ -282,9 +326,9 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faPlus} />
               </IconButton>
               <IconButton color="inherit" style={{ marginRight: "10px" }} component={Link} to="/" onClick={handleLogout}>
-  <FontAwesomeIcon icon={faRightFromBracket} />
-</IconButton>
-<IconButton
+                <FontAwesomeIcon icon={faRightFromBracket} />
+              </IconButton>
+              <IconButton
                 color="inherit"
                 style={{ marginRight: "10px" }}
                 component={Link}

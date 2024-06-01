@@ -24,7 +24,9 @@ import Ticket from "./Ticket";
 import Verify from "./Verify";
 import { Modal } from "@mui/material";
 import GoAuthorize from "./GoAuthorize";
+import Notification from "./Notification.js"
 import io  from "socket.io-client";
+import AdminPage from "./AdminPage";
 const socket = io("http://localhost:3500");
 
 
@@ -71,6 +73,8 @@ export default function Container1() {
 
 
             <Route path="/goAuthrize" element={<><GoAuthorize socket = {socket}/></>} />
+            <Route path="/adminpage" element={<><AdminPage socket = {socket}/></>} />
+            <Route path="/notification" element={<><Notification socket = {socket}/></>} />
 
         </Routes>
     </>)

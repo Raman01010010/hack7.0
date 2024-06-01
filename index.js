@@ -39,6 +39,11 @@ app.use('/slot',require('./routes/slots'))
 app.use('/alert2',require('./routes/alert2'))
 
 app.use('/req', require('./routes/verify'));
+app.use('/req', require('./routes/verify'));
+app.use('/delete',require('./routes/verify'));
+app.use('/accept',require('./routes/verify'));
+app.use('/notif',require('./routes/verify'));
+app.use('/check',require('./routes/verify'));
 
 app.use(verifyJWT)
 

@@ -15,14 +15,14 @@ const GoAuthorize = ({ socket }) => {
 
 
 
-    // useEffect(() => {
-    //     const handleAcceptedNotification = () => {
-    //         console.log("your request is accepted");
-    //     };
-    //     if (socket) {
-    //         socket.on('acceptedNotf', handleAcceptedNotification);
-    //     }
-    // }, [socket]);
+    useEffect(() => {
+        const handleAcceptedNotification = () => {
+            console.log("your request is accepted");
+        };
+        if (socket) {
+            socket.on('acceptedNotf', handleAcceptedNotification);
+        }
+    }, [socket]);
 
 
 
@@ -67,10 +67,10 @@ const GoAuthorize = ({ socket }) => {
                 receiveremail: "priyanshusingh202010@gmail.com"
             };
 
-            // if (socket) {
-            //     console.log("hlo man");
-            //     socket.emit("RequestingToAuth", payload);
-            // }
+            if (socket) {
+                console.log("hlo man");
+                socket.emit("RequestingToAuth", payload);
+            }
 
             try {
                 const res = await makeRequest(payload);
