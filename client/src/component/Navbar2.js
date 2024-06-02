@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
   faRegistered,
+  faUserCheck,
   faUserFriends,
   faEnvelope,
   faMoneyCheckAlt,
@@ -220,6 +221,10 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faSquareParking} style={{ marginRight: "5px" }} />
                 Parking
               </Button>
+              <Button color="inherit" component={Link} to="/verify">
+                <FontAwesomeIcon icon={faUserCheck} style={{ marginRight: "5px" }} />
+                Verify
+              </Button>
               
               <IconButton
                 onClick={handleLogout}
@@ -294,6 +299,14 @@ const Navbar2 = () => {
                 to="/search"
               >
                 <FontAwesomeIcon icon={faSquareParking} />
+              </IconButton>
+              <IconButton
+                color="inherit"
+                style={{ marginRight: "10px" }}
+                component={Link}
+                to="/verify"
+              >
+                <FontAwesomeIcon icon={faUserCheck} />
               </IconButton>
               {/* <IconButton
                 color="inherit"
