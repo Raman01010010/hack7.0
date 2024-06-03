@@ -150,6 +150,26 @@ const showdata = async (req, res) => {
     }
 };
 
+const isParking = async (req, res) => {
+    const { email } = req.body;
+    console.log("aayya hu")
+    console.log(email);
+    try {
+        // Query the ParkingLot collection to check if the email is present
+        const parkingLot = await ParkingLot.findOne({ email: email });
+         
+        if (parkingLot) {
+            // Email is present in the ParkingLot collection
+            return res.status(200).json({ isParking: true });
+        } else {
+            // Email is not present in the ParkingLot collection
+            return res.status(200).json({ isParking: false });
+        }
+    } catch (error) {
+        console.error("Error checking parking status:", error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
 // const takeinVehicle = async (req, res) => {
 //     try {
@@ -257,4 +277,4 @@ const bookparking = async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   };
-module.exports = { addparkinglot ,bookparking,showdata,verifykey};
+module.exports = { addparkinglot ,bookparking,showdata,verifykey,isParking};

@@ -2,6 +2,9 @@ import React, { useContext, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { User } from "../context/User";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import { Box, CircularProgress, LinearProgress } from "@mui/material";
 
 const Bookit = () => {
   const axios = useAxiosPrivate();
@@ -26,10 +29,17 @@ const Bookit = () => {
       [e.target.name]: e.target.value
     });
   };
+  const [loading,setLoading]=useState(false)
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true)
+
     try {
+      
+      await toast(" Successful! Redirecting to the  page!");
+
       const response = await axios.post('/park/bookit', formData);
       if (response.status !== 200) {
         throw new Error('Failed to book the slot');
@@ -44,6 +54,7 @@ const Bookit = () => {
           bookingKey: response.data.key
         }
       });
+      setLoading(false)
 
       // Reset form fields (optional)
       setFormData({
@@ -134,7 +145,16 @@ const Bookit = () => {
     style={styles.input}
   />
 </div>
-<button type="submit" style={styles.button}>Book Slot</button>
+{loading ? (
+              <button className="rounded">
+                <Box sx={{ width: '100%', height: '20px' }}>
+                  <LinearProgress color="secondary" sx={{ height: '5vh' }} />
+                </Box>
+              </button>
+            ):(
+              <button type="submit" style={styles.button}>Book Slot</button>
+
+            )}
 
       </form>
     </div>
