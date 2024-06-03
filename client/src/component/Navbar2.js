@@ -6,13 +6,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Container2 from "./Container2";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import { User } from "../context/User";
 import Modal from "@mui/material/Modal";
 import { Backdrop, Fade } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
 import CircleNotificationsIcon from "@mui/icons-material/CircleNotifications";
-import { User } from "../context/User";
 import MenuIcon from "@mui/icons-material/Menu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -64,10 +65,8 @@ const Navbar2 = () => {
   }
   console.log(newUser.userid);
   // Example usage in a logout function
-
   async function handleLogout() {
     // Perform any additional logout logic if needed
-
     // Clear all cookies
     //clearAllCookies();
     console.log(newUser.userid);
@@ -125,7 +124,27 @@ const Navbar2 = () => {
       setIsJobMenuOpen(false);
     };
   }, []);
-
+  const [company,setCompany]=useState(false)
+  useEffect(() => {
+    console.log(newUser.email,"hello sir")
+    const fetchCompanyData = async () => {
+      try {
+        console.log("hahaha");
+        const response = await axios.post("/park/isparking", {
+          email: newUser.email
+        });
+        // Handle the response and update the state
+        console.log("vive",response.data);
+        if (response.data.isParking) {
+          setCompany(true);
+        }
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+        // Handle the error if needed
+      }
+    };
+    fetchCompanyData();
+  }, []); 
   useEffect(() => {
     // Set isJobMenuOpen to true when the location changes to "/showjob"
     setIsJobMenuOpen(location.pathname === "/showjob");
@@ -221,10 +240,14 @@ const Navbar2 = () => {
                 <FontAwesomeIcon icon={faSquareParking} style={{ marginRight: "5px" }} />
                 Parking
               </Button>
-              <Button color="inherit" component={Link} to="/verify">
-                <FontAwesomeIcon icon={faUserCheck} style={{ marginRight: "5px" }} />
-                Verify
-              </Button>
+              <div>
+              {company && (
+        <Button color="inherit" component={Link} to="/verify">
+          <FontAwesomeIcon icon={faUserCheck} style={{ marginRight: "5px" }} />
+          Verify
+        </Button>
+      )}
+              </div>
               
               <IconButton
                 onClick={handleLogout}
@@ -300,14 +323,18 @@ const Navbar2 = () => {
               >
                 <FontAwesomeIcon icon={faSquareParking} />
               </IconButton>
-              <IconButton
-                color="inherit"
-                style={{ marginRight: "10px" }}
-                component={Link}
-                to="/verify"
-              >
-                <FontAwesomeIcon icon={faUserCheck} />
-              </IconButton>
+              <div>
+      {company && (
+        <IconButton
+          color="inherit"
+          style={{ marginRight: "10px" }}
+          component={Link}
+          to="/verify"
+        >
+          <FontAwesomeIcon icon={faUserCheck} />
+        </IconButton>
+      )}
+    </div>
               {/* <IconButton
                 color="inherit"
                 onClick={handleMenuOpen}

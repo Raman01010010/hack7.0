@@ -8,7 +8,6 @@ const handleNewUser=async(req,res)=>{
     /*
     const adduser=new users({
         name, email,given_name,picture,token,family_name
-
     })
     */
 try{
@@ -39,20 +38,10 @@ if(tm.length){
     else{
         const adduser=new users({
             name:otp3[0].name, email:otp3[0].email,picture:otp3[0].picture,pwd:otp3[0].pwd,username:otp3[0].username
-        
         })
         console.log("otp accepted")
-        
         await adduser.save();
-
-
-        
-
-
-
-
         res.status(200).send("Otp Accepted")
-
     }}
     else{
         console.log("wrong otp")
