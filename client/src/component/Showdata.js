@@ -21,7 +21,7 @@ const Showdata = () => {
 
   return (
     <div>
-      {parkingLots.length === 0 ? (
+      {parkingLots.length === 0 || parkingLots.availableParkingLots.length === 0 ? ( // Check if no parking lots are available
         <Typography variant="h5" align="center" style={{ marginTop: '20px' }}>
           No parking lots available. Please try a different search.
         </Typography>
@@ -33,9 +33,9 @@ const Showdata = () => {
                 variant="outlined"
                 style={{
                   cursor: 'pointer',
-                  transition: 'transform 0.3s', // Add transition effect
-                  backgroundColor: index !== hoveredIndex ? '#fff' : '#f0f0f0', // Set background color based on hover state
-                  transform: index === hoveredIndex ? 'scale(1.05)' : 'scale(1)' // Apply hover effect based on hover state
+                  transition: 'transform 0.3s',
+                  backgroundColor: index !== hoveredIndex ? '#fff' : '#f0f0f0',
+                  transform: index === hoveredIndex ? 'scale(1.05)' : 'scale(1)'
                 }}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}

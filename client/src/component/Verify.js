@@ -55,9 +55,6 @@ const Verify = () => {
       console.error('error in verifying:', error.message);
     }
   };
-  
-  
-
   const styles = {
     container: {
       position: 'relative',

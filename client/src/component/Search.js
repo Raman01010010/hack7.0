@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import image1 from '../utility/pexels-pok-rie-33563-1004409.jpg'; // Adjust the path to your image
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { User } from "../context/User";
+import CircularProgress from '@mui/material/CircularProgress';
+import { IconButton, Box, Typography } from '@mui/material';
 
 const Search = () => {
   const axios = useAxiosPrivate();
@@ -12,10 +14,24 @@ const Search = () => {
   const [dataFetched, setDataFetched] = useState(false); // Track if data has been fetched
   const navigate = useNavigate();
   const { parkingLots, setParkingLots, arrivalDate, setArrivalDate, departureDate, setDepartureDate } = useContext(User);
-
+  const [loading, setLoading] = useState(false);
+  if (loading) {
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevent default form submission behavior
     try {
+      setLoading(true);
+      
       const response = await axios.post('/park/showdata', {
         address,
         start: arrivalDate,
@@ -26,16 +42,15 @@ const Search = () => {
       }
       setParkingLots(response.data);
       setDataFetched(true); // Set the dataFetched flag to true
+      setLoading(false);
+      navigate('/showdata');
+
     } catch (error) {
       console.error('Error fetching data:', error.message);
     }
   };
 
-  useEffect(() => {
-    if (dataFetched) {
-      navigate('/showdata');
-    }
-  }, [dataFetched, navigate]);
+ 
 
   const styles = {
     container: {
