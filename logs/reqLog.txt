@@ -1498,3 +1498,9 @@ Mon Jun 03 2024 10:01:44 GMT+0530 (India Standard Time)	970c46d7-53b9-40a8-aeb9-
 Mon Jun 03 2024 10:01:44 GMT+0530 (India Standard Time)	cac64b67-bcd1-4724-92d3-84fc3097ef62	POST	http://localhost:3000	/park/isparking
 Mon Jun 03 2024 10:01:44 GMT+0530 (India Standard Time)	178ce4cf-cfb8-4040-8ef6-1311978389bc	POST	http://localhost:3000	/connect/searchname
 Mon Jun 03 2024 10:01:44 GMT+0530 (India Standard Time)	d072e6ca-e44d-4682-921e-b129665f32ca	POST	http://localhost:3000	/connect/searchname
+Wed Jun 05 2024 07:03:31 GMT+0530 (India Standard Time)	18717f84-17ef-45cb-a6a2-0f8ccdd1851b	OPTIONS	http://localhost:3000	/api/logout
+Wed Jun 05 2024 07:03:31 GMT+0530 (India Standard Time)	59dde7b5-36fa-46ab-9a97-effcaf58c4dc	POST	http://localhost:3000	/api/logout
+Wed Jun 05 2024 07:03:41 GMT+0530 (India Standard Time)	b674bba3-aca5-4d21-bef6-c60929e9307b	GET	http://localhost:3000	/refresh
+Wed Jun 05 2024 07:03:41 GMT+0530 (India Standard Time)	633ff4cf-e2fc-4066-8acb-e0164dd6198e	GET	http://localhost:3000	/refresh
+Wed Jun 05 2024 07:03:44 GMT+0530 (India Standard Time)	fd964c23-cb3e-46ff-a925-0af9180adec3	OPTIONS	http://localhost:3000	/check
+Wed Jun 05 2024 07:03:44 GMT+0530 (India Standard Time)	f4ad36c1-cb3c-4104-afef-e43c7fbb1361	POST	http://localhost:3000	/check
