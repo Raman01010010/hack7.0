@@ -79,7 +79,7 @@ const Bookit = () => {
   // handlePayment Function
   const handlePayment = async () => {
       try {
-          const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/payment/order`, {
+          const res = await fetch("http://localhost:3500/api/payment/order", {
               method: "POST",
               headers: {
                   "content-type": "application/json"
@@ -100,16 +100,17 @@ const Bookit = () => {
   // handlePaymentVerify Function
   const handlePaymentVerify = async (data) => {
       const options = {
-          key: import.meta.env.RAZORPAY_KEY_ID,
+          // key: import.meta.env.RAZORPAY_KEY_ID,
+          key:"rzp_test_pVw2xUhCDTWUUw",
           amount: data.amount,
           currency: data.currency,
-          name: "Devknus",
+          name: "SafeNet",
           description: "Test Mode",
           order_id: data.id,
           handler: async (response) => {
               console.log("response", response)
               try {
-                  const res = await fetch(`${import.meta.env.VITE_BACKEND_HOST_URL}/api/payment/verify`, {
+                  const res = await fetch("http://localhost:3500/api/payment/verify", {
                       method: 'POST',
                       headers: {
                           'content-type': 'application/json'
