@@ -134,6 +134,7 @@ const Bookit = () => {
     style={styles.input}
   />
 </div>
+  
 <button type="submit" style={styles.button}>Book Slot</button>
 
       </form>
