@@ -167,7 +167,7 @@ const ParkingForm = () => {
                     <Grid item xs={10}>
                         <TextField
                             fullWidth
-                            label="Location Type"
+                            label="Location"
                             name="locationType"
                             variant="outlined"
                             value={formData.locationType}

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { booked } = require('../controllers/slotController');
+
 const Schema = mongoose.Schema;
 
 

@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
 });
+console.log("jjfjjjjjjjjjjj");
 
 const TicketPDF = ({ formData, companyId, bookingKey }) => (
   <Document>
