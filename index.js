@@ -45,6 +45,8 @@ app.use('/accept',require('./routes/verify'));
 app.use('/notif',require('./routes/verify'));
 app.use('/check',require('./routes/verify'));
 
+app.use('/api/payment', require('./routes/payment'));
+
 app.use(verifyJWT)
 
 app.use('/alert',require('./routes/alert'))

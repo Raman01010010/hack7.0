@@ -222,14 +222,13 @@ const Bookit = () => {
     </button>
 
 {loading ? (
-              <button className="rounded">
+               <button className="rounded">
                 <Box sx={{ width: '100%', height: '20px' }}>
                   <LinearProgress color="secondary" sx={{ height: '5vh' }} />
                 </Box>
               </button>
             ):(
               <button type="submit" style={styles.button}>Book Slot</button>
-
             )}
 
       </form>
