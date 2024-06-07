@@ -14,7 +14,7 @@ const razorpayInstance = new Razorpay({
 const verify = async(req,res) =>{
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
 
-    // console.log("req.body", req.body);
+    console.log("req.body ", req.body);
 
     try {
         // Create Sign

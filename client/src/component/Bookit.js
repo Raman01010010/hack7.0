@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { User } from "../context/User";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-import { Box, CircularProgress, LinearProgress } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 
 const Bookit = () => {
   const axios = useAxiosPrivate();
@@ -23,13 +23,26 @@ const Bookit = () => {
     endTime: departureDate
   });
 
+  const [loading, setLoading] = useState(false);
+  const [amount, setAmount] = useState(350);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
-  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,8 +82,6 @@ const Bookit = () => {
     }
   };
 
-  const [amount, setAmount] = useState(350);
-
   const handlePayment = async () => {
     try {
       const res = await fetch("http://localhost:3500/api/payment/order", {
@@ -82,16 +93,17 @@ const Bookit = () => {
       });
 
       const data = await res.json();
-      console.log(data);
+      console.log("i am payment data", data);
       handlePaymentVerify(data.data);
     } catch (error) {
-      console.log(error);
+      console.error("Error in handlePayment:", error);
     }
   };
 
   const handlePaymentVerify = async (data) => {
+    console.log("handlePaymentVerify called with data:", data);
     const options = {
-      key: "rzp_test_pVw2xUhCDTWUUw",
+      key: "rzp_test_JhBKYLwBCrstEE",
       amount: data.amount,
       currency: data.currency,
       name: "SafeNet",
@@ -100,6 +112,7 @@ const Bookit = () => {
       handler: async (response) => {
         console.log("response", response);
         try {
+          console.log("i enter");
           const res = await fetch("http://localhost:3500/api/payment/verify", {
             method: 'POST',
             headers: {
@@ -113,11 +126,12 @@ const Bookit = () => {
           });
 
           const verifyData = await res.json();
+          console.log("verifyData:", verifyData);
           if (verifyData.message) {
             toast.success(verifyData.message);
           }
         } catch (error) {
-          console.log(error);
+          console.error("Error in handler:", error);
         }
       },
       theme: {
@@ -125,7 +139,9 @@ const Bookit = () => {
       }
     };
 
+    console.log("Creating Razorpay instance with options:", options);
     const rzp1 = new window.Razorpay(options);
+    console.log("Opening Razorpay checkout");
     rzp1.open();
   };
 
