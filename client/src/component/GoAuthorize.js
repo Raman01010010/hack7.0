@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { User } from "../context/User";
 import { makeRequest } from '../api/api';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const GoAuthorize = ({ socket }) => {
 
@@ -41,48 +44,50 @@ const GoAuthorize = ({ socket }) => {
         setSelectedFile(e.target.files[0]);
     };
 
-    const handleUpload = async () => {
-        if (!selectedFile) {
-            alert('Please select a file');
-            return;
-        }
+   const handleUpload = async () => {
+    if (!selectedFile) {
+      toast.error('Please select a file');
+      return;
+    }
 
-        try {
-            const data = new FormData();
-            data.append("file", selectedFile);
-            data.append("upload_preset", "chat-app");
-            data.append("cloud_name", "piyushproj");
+    try {
+      const data = new FormData();
+      data.append("file", selectedFile);
+      data.append("upload_preset", "chat-app");
+      data.append("cloud_name", "piyushproj");
 
-            const response = await fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
-                method: "POST",
-                body: data,
-            });
+      const response = await fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
+        method: "POST",
+        body: data,
+      });
 
-            const result = await response.json();
-            const imgUrl = result.url.toString();
+      const result = await response.json();
+      const imgUrl = result.url.toString();
 
-            const payload = {
-                imgurl: imgUrl,
-                email: newUser.email,
-                receiveremail: "priyanshusingh202010@gmail.com"
-            };
+      const payload = {
+        imgurl: imgUrl,
+        email: newUser.email,
+        receiveremail: "priyanshusingh202010@gmail.com"
+      };
 
-            if (socket) {
-                console.log("hlo man");
-                socket.emit("RequestingToAuth", payload);
-            }
+      if (socket) {
+        socket.emit("RequestingToAuth", payload);
+      }
 
-            try {
-                const res = await makeRequest(payload);
-                navigate('/dashboard');
-            } catch (err) {
-                console.error("Error making request:", err);
-            }
+      try {
+        const res = await makeRequest(payload);
+        toast.success('File uploaded and request sent successfully');
+        navigate('/dashboard');
+      } catch (err) {
+        console.error("Error making request:", err);
+        toast.error('Error making request');
+      }
 
-        } catch (error) {
-            console.error('Error uploading file:', error);
-        }
-    };
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      toast.error('Error uploading file');
+    }
+  };
 
     return (
         <div style={{ 
@@ -124,6 +129,7 @@ const GoAuthorize = ({ socket }) => {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </div>
 
     );

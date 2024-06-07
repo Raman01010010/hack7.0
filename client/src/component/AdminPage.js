@@ -21,6 +21,7 @@ const AdminPage = ({socket}) => {
             setReqdata(old => { 
                 return ([...old, {imgurl,email}])
             })
+            toast.info(`New notification from ${email}`);
             console.log(reqdata);
         });
 

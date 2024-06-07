@@ -9,6 +9,9 @@ import { User } from "../context/User";
 import {useState,useEffect,useContext} from 'react'
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function AccordionUsage({socket}) {
 
@@ -24,7 +27,7 @@ export default function AccordionUsage({socket}) {
             setReqdata(old => { 
                 return ([...old, {imgurl,email}])
             })
-
+            toast.info(`New verification request from ${email}`);    
             console.log(reqdata);
         });
 
@@ -35,6 +38,7 @@ export default function AccordionUsage({socket}) {
                 const tn = `${email} Your verification request has been accepted`;
                 setNotif(old => [...old, tn]);
                 console.log(notif);
+                toast.success(tn);
             }
         });
         socket.on('rejectedNotf', ({ email }) => {
@@ -44,6 +48,7 @@ export default function AccordionUsage({socket}) {
                 const tn = `${email} Your verification request has been rejected`;
                 setNotif(old => [...old, tn]);
                 console.log(notif);
+                toast.error(tn);
             }
         });
 
@@ -137,6 +142,7 @@ export default function AccordionUsage({socket}) {
         ))
     )}
 </div>
+<ToastContainer />
 </div>
 
   );
