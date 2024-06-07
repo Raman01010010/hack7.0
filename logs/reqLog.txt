@@ -1629,3 +1629,15 @@ Fri Jun 07 2024 14:11:54 GMT+0530 (India Standard Time)	831b92e4-f0b9-4ccf-b923-
 Fri Jun 07 2024 14:11:54 GMT+0530 (India Standard Time)	e35d4b62-8f3d-41a0-bd42-e2127c723a24	POST	http://localhost:3000	/api/payment/order
 Fri Jun 07 2024 14:14:28 GMT+0530 (India Standard Time)	247037ea-3732-4656-a2be-207145bdfe2d	OPTIONS	http://localhost:3000	/api/payment/verify
 Fri Jun 07 2024 14:14:28 GMT+0530 (India Standard Time)	8c9e277f-80b1-4dc9-bdab-3a7a90a48511	POST	http://localhost:3000	/api/payment/verify
+Fri Jun 07 2024 14:22:01 GMT+0530 (India Standard Time)	437e9e41-f519-42d4-a525-c348b4b6d06d	OPTIONS	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:22:01 GMT+0530 (India Standard Time)	0e671a53-2459-4b56-adcc-b6ff6e8796e8	POST	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:22:43 GMT+0530 (India Standard Time)	51a441d3-8415-4451-8baa-935f48dc41b5	OPTIONS	http://localhost:3000	/api/payment/verify
+Fri Jun 07 2024 14:22:43 GMT+0530 (India Standard Time)	6735e0ab-0f5d-4dde-b5a4-2760b40f0898	POST	http://localhost:3000	/api/payment/verify
+Fri Jun 07 2024 14:26:00 GMT+0530 (India Standard Time)	db78d32b-7c8b-44e6-8999-09e1359524ba	OPTIONS	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:26:00 GMT+0530 (India Standard Time)	b456191e-be7a-4752-9953-0a5a1bd7fea5	POST	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:26:27 GMT+0530 (India Standard Time)	e9b91ad4-5699-4c4d-9b23-1ec90ecf951e	OPTIONS	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:26:27 GMT+0530 (India Standard Time)	ee09345e-aaab-46f6-bfc9-47e800b009ed	POST	http://localhost:3000	/api/payment/order
+Fri Jun 07 2024 14:49:25 GMT+0530 (India Standard Time)	a1443bef-fd1b-4227-ac55-f5a722018b04	OPTIONS	http://localhost:3000	/api/logout
+Fri Jun 07 2024 14:49:25 GMT+0530 (India Standard Time)	9e292311-7f7c-4d2b-8638-4009ffd1c7d8	POST	http://localhost:3000	/api/logout
+Fri Jun 07 2024 14:50:00 GMT+0530 (India Standard Time)	d57fd024-f897-4a96-ad8a-bbac88ddbe8a	GET	http://localhost:3000	/refresh
+Fri Jun 07 2024 14:50:00 GMT+0530 (India Standard Time)	bf5e9935-1125-402e-8822-b08498572390	GET	http://localhost:3000	/refresh

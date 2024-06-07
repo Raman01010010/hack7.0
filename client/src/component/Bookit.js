@@ -24,7 +24,7 @@ const Bookit = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [amount, setAmount] = useState(350);
+  const [amount, setAmount] = useState(5);
 
   const handleChange = (e) => {
     setFormData({
@@ -158,7 +158,7 @@ const Bookit = () => {
             value={formData.licensePlate}
             onChange={handleChange}
             required
-            style={styles.input}
+            style = {styles.input}
           />
         </div>
         <div style={styles.inputGroup}>
@@ -225,7 +225,7 @@ const Bookit = () => {
           onClick={handlePayment}
           className="mb-5 w-full bg-[#1B9CFC] text-white py-2 px-4 rounded-md hover:bg-[#1781cc] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1B9CFC]"
         >
-          Pay ₹ 10
+          Pay ₹ 5
         </button>
 
         {loading ? (
