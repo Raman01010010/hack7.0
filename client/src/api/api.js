@@ -17,7 +17,15 @@ export const addClient=async (data)=>{
         return error
     }
 }
+export const makeRequest=async (data)=>{
+    try{
+        return await axios.post(`/req/upload`,data)
 
+    }catch(error){
+        console.log("Error add",error.response)
+        return error
+    }
+}
 export const verifyOtp=async (data)=>{
     try{
         return await axios.post(`/user/otp`,data)
