@@ -74,7 +74,6 @@ const Navbar2 = () => {
       const response = await axios.post("/api/logout", {
         userid: newUser.userid,
       });
-
       if (response.status === 200) {
         // Successful logout on the server
         // Redirect to the login page or perform any other client-side cleanup
