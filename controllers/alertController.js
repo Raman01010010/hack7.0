@@ -74,8 +74,9 @@ const send = async (req, res) => {
 const add =
     async (req, res) => {
         console.log(req.body)
+        const user = req.userid;
         try {
-            const { name, phoneNumber, relationship, notes, user, email } = req.body;
+            const { name, phoneNumber, relationship, notes, email } = req.body;
 
             const safetyNumber = new SafetyNumber({
                 name,

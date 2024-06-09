@@ -72,7 +72,7 @@ export default function Signin() {
         console.log(res)
         const accessToken = res?.data?.accessToken;
         const roles = res?.data?.roles;
-        setNewUser({ "email": login.email,"userid":login.userid, "pwd": login.pwd, roles, accessToken: res?.data?.accessToken, picture: res?.data?.picture, username: res?.data?.username, email: res?.data?.email });
+        setNewUser({ userid:login.userid,"email": login.email,"userid":login.userid, "pwd": login.pwd, roles, accessToken: res?.data?.accessToken, picture: res?.data?.picture, username: res?.data?.username, email: res?.data?.email });
 
         navigate('/dashboard')
         setLoading(false)
