@@ -254,10 +254,10 @@ const Navbar2 = () => {
                 Send Alert
               </Button>
 
-              {allowed === true ?( <Button color="inherit" component={Link} to="/add">
+               <Button color="inherit" component={Link} to="/add">
                 <FontAwesomeIcon icon={faPlus} style={{ marginRight: "5px" }} />
                 Add accident
-              </Button>):null}
+              </Button>
              
 
               {newUser.email === "priyanshusingh202010@gmail.com" ? (
@@ -287,6 +287,7 @@ const Navbar2 = () => {
           <FontAwesomeIcon icon={faUserCheck} style={{ marginRight: "5px" }} />
           Verify
         </Button>
+        
       )}
               </div>
               
