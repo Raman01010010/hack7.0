@@ -74,8 +74,9 @@ const send = async (req, res) => {
 const add =
     async (req, res) => {
         console.log(req.body)
+        const user = req.userid;
         try {
-            const { name, phoneNumber, relationship, notes, user, email } = req.body;
+            const { name, phoneNumber, relationship, notes, email } = req.body;
 
             const safetyNumber = new SafetyNumber({
                 name,
@@ -328,7 +329,7 @@ const sendEmail = async (subjects, message, send_to, send_from, reply_to) => {
 const getAll = async (req, res) => {
     try {
         // Extract user ID from request parameters
-        req.userid="658d45c616bae47d92b240d0"
+        //req.userid="658d45c616bae47d92b240d0"
         const userId = req.userid;
 
         // Query the database to find safety numbers associated with the user ID
