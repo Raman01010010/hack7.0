@@ -31,6 +31,14 @@ app.use(cookieParser())
 app.use('/user',require('./routes/user'))
 app.use('/auth',require('./routes/auth'))
 app.use('/refresh',require('./routes/refresh'))
+
+
+app.use(verifyJWT)
+
+
+
+
+
 app.use('/data',require('./routes/manageData'));
 //
 app.use('/user1', require('./routes/userUpdate'));
@@ -47,7 +55,6 @@ app.use('/check',require('./routes/verify'));
 
 app.use('/api/payment', require('./routes/payment'));
 
-app.use(verifyJWT)
 
 app.use('/alert',require('./routes/alert'))
 

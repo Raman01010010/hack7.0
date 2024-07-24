@@ -34,21 +34,19 @@ const addparkinglot = async (req, res) => {
 };
 
 const verifykey = async (req, res) => {
+    console.log(req.body)
     try {
         const { keyentered, email } = req.body;
-        
-        // Validate the input
         if (!keyentered || !email) {
             return res.status(400).json({ message: "Key and email are required." });
         }
-
         // Find the company ID from the email in the ParkingLot schema
         const company = await ParkingLot.findOne({ email: email });
+        console.log(company);
 
         if (!company) {
             return res.status(404).json({ message: "Company not found." });
         }
-
         // Find the vehicle by key and company
         const vehicle = await Vehicle.findOne({ key: keyentered, company: company._id });
 

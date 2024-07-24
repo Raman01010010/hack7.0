@@ -13,8 +13,6 @@ const upload = async (req, res) => {
     
     try {   
         const savedRequest = await newRequest.save();
-
-
         console.log('Request saved successfully:', savedRequest);
         res.status(200).json({ message: 'Request saved successfully' });
     } catch (error) {
@@ -43,7 +41,6 @@ const reject = async (req, res) => {
         if (deletedRequest) {
             // Find the notification document for the given email
             let notif = await Notif.findOne({ email: email });
-
             if (notif) {
                 // Add the rejection message to the notifications array
                 notif.notifications.push(`${email} Your verification request has been rejected`);

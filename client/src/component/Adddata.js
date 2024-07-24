@@ -123,7 +123,7 @@ const axios=useAxiosPrivate();
             // For example: latitude: result.geometry.lat, longitude: result.geometry.lng
           }));
 
-          setLocationSuggestions(suggestions);
+          // setLocationSuggestions(suggestions);
         } else {
           setLocationSuggestions([]);
         }

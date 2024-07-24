@@ -70,8 +70,6 @@ export default function Container1() {
             <Route path="/ticket" element={<Ticket />} />
             <Route path="/verify" element={<Verify />} />
             <Route path="/modal" element={<Modal />} />
-
-
             <Route path="/goAuthrize" element={<><GoAuthorize socket = {socket}/></>} />
             <Route path="/adminpage" element={<><AdminPage socket = {socket}/></>} />
             <Route path="/notification" element={<><Notification socket = {socket}/></>} />

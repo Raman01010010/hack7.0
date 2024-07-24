@@ -31,7 +31,6 @@ const Search = () => {
     event.preventDefault(); // Prevent default form submission behavior
     try {
       setLoading(true);
-      
       const response = await axios.post('/park/showdata', {
         address,
         start: arrivalDate,
@@ -44,7 +43,6 @@ const Search = () => {
       setDataFetched(true); // Set the dataFetched flag to true
       setLoading(false);
       navigate('/showdata');
-
     } catch (error) {
       console.error('Error fetching data:', error.message);
     }
